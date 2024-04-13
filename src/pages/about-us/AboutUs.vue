@@ -1,9 +1,21 @@
 <template>
-  <TheContainer class="pt-20 text-neutral-800">
-    <p class="text-heading3 font-bold">About us</p>
-  </TheContainer>
+  <main class="isolate">
+    <HeroSection />
+    <ContentSection />
+    <ImageSection />
+    <ValuesSection />
+    <LogoCloudSection />
+    <TeamSection />
+    <BlogSection />
+  </main>
 </template>
 
 <script setup lang="ts">
-import TheContainer from '@/layouts/container/TheContainer.vue';
+import BlogSection from './BlogSection.vue';
+import ContentSection from './ContentSection.vue';
+import HeroSection from './HeroSection.vue';
+import ImageSection from './ImageSection.vue';
+import LogoCloudSection from './LogoCloudSection.vue';
+import TeamSection from './TeamSection.vue';
+import ValuesSection from './ValuesSection.vue';
 </script>
