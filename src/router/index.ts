@@ -1,89 +1,119 @@
-import { store } from '@/store';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    redirect: '/coaches',
+    redirect: '/about-us',
   },
   {
-    path: '/design-pattern/content',
-    name: 'designPatternContent',
-    component: () => import('@/pages/design-pattern/content/TheContent.vue'),
-  },
-  {
-    path: '/design-pattern/forms',
-    name: 'designPatternForm',
-    component: () => import('@/pages/design-pattern/forms/TheForms.vue'),
-  },
-  {
-    path: '/design-pattern/layouts',
-    name: 'designPatternLayout',
-    component: () => import('@/pages/design-pattern/layouts/TheLayouts.vue'),
-  },
-  {
-    path: '/design-pattern/components',
-    name: 'designPatternComponents',
-    component: () => import('@/pages/design-pattern/components/TheComponents.vue'),
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: () => import('@/pages/profile/TheProfile.vue'),
-  },
-  {
-    path: '/public-projects',
-    name: 'publicProjects',
-    component: () => import('@/pages/public-projects/PublicProject.vue'),
-  },
-  {
-    path: '/coaches',
-    name: 'coaches',
-    component: () => import('@/pages/coaches/CoachesList.vue'),
-  },
-  {
-    path: '/coaches/:coachId',
-    name: 'coachDetails',
-    props: true,
-    component: () => import('@/pages/coaches/CoachDetails.vue'),
-    children: [
-      {
-        path: '/coaches/:coachId/request',
-        name: 'requestForm',
-        props: true,
-        component: () => import('@/pages/requests/RequestForm.vue'),
-      },
-    ],
-  },
-  {
-    path: '/coaches/add',
-    name: 'coachesAdd',
-    component: () => import('@/pages/coaches/CoachAdd.vue'),
+    path: '/about-us',
+    name: 'aboutUs',
+    component: () => import('@/pages/about-us/AboutUs.vue'),
     meta: {
-      requireAuth: true,
+      title: 'About us',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     },
   },
   {
-    path: '/requests-received',
-    name: 'requestsReceived',
-    component: () => import('@/pages/requests/RequestsReceived.vue'),
+    path: '/s-trade-promotion/have',
+    name: 'sTradePromotionHave',
+    component: () => import('@/pages/s-trade-promotion/STradePromotionHave.vue'),
     meta: {
-      requireAuth: true,
+      title: 'Sản phẩm/Dịch vụ chúng tôi có',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     },
   },
   {
-    path: '/auth',
-    name: 'authen',
-    component: () => import('@/pages/auth/TheAuthentication.vue'),
+    path: '/s-trade-promotion/need',
+    name: 'sTradePromotionNeed',
+    component: () => import('@/pages/s-trade-promotion/STradePromotionNeed.vue'),
     meta: {
-      requireUnauth: true,
+      title: 'Sản phẩm/Dịch vụ chúng tôi cần',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+  {
+    path: '/s-investment/have',
+    name: 'sInvestmentHave',
+    component: () => import('@/pages/s-investment/SInvestmentHave.vue'),
+    meta: {
+      title: 'Cơ hội đầu tư chúng tôi có',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+  {
+    path: '/s-investment/need',
+    name: 'sInvestmentNeed',
+    component: () => import('@/pages/s-investment/SInvestmentNeed.vue'),
+    meta: {
+      title: 'Cơ hội đầu tư chúng tôi cần',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+
+  {
+    path: '/learning/finance',
+    name: 'learningFinance',
+    component: () => import('@/pages/learning-center/Finance.vue'),
+    meta: {
+      title: 'Tài chính',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+  {
+    path: '/learning/legal',
+    name: 'learningLegal',
+    component: () => import('@/pages/learning-center/Legal.vue'),
+    meta: {
+      title: 'Pháp lý',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+  {
+    path: '/learning/mar-tech',
+    name: 'learningMarTech',
+    component: () => () => import('@/pages/learning-center/MarTech.vue'),
+    meta: {
+      title: 'Mar-tech',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+  {
+    path: '/learning/download',
+    name: 'learningDownload',
+    component: () => import('@/pages/learning-center/DocumentDownload.vue'),
+    meta: {
+      title: 'Tải tài liệu',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+  {
+    path: '/learning/caseStudy',
+    name: 'learningCasestudy',
+    component: () => import('@/pages/learning-center/CaseStudy.vue'),
+    meta: {
+      title: 'Casestudy',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: () => import('@/pages/contact/Contact.vue'),
+    meta: {
+      title: 'Liên hệ',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     },
   },
   {
     path: '/not-found',
     name: 'notFound',
     component: () => import('@/pages/NotFound.vue'),
+    meta: {
+      title: '',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    },
   },
   {
     path: '/:catchAll(.*)',
@@ -94,37 +124,49 @@ export const routes: RouteRecordRaw[] = [
 export const getRoute = (
   name:
     | 'home'
-    | 'designPatternContent'
-    | 'designPatternForm'
-    | 'designPatternLayout'
-    | 'designPatternComponents'
-    | 'profile'
-    | 'publicProjects'
-    | 'coaches'
-    | 'requestsReceived'
-    | 'coachDetails'
-    | 'requestForm'
-    | 'coachesAdd'
-    | 'authen'
+    | 'aboutUs'
+    | 'sTradePromotionHave'
+    | 'sTradePromotionNeed'
+    | 'sInvestmentHave'
+    | 'sInvestmentNeed'
+    | 'learningFinance'
+    | 'learningLegal'
+    | 'learningMarTech'
+    | 'learningDownload'
+    | 'learningCasestudy'
+    | 'contact'
     | 'notFound',
 ) => {
-  return routes.find((item) => item.name === name) as RouteRecordRaw;
+  const rs = routes.find((item) => item.name === name);
+  return {
+    path: rs?.path || '',
+    title: rs?.meta?.title || '',
+    description: rs?.meta?.description || '',
+  } as {
+    path: string;
+    title: string;
+    description: string;
+  };
 };
+
+export const stradePromotionRoutes = [
+  getRoute('sTradePromotionHave'),
+  getRoute('sTradePromotionNeed'),
+];
+export const sInvestmentRoutes = [getRoute('sInvestmentHave'), getRoute('sInvestmentNeed')];
+export const learningCenterRoutes = [
+  getRoute('learningFinance'),
+  getRoute('learningLegal'),
+  getRoute('learningMarTech'),
+  getRoute('learningCasestudy'),
+  getRoute('learningDownload'),
+];
+export const contactRoute = getRoute('contact');
+export const aboutRoute = getRoute('aboutUs');
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-});
-
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = store.getters['AUTHEN/isAuthenticated'];
-  if (to.meta.requireAuth && !isAuthenticated) {
-    next('/auth');
-  } else if (to.meta.requireUnauth && isAuthenticated) {
-    next(from || '/coaches');
-  } else {
-    next();
-  }
 });
 
 export default router;

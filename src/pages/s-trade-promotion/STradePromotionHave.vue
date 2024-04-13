@@ -1,6 +1,6 @@
 <template>
   <TheContainer class="pt-20 text-neutral-800">
-    <p class="text-heading3 font-bold">Public projects</p>
+    <p class="text-heading3 font-bold">Sản phẩm chúng tôi có</p>
   </TheContainer>
 </template>
 
