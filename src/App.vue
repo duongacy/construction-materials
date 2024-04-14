@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { MainLayout } from '@/layouts';
 import TheFooter from '@/layouts/TheFooter.vue';
-import { store } from '@/store';
 import { computed, onBeforeUnmount, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import TheNavigation from './layouts/navigation/TheNavigation.vue';
@@ -26,15 +25,15 @@ const removeAuthenSuccessEventHandler = () => {
 };
 
 onMounted(() => {
-  store.dispatch('PROFILE/getProfile');
-  store.dispatch('AUTHEN/autoSignin');
-  window.addEventListener('authenSuccess', authenSuccessEventHandler);
-  window.addEventListener('removeAuthenSuccess', removeAuthenSuccessEventHandler);
+  // store.dispatch('PROFILE/getProfile');
+  // store.dispatch('AUTHEN/autoSignin');
+  // window.addEventListener('authenSuccess', authenSuccessEventHandler);
+  // window.addEventListener('removeAuthenSuccess', removeAuthenSuccessEventHandler);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('authenSuccess', authenSuccessEventHandler);
-  window.removeEventListener('removeAuthenSuccess', removeAuthenSuccessEventHandler);
+  // window.removeEventListener('authenSuccess', authenSuccessEventHandler);
+  // window.removeEventListener('removeAuthenSuccess', removeAuthenSuccessEventHandler);
 });
 </script>
 <template>

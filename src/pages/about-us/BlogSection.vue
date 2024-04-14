@@ -1,8 +1,10 @@
 <template>
   <div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
-      <p class="mt-2 text-lg leading-8 text-gray-600">
+      <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
+        From the blog
+      </h2>
+      <p class="mt-2 text-lg leading-8 text-foreground/60">
         Vel dolorem qui facilis soluta sint aspernatur totam cumque.
       </p>
     </div>
@@ -12,18 +14,18 @@
       <article
         v-for="post in blogPosts"
         :key="post.id"
-        class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
+        class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-neutral-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
       >
         <img
           :src="post.imageUrl"
           alt=""
           class="absolute inset-0 -z-10 h-full w-full object-cover"
         />
-        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
-        <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-neutral-900 via-neutral-900/40" />
+        <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-neutral-900/10" />
 
         <div
-          class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-gray-300"
+          class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-neutral-300"
         >
           <time :datetime="post.datetime" class="mr-8">{{ post.date }}</time>
           <div class="-ml-4 flex items-center gap-x-4">

@@ -80,6 +80,7 @@
       <router-link :to="contactRoute.path" :class="navigationMenuTriggerStyle()">
         Contact
       </router-link>
+      <button @click="toggleDarkMode">{{ isDark ? 'Light' : 'Dark' }}</button>
     </NavigationMenuList>
   </NavigationMenu>
 </template>
@@ -93,6 +94,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
+import { useTheme } from '@/hooks/useTheme';
 import { cn } from '@/lib/utils';
 import {
   aboutRoute,
@@ -101,10 +103,20 @@ import {
   sInvestmentRoutes,
   stradePromotionRoutes,
 } from '@/router';
+import { ref, watchEffect } from 'vue';
 import ListItem from './NavigationItem.vue';
+const theme = ref('');
 
+watchEffect(() => {
+  if (theme.value === '') {
+    document.querySelector('html')?.classList.remove('dark');
+  } else {
+    document.querySelector('html')?.classList.add('dark');
+  }
+});
 defineOptions({ inheritAttrs: true });
 defineProps<{
   class?: string;
 }>();
+const [isDark, toggleDarkMode] = useTheme();
 </script>
