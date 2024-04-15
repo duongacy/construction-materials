@@ -38,10 +38,10 @@
                 />
               </div>
               <div class="flex-auto">
-                <a :href="item.path" class="block font-semibold text-foreground/90">
+                <router-link :to="item.path" class="block font-semibold text-foreground/90">
                   {{ item.title }}
                   <span class="absolute inset-0" />
-                </a>
+                </router-link>
                 <p class="mt-1 text-foreground/60">{{ item.description }}</p>
               </div>
             </div>
@@ -99,10 +99,10 @@
                 />
               </div>
               <div class="flex-auto">
-                <a :href="item.path" class="block font-semibold text-foreground/90">
+                <router-link :to="item.path" class="block font-semibold text-foreground/90">
                   {{ item.title }}
                   <span class="absolute inset-0" />
-                </a>
+                </router-link>
                 <p class="mt-1 text-foreground/60">{{ item.description }}</p>
               </div>
             </div>
@@ -160,10 +160,10 @@
                 />
               </div>
               <div class="flex-auto">
-                <a :href="item.path" class="block font-semibold text-foreground/90">
+                <router-link :to="item.path" class="block font-semibold text-foreground/90">
                   {{ item.title }}
                   <span class="absolute inset-0" />
-                </a>
+                </router-link>
                 <p class="mt-1 text-foreground/60">{{ item.description }}</p>
               </div>
             </div>

@@ -7,14 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    copy: typeof import('./src/layouts/navigation/NavigationPCMenu1 copy.vue')['default']
     MainLayout: typeof import('./src/layouts/MainLayout.vue')['default']
-    NavigationItem: typeof import('./src/layouts/navigation/NavigationItem.vue')['default']
-    NavigationLogo: typeof import('./src/layouts/navigation/NavigationLogo.vue')['default']
-    NavigationMenu1: typeof import('./src/layouts/navigation/NavigationMenu1.vue')['default']
-    NavigationMobileMenu: typeof import('./src/layouts/navigation/NavigationMobileMenu.vue')['default']
     NavigationMobileMenu1: typeof import('./src/layouts/navigation/NavigationMobileMenu1.vue')['default']
-    NavigationPCMenu: typeof import('./src/layouts/navigation/NavigationPCMenu.vue')['default']
     NavigationPCMenu1: typeof import('./src/layouts/navigation/NavigationPCMenu1.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
