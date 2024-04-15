@@ -1,3 +1,5 @@
+import { ChartPieIcon } from '@heroicons/vue/24/outline';
+import type { Component } from 'vue';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
 export const routes: RouteRecordRaw[] = [
@@ -22,6 +24,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Sản phẩm/Dịch vụ chúng tôi có',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -31,6 +34,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Sản phẩm/Dịch vụ chúng tôi cần',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -40,6 +44,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Cơ hội đầu tư chúng tôi có',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -49,6 +54,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Cơ hội đầu tư chúng tôi cần',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
 
@@ -59,6 +65,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Tài chính',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -68,6 +75,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Pháp lý',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -77,6 +85,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Mar-tech',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -86,6 +95,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Tải tài liệu',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -95,6 +105,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       title: 'Casestudy',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
     },
   },
   {
@@ -142,10 +153,12 @@ export const getRoute = (
     path: rs?.path || '',
     title: rs?.meta?.title || '',
     description: rs?.meta?.description || '',
+    icon: rs?.meta?.icon || null,
   } as {
     path: string;
     title: string;
     description: string;
+    icon: Component;
   };
 };
 
