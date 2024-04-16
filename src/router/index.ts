@@ -176,7 +176,7 @@ export const aboutRoute = getRoute('aboutUs');
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.VITE_BASE_URL),
-  history: createWebHistory('/'),
+  history: createWebHistory(''),
   routes,
 });
 
