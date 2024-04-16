@@ -18,9 +18,9 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/s-trade-promotion/have',
-    name: 'sTradePromotionHave',
-    component: () => import('@/pages/s-trade-promotion/STradePromotionHave.vue'),
+    path: '/promotion/have',
+    name: 'PromotionHave',
+    component: () => import('@/pages/promotion/PromotionHave.vue'),
     meta: {
       title: 'Sản phẩm/Dịch vụ chúng tôi có',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -28,9 +28,9 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/s-trade-promotion/need',
-    name: 'sTradePromotionNeed',
-    component: () => import('@/pages/s-trade-promotion/STradePromotionNeed.vue'),
+    path: '/promotion/need',
+    name: 'PromotionNeed',
+    component: () => import('@/pages/promotion/PromotionNeed.vue'),
     meta: {
       title: 'Sản phẩm/Dịch vụ chúng tôi cần',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -38,9 +38,9 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/s-investment/have',
-    name: 'sInvestmentHave',
-    component: () => import('@/pages/s-investment/SInvestmentHave.vue'),
+    path: '/investment/have',
+    name: 'InvestmentHave',
+    component: () => import('@/pages/investment/InvestmentHave.vue'),
     meta: {
       title: 'Cơ hội đầu tư chúng tôi có',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -48,9 +48,9 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/s-investment/need',
-    name: 'sInvestmentNeed',
-    component: () => import('@/pages/s-investment/SInvestmentNeed.vue'),
+    path: '/investment/need',
+    name: 'InvestmentNeed',
+    component: () => import('@/pages/investment/InvestmentNeed.vue'),
     meta: {
       title: 'Cơ hội đầu tư chúng tôi cần',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -136,10 +136,10 @@ export const getRoute = (
   name:
     | 'home'
     | 'aboutUs'
-    | 'sTradePromotionHave'
-    | 'sTradePromotionNeed'
-    | 'sInvestmentHave'
-    | 'sInvestmentNeed'
+    | 'PromotionHave'
+    | 'PromotionNeed'
+    | 'InvestmentHave'
+    | 'InvestmentNeed'
     | 'learningFinance'
     | 'learningLegal'
     | 'learningMarTech'
@@ -162,11 +162,8 @@ export const getRoute = (
   };
 };
 
-export const stradePromotionRoutes = [
-  getRoute('sTradePromotionHave'),
-  getRoute('sTradePromotionNeed'),
-];
-export const sInvestmentRoutes = [getRoute('sInvestmentHave'), getRoute('sInvestmentNeed')];
+export const stradePromotionRoutes = [getRoute('PromotionHave'), getRoute('PromotionNeed')];
+export const sInvestmentRoutes = [getRoute('InvestmentHave'), getRoute('InvestmentNeed')];
 export const learningCenterRoutes = [
   getRoute('learningFinance'),
   getRoute('learningLegal'),
