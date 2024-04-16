@@ -54,7 +54,7 @@
         class="absolute -translate-x-1/2 p-4 top-full z-50 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-background shadow-lg ring-1 ring-border"
       >
         <DropdownMenuItem
-          v-for="item in sInvestmentRoutes"
+          v-for="item in stradePromotionRoutes"
           :key="item.path"
           class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-muted/80"
         >
@@ -127,7 +127,12 @@
 
 <script setup lang="ts">
 import { useTheme } from '@/hooks/useTheme';
-import { aboutRoute, learningCenterRoutes, sInvestmentRoutes } from '@/router';
+import {
+  aboutRoute,
+  learningCenterRoutes,
+  sInvestmentRoutes,
+  stradePromotionRoutes,
+} from '@/router';
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid';
 
 import {
