@@ -131,7 +131,7 @@ import {
   sInvestmentRoutes,
   stradePromotionRoutes,
 } from '@/router';
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid';
+import { ChevronDownIcon } from '@heroicons/vue/20/solid';
 
 import {
   DropdownMenu,
@@ -140,9 +140,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
-];
+// const callsToAction = [
+//   { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
+//   { name: 'Contact sales', href: '#', icon: PhoneIcon },
+// ];
 const [isDark, toggleDarkMode] = useTheme();
 </script>
