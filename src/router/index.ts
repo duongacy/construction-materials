@@ -6,7 +6,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    redirect: '/about-us',
+    component: () => import('@/pages/about-us/AboutUs.vue'),
   },
   {
     path: '/about-us',
