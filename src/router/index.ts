@@ -6,7 +6,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/pages/about-us/AboutUs.vue'),
+    redirect: '/about-us',
   },
   {
     path: '/about-us',
@@ -173,9 +173,13 @@ export const learningCenterRoutes = [
 ];
 export const contactRoute = getRoute('contact');
 export const aboutRoute = getRoute('aboutUs');
+// const baseURL = import.meta.env.VITE_BASE_URL
+// console.log(baseURL);
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes,
 });
+
+
 export default router;
