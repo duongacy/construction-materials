@@ -22,11 +22,7 @@
               alt=""
             />
           </router-link>
-          <button
-            type="button"
-            class="-m-2.5 rounded-md p-2.5 text-foreground/70"
-            @click="mobileMenuOpen = false"
-          >
+          <button type="button" class="-m-2.5 rounded-md p-2.5 text-foreground/70">
             <span class="sr-only">Close menu</span>
             <XMarkIcon class="h-6 w-6" aria-hidden="true" />
           </button>
@@ -34,7 +30,6 @@
         <div class="mt-6 flow-root">
           <div class="py-6">
             <router-link
-              @click="mobileMenuOpen = false"
               :to="aboutRoute.path"
               class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-foreground/90 hover:bg-muted/60"
               >{{ aboutRoute.title }}
@@ -55,7 +50,6 @@
                 <DisclosurePanel class="mt-2 space-y-2">
                   <DisclosureButton
                     as="router-link"
-                    @click="mobileMenuOpen = false"
                     v-for="item in [...stradePromotionRoutes]"
                     :key="item.name"
                     :to="item.path"
@@ -81,7 +75,6 @@
                     :key="item.name"
                     as="router-link"
                     :to="item.path"
-                    @click="mobileMenuOpen = false"
                     class="block cursor-pointer rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-foreground/90 hover:bg-muted/60"
                   >
                     {{ item.title }}
