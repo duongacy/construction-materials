@@ -164,9 +164,9 @@ export const getRoute = (
   } as RouterLinkItem;
 };
 
-export const stradePromotionRoutes = [getRoute('PromotionHave'), getRoute('PromotionNeed')];
-export const sInvestmentRoutes = [getRoute('InvestmentHave'), getRoute('InvestmentNeed')];
-export const learningCenterRoutes = [
+export const promotionRoutes = [getRoute('PromotionHave'), getRoute('PromotionNeed')];
+export const investmentRoutes = [getRoute('InvestmentHave'), getRoute('InvestmentNeed')];
+export const learningRoutes = [
   getRoute('learningFinance'),
   getRoute('learningLegal'),
   getRoute('learningMarTech'),
@@ -175,8 +175,6 @@ export const learningCenterRoutes = [
 ];
 export const contactRoute = getRoute('contact');
 export const aboutRoute = getRoute('aboutUs');
-// const baseURL = import.meta.env.VITE_BASE_URL
-// console.log(baseURL);
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),

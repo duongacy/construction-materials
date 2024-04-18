@@ -43,17 +43,17 @@
           <div class="-my-6 divide-y divide-border/50">
             <div class="space-y-2 py-6">
               <MobileMenuDropdown
-                :items="stradePromotionRoutes"
+                :items="promotionRoutes"
                 title="Promotion"
                 @change-link="toggleMobileMenuOpen"
               />
               <MobileMenuDropdown
-                :items="sInvestmentRoutes"
+                :items="investmentRoutes"
                 title="Investment"
                 @change-link="toggleMobileMenuOpen"
               />
               <MobileMenuDropdown
-                :items="learningCenterRoutes"
+                :items="learningRoutes"
                 title="Learning"
                 @change-link="toggleMobileMenuOpen"
               />
@@ -76,12 +76,7 @@
 <script setup>
 import { useTheme } from '@/hooks/useTheme';
 import { useToggle } from '@/hooks/useToggle';
-import {
-  aboutRoute,
-  learningCenterRoutes,
-  sInvestmentRoutes,
-  stradePromotionRoutes,
-} from '@/router';
+import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@/router';
 import { Dialog, DialogPanel } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import MobileMenuDropdown from './MobileMenuDropdown.vue';

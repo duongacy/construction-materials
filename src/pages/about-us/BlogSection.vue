@@ -54,6 +54,9 @@
 </template>
 
 <script setup lang="ts">
+import { useAboutUsStore } from '@/store/useAboutUsStore';
+
+const store = useAboutUsStore();
 const blogPosts = [
   {
     id: 1,
@@ -74,5 +77,3 @@ const blogPosts = [
   // More posts...
 ];
 </script>
-
-<style scoped></style>

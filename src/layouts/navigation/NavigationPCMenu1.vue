@@ -6,9 +6,9 @@
     >
       {{ aboutRoute.title }}
     </RouterLink>
-    <PCMenuDropdown title="Promotion" :items="stradePromotionRoutes" />
-    <PCMenuDropdown title="Investment" :items="sInvestmentRoutes" />
-    <PCMenuDropdown title="Learning" :items="learningCenterRoutes" />
+    <PCMenuDropdown title="Promotion" :items="promotionRoutes" />
+    <PCMenuDropdown title="Investment" :items="investmentRoutes" />
+    <PCMenuDropdown title="Learning" :items="learningRoutes" />
   </div>
   <div class="flex lg:flex-1 lg:justify-end">
     <button class="text-sm font-semibold leading-6 text-foreground/90" @click="toggleDarkMode">
@@ -19,12 +19,7 @@
 
 <script setup lang="ts">
 import { useTheme } from '@/hooks/useTheme';
-import {
-  aboutRoute,
-  learningCenterRoutes,
-  sInvestmentRoutes,
-  stradePromotionRoutes,
-} from '@/router';
+import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@/router';
 
 import PCMenuDropdown from './PCMenuDropdown.vue';
 const [isDark, toggleDarkMode] = useTheme();
