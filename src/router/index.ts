@@ -132,6 +132,13 @@ export const routes: RouteRecordRaw[] = [
   },
 ];
 
+export type RouterLinkItem = {
+  path: string;
+  title: string;
+  description: string;
+  icon: Component;
+};
+
 export const getRoute = (
   name:
     | 'home'
@@ -154,12 +161,7 @@ export const getRoute = (
     title: rs?.meta?.title || '',
     description: rs?.meta?.description || '',
     icon: rs?.meta?.icon || null,
-  } as {
-    path: string;
-    title: string;
-    description: string;
-    icon: Component;
-  };
+  } as RouterLinkItem;
 };
 
 export const stradePromotionRoutes = [getRoute('PromotionHave'), getRoute('PromotionNeed')];

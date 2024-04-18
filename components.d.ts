@@ -8,8 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     MainLayout: typeof import('./src/layouts/MainLayout.vue')['default']
+    MobileMenuDropdown: typeof import('./src/layouts/navigation/MobileMenuDropdown.vue')['default']
     NavigationMobileMenu1: typeof import('./src/layouts/navigation/NavigationMobileMenu1.vue')['default']
     NavigationPCMenu1: typeof import('./src/layouts/navigation/NavigationPCMenu1.vue')['default']
+    PCMenuDropdown: typeof import('./src/layouts/navigation/PCMenuDropdown.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheContainer: typeof import('./src/layouts/container/TheContainer.vue')['default']
