@@ -14,7 +14,8 @@
         v-for="item in items"
         :key="item.title"
         :to="item.path"
-        class="block cursor-pointer py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-foreground/80 hover:text-foreground/60 [&.router-link-active]:underline"
+        class="block cursor-pointer py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-foreground/80 hover:text-foreground/60 [&.router-link-active]:underline underline-offset-4"
+        style="text-decoration-thickness: 2px"
         @click="handleChangeLink"
       >
         {{ item.title }}
