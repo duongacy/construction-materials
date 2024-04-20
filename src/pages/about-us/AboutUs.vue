@@ -11,8 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { useAboutUsStore } from '@/store/useAboutUsStore';
-import { onMounted } from 'vue';
 import BlogSection from './BlogSection.vue';
 import HeroSection from './HeroSection.vue';
 import ImageSection from './ImageSection.vue';
@@ -20,9 +18,4 @@ import LogoCloudSection from './LogoCloudSection.vue';
 import StatsSection from './StatsSection.vue';
 import TeamSection from './TeamSection.vue';
 import ValuesSection from './ValuesSection.vue';
-
-const aboutUsStore = useAboutUsStore();
-onMounted(() => {
-  aboutUsStore.fetchData();
-});
 </script>

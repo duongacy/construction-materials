@@ -62,10 +62,10 @@
         <div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
           <div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
             <h1 class="text-4xl font-bold tracking-tight text-foreground/90 sm:text-6xl">
-              {{ aboutUsData?.heroSection.title }}
+              {{ heroSection?.heroSection.title }}
             </h1>
             <p class="relative mt-6 text-lg leading-8 text-foreground/60 sm:max-w-md lg:max-w-none">
-              {{ aboutUsData?.heroSection?.description }}
+              {{ heroSection?.heroSection.description }}
             </p>
           </div>
           <div
@@ -138,8 +138,8 @@
 
 <script setup lang="ts">
 import { useAboutUsStore } from '@/store/useAboutUsStore';
-import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
-const { aboutUsData } = storeToRefs(aboutUsStore);
+const heroSection = computed(() => aboutUsStore.aboutUsQuery.data);
 </script>
