@@ -28,53 +28,46 @@
         />
       </svg>
     </div>
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <TheContainer>
       <h2 class="text-center text-lg font-semibold leading-8 text-foreground/90">
-        Trusted by the world’s most innovative teams
+        {{ aboutUsLogoCloudsSectionData?.title }}
       </h2>
       <div
         class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5"
       >
         <img
-          class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-          src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-900.svg"
-          alt="Transistor"
-          width="158"
-          height="48"
-        />
-        <img
-          class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-          src="https://tailwindui.com/img/logos/158x48/reform-logo-gray-900.svg"
-          alt="Reform"
-          width="158"
-          height="48"
-        />
-        <img
-          class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-          src="https://tailwindui.com/img/logos/158x48/tuple-logo-gray-900.svg"
-          alt="Tuple"
-          width="158"
-          height="48"
-        />
-        <img
-          class="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
-          src="https://tailwindui.com/img/logos/158x48/savvycal-logo-gray-900.svg"
-          alt="SavvyCal"
-          width="158"
-          height="48"
-        />
-        <img
-          class="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
-          src="https://tailwindui.com/img/logos/158x48/statamic-logo-gray-900.svg"
-          alt="Statamic"
-          width="158"
-          height="48"
+          v-for="(logo, index) in logos"
+          :key="logo.id + logo.name"
+          :class="
+            cn('col-span-2 max-h-12 w-full object-contain lg:col-span-1 ', {
+              ' col-span-2  sm:col-start-2': index % 3 === 0,
+              ' col-span-2 col-start-2  sm:col-start-auto ': index % 4 === 0,
+            })
+          "
+          :src="VITE_API_URL + logo?.url"
+          :alt="logo.alternativeText"
+          :width="logo.width"
+          :height="logo.height"
         />
       </div>
-    </div>
+    </TheContainer>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TheContainer from '@/layouts/container/TheContainer.vue';
 
-<style scoped></style>
+import { aboutUsLogoCloudsSectionQueryFn } from '@/apis/aboutUs';
+import { VITE_API_URL } from '@/consts';
+import { cn } from '@/lib/utils';
+import { useQuery } from '@tanstack/vue-query';
+import { computed } from 'vue';
+
+const aboutUsLogoCloudsSectionQuery = useQuery({
+  queryKey: ['about-us-logo-clouds-section'],
+  queryFn: aboutUsLogoCloudsSectionQueryFn,
+});
+
+const aboutUsLogoCloudsSectionData = aboutUsLogoCloudsSectionQuery.data;
+const logos = computed(() => aboutUsLogoCloudsSectionData.value?.logos);
+</script>

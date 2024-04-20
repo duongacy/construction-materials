@@ -1,3 +1,4 @@
+import { VITE_BASE_URL } from '@/consts';
 import { ChartPieIcon } from '@heroicons/vue/24/outline';
 import type { Component } from 'vue';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
@@ -177,7 +178,7 @@ export const contactRoute = getRoute('contact');
 export const aboutRoute = getRoute('aboutUs');
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.VITE_BASE_URL),
+  history: createWebHistory(VITE_BASE_URL),
   routes,
 });
 

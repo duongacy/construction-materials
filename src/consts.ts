@@ -1,1 +1,2 @@
-export const API_HOST = 'http://localhost:1337';
+export const VITE_BASE_URL = import.meta.env.VITE_BASE_URL;
+export const VITE_API_URL = import.meta.env.VITE_API_URL;

@@ -1,17 +1,17 @@
 <template>
-  <div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+  <TheContainer class="mt-32 sm:mt-40">
     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-        From the blog
+        {{ aboutUsBlogsSectionData?.title }}
       </h2>
       <p class="mt-2 text-lg leading-8 text-foreground/60">
-        Vel dolorem qui facilis soluta sint aspernatur totam cumque.
+        {{ aboutUsBlogsSectionData?.description }}
       </p>
     </div>
     <div
       class="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
     >
-      <article
+      <!-- <article
         v-for="post in blogPosts"
         :key="post.id"
         class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-neutral-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
@@ -48,32 +48,43 @@
             {{ post.title }}
           </a>
         </h3>
-      </article>
+      </article> -->
     </div>
-  </div>
+  </TheContainer>
 </template>
 
 <script setup lang="ts">
-import { useAboutUsStore } from '@/store/useAboutUsStore';
+import { aboutUsBlogsSectionQueryFn } from '@/apis/aboutUs';
+import TheContainer from '@/layouts/container/TheContainer.vue';
+import { useQuery } from '@tanstack/vue-query';
+import { computed } from 'vue';
 
-const store = useAboutUsStore();
-const blogPosts = [
-  {
-    id: 1,
-    title: 'Vel expedita assumenda placeat aut nisi optio voluptates quas',
-    href: '#',
-    description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    author: {
-      name: 'Michael Foster',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-  },
-  // More posts...
-];
+const aboutUsBlogsSectionQuery = useQuery({
+  queryKey: ['about-us-blogs-section'],
+  queryFn: aboutUsBlogsSectionQueryFn,
+});
+
+const aboutUsBlogsSectionData = aboutUsBlogsSectionQuery.data;
+const blogPosts = computed(() => aboutUsBlogsSectionData.value?.blogs);
+
+// const store = useAboutUsStore();
+// const blogPosts = [
+//   {
+//     id: 1,
+//     title: 'Vel expedita assumenda placeat aut nisi optio voluptates quas',
+//     href: '#',
+//     description:
+//       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
+//     imageUrl:
+//       'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
+//     date: 'Mar 16, 2020',
+//     datetime: '2020-03-16',
+//     author: {
+//       name: 'Michael Foster',
+//       imageUrl:
+//         'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//     },
+//   },
+//   // More posts...
+// ];
 </script>
