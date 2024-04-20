@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+  <TheContainer class="mt-32 sm:mt-40">
     <div class="mx-auto max-w-2xl lg:mx-0">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
         {{ aboutUsValuesSectionData?.title }}
@@ -16,11 +16,12 @@
         <dd class="mt-1 text-foreground/60">{{ value.description }}</dd>
       </div>
     </dl>
-  </div>
+  </TheContainer>
 </template>
 
 <script setup lang="ts">
 import { aboutUsValuesSectionQueryFn } from '@/apis/aboutUs';
+import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 

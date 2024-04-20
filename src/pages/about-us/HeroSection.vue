@@ -58,7 +58,7 @@
       />
     </div>
     <div class="overflow-hidden">
-      <div class="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
+      <TheContainer class="pb-32 pt-36 sm:pt-60 lg:pt-32">
         <div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
           <div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
             <h1 class="text-4xl font-bold tracking-tight text-foreground/90 sm:text-6xl">
@@ -142,13 +142,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </TheContainer>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { VITE_API_URL } from '@/consts';
+import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
