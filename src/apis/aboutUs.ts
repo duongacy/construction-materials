@@ -1,38 +1,4 @@
-import { getQueryFn } from '.';
-
-type Image = {
-  id: number;
-  name: string;
-  alternativeText?: string;
-  caption?: string;
-  width?: number;
-  height?: number;
-  formats: any;
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl?: string;
-  provider: string;
-  provider_metadata: any;
-  createdAt: string;
-  updatedAt: string;
-};
-const defaultImage: Image = {
-  id: 0,
-  name: '',
-  formats: undefined,
-  hash: '',
-  ext: '',
-  mime: '',
-  size: 0,
-  url: '',
-  provider: '',
-  provider_metadata: undefined,
-  createdAt: '',
-  updatedAt: '',
-};
+import { defaultImage, getQueryFn, type Image } from '.';
 
 /* aboutUsHeroSectionQueryFn */
 type AboutUsHeroSectionData = {
@@ -46,6 +12,7 @@ const aboutUsHeroSectionDefaultData: AboutUsHeroSectionData = {
   description: '',
   backgrounds: [],
 };
+
 export const aboutUsHeroSectionQueryFn = () =>
   getQueryFn<AboutUsHeroSectionData>(
     '/api/about-us-hero-section?populate=deep',
@@ -109,7 +76,7 @@ const aboutUsLogoCloudsSectionDefaultData: AboutUsLogoCloudsSectionData = {
 };
 
 export const aboutUsLogoCloudsSectionQueryFn = () =>
-  getQueryFn(
+  getQueryFn<AboutUsLogoCloudsSectionData>(
     '/api/about-us-logo-clouds-section?populate=deep',
     aboutUsLogoCloudsSectionDefaultData,
   );
@@ -134,7 +101,10 @@ const aboutUsBlogsSectionDefaultData: AboutUsBlogsSectionData = {
 };
 
 export const aboutUsBlogsSectionQueryFn = () =>
-  getQueryFn('/api/about-us-blogs-section?populate=deep', aboutUsBlogsSectionDefaultData);
+  getQueryFn<AboutUsBlogsSectionData>(
+    '/api/about-us-blogs-section?populate=deep',
+    aboutUsBlogsSectionDefaultData,
+  );
 
 /* aboutUsTeamSectionQueryFn */
 type Member = {
@@ -156,7 +126,10 @@ const aboutUsTeamSectionDefaultData: AboutUsTeamSectionData = {
 };
 
 export const aboutUsTeamSectionQueryFn = () =>
-  getQueryFn('/api/about-us-team-section?populate=deep', aboutUsTeamSectionDefaultData);
+  getQueryFn<AboutUsTeamSectionData>(
+    '/api/about-us-team-section?populate=deep',
+    aboutUsTeamSectionDefaultData,
+  );
 
 /* aboutUsValuesSectionQueryFn */
 type Value = {
@@ -177,4 +150,7 @@ const aboutUsValuesSectionDefaultData: AboutUsValuesSectionData = {
 };
 
 export const aboutUsValuesSectionQueryFn = () =>
-  getQueryFn('/api/about-us-values-section?populate=deep', aboutUsValuesSectionDefaultData);
+  getQueryFn<AboutUsValuesSectionData>(
+    '/api/about-us-values-section?populate=deep',
+    aboutUsValuesSectionDefaultData,
+  );
