@@ -1,16 +1,20 @@
-import { defaultImage, getQueryFn, type Image } from '.';
+import { defaultImage, getQueryFn, type Image, type StrapiFormat } from '.';
 
 /* aboutUsHeroSectionQueryFn */
-type AboutUsHeroSectionData = {
+interface AboutUsHeroSectionData extends StrapiFormat {
   title: string;
   description: string;
   backgrounds: Image[];
-};
+}
 
 const aboutUsHeroSectionDefaultData: AboutUsHeroSectionData = {
   title: '',
   description: '',
   backgrounds: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
 };
 
 export const aboutUsHeroSectionQueryFn = () =>
@@ -20,21 +24,25 @@ export const aboutUsHeroSectionQueryFn = () =>
   );
 
 /* aboutUsStatsSectionQueryFn */
-type Stat = {
+interface Stat {
   value: string;
   title: string;
   description: string;
-};
-type AboutUsStatsSectionData = {
+}
+interface AboutUsStatsSectionData extends StrapiFormat {
   title: string;
   description: string;
   stats: Stat[];
-};
+}
 
 const aboutUsStatsSectionDefaultData: AboutUsStatsSectionData = {
   title: '',
   description: '',
   stats: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
 };
 
 export const aboutUsStatsSectionQueryFn = () =>
@@ -44,16 +52,20 @@ export const aboutUsStatsSectionQueryFn = () =>
   );
 
 /* aboutUsImageSectionQueryFn */
-type AboutUsImageSectionData = {
+interface AboutUsImageSectionData extends StrapiFormat {
   title: string;
   description: string;
   image: Image;
-};
+}
 
 const aboutUsImageSectionDefaultData: AboutUsImageSectionData = {
   title: '',
   description: '',
   image: defaultImage,
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
 };
 
 export const aboutUsImageSectionQueryFn = () =>
@@ -63,16 +75,20 @@ export const aboutUsImageSectionQueryFn = () =>
   );
 
 /* aboutUsLogoCloudsSectionQueryFn */
-type AboutUsLogoCloudsSectionData = {
+interface AboutUsLogoCloudsSectionData extends StrapiFormat {
   title: string;
   description: string;
   logos: Image[];
-};
+}
 
 const aboutUsLogoCloudsSectionDefaultData: AboutUsLogoCloudsSectionData = {
   title: '',
   description: '',
   logos: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
 };
 
 export const aboutUsLogoCloudsSectionQueryFn = () =>
@@ -82,22 +98,26 @@ export const aboutUsLogoCloudsSectionQueryFn = () =>
   );
 
 /* aboutUsBlogsSectionQueryFn */
-type Blog = {
+interface Blog {
   title: string;
   description: string;
   content: string;
-};
+}
 
-type AboutUsBlogsSectionData = {
+interface AboutUsBlogsSectionData extends StrapiFormat {
   title: string;
   description: string;
   blogs: Blog[];
-};
+}
 
 const aboutUsBlogsSectionDefaultData: AboutUsBlogsSectionData = {
   title: '',
   description: '',
   blogs: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
 };
 
 export const aboutUsBlogsSectionQueryFn = () =>
@@ -107,22 +127,26 @@ export const aboutUsBlogsSectionQueryFn = () =>
   );
 
 /* aboutUsTeamSectionQueryFn */
-type Member = {
+interface Member {
   name: string;
   role: string;
   avatar: Image;
-};
+}
 
-type AboutUsTeamSectionData = {
+interface AboutUsTeamSectionData extends StrapiFormat {
   title: string;
   description: string;
   members: Member[];
-};
+}
 
 const aboutUsTeamSectionDefaultData: AboutUsTeamSectionData = {
   title: '',
   description: '',
   members: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
 };
 
 export const aboutUsTeamSectionQueryFn = () =>
@@ -132,21 +156,25 @@ export const aboutUsTeamSectionQueryFn = () =>
   );
 
 /* aboutUsValuesSectionQueryFn */
-type Value = {
+interface Value {
   title: string;
   description: string;
-};
+}
 
-type AboutUsValuesSectionData = {
+interface AboutUsValuesSectionData extends StrapiFormat {
   title: string;
   description: string;
   values: Value[];
-};
+}
 
 const aboutUsValuesSectionDefaultData: AboutUsValuesSectionData = {
   title: '',
   description: '',
   values: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
 };
 
 export const aboutUsValuesSectionQueryFn = () =>

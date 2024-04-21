@@ -1,7 +1,13 @@
 import { VITE_API_URL } from '@/consts';
 
-export type Image = {
+export interface StrapiFormat {
   id: number;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+export interface Image extends StrapiFormat {
   name: string;
   alternativeText?: string;
   caption?: string;
@@ -16,12 +22,9 @@ export type Image = {
   previewUrl?: string;
   provider: string;
   provider_metadata: any;
-  createdAt: string;
-  updatedAt: string;
-};
+}
 
 export const defaultImage: Image = {
-  id: 0,
   name: '',
   formats: undefined,
   hash: '',
@@ -31,9 +34,12 @@ export const defaultImage: Image = {
   url: '',
   provider: '',
   provider_metadata: undefined,
+  id: 0,
   createdAt: '',
   updatedAt: '',
+  publishedAt: '',
 };
+
 export async function getQueryFn<DataType>(url: string, defaultData: DataType) {
   try {
     const response = await fetch(`${VITE_API_URL}${url}`);
