@@ -1,4 +1,4 @@
-import { VITE_API_URL } from '@/consts';
+import { getQueryFn } from '.';
 
 type Image = {
   id: number;
@@ -46,19 +46,11 @@ const aboutUsHeroSectionDefaultData: AboutUsHeroSectionData = {
   description: '',
   backgrounds: [],
 };
-
-export const aboutUsHeroSectionQueryFn = async () => {
-  try {
-    const response = await fetch(`${VITE_API_URL}/api/about-us-hero-section?populate=deep`);
-    if (response.ok) {
-      return (await response.json()) as AboutUsHeroSectionData;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-
-  return aboutUsHeroSectionDefaultData;
-};
+export const aboutUsHeroSectionQueryFn = () =>
+  getQueryFn<AboutUsHeroSectionData>(
+    '/api/about-us-hero-section?populate=deep',
+    aboutUsHeroSectionDefaultData,
+  );
 
 /* aboutUsStatsSectionQueryFn */
 type Stat = {
@@ -78,18 +70,11 @@ const aboutUsStatsSectionDefaultData: AboutUsStatsSectionData = {
   stats: [],
 };
 
-export const aboutUsStatsSectionQueryFn = async () => {
-  try {
-    const response = await fetch(`${VITE_API_URL}/api/about-us-stats-section?populate=deep`);
-    if (response.ok) {
-      return (await response.json()) as AboutUsStatsSectionData;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-
-  return aboutUsStatsSectionDefaultData;
-};
+export const aboutUsStatsSectionQueryFn = () =>
+  getQueryFn<AboutUsStatsSectionData>(
+    '/api/about-us-stats-section?populate=deep',
+    aboutUsStatsSectionDefaultData,
+  );
 
 /* aboutUsImageSectionQueryFn */
 type AboutUsImageSectionData = {
@@ -104,17 +89,11 @@ const aboutUsImageSectionDefaultData: AboutUsImageSectionData = {
   image: defaultImage,
 };
 
-export const aboutUsImageSectionQueryFn = async () => {
-  try {
-    const response = await fetch(`${VITE_API_URL}/api/about-us-image-section?populate=deep`);
-    if (response.ok) {
-      return (await response.json()) as AboutUsImageSectionData;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return aboutUsImageSectionDefaultData;
-};
+export const aboutUsImageSectionQueryFn = () =>
+  getQueryFn<AboutUsImageSectionData>(
+    '/api/about-us-image-section?populate=deep',
+    aboutUsImageSectionDefaultData,
+  );
 
 /* aboutUsLogoCloudsSectionQueryFn */
 type AboutUsLogoCloudsSectionData = {
@@ -129,17 +108,11 @@ const aboutUsLogoCloudsSectionDefaultData: AboutUsLogoCloudsSectionData = {
   logos: [],
 };
 
-export const aboutUsLogoCloudsSectionQueryFn = async () => {
-  try {
-    const response = await fetch(`${VITE_API_URL}/api/about-us-logo-clouds-section?populate=deep`);
-    if (response.ok) {
-      return (await response.json()) as AboutUsLogoCloudsSectionData;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return aboutUsLogoCloudsSectionDefaultData;
-};
+export const aboutUsLogoCloudsSectionQueryFn = () =>
+  getQueryFn(
+    '/api/about-us-logo-clouds-section?populate=deep',
+    aboutUsLogoCloudsSectionDefaultData,
+  );
 
 /* aboutUsBlogsSectionQueryFn */
 type Blog = {
@@ -160,17 +133,8 @@ const aboutUsBlogsSectionDefaultData: AboutUsBlogsSectionData = {
   blogs: [],
 };
 
-export const aboutUsBlogsSectionQueryFn = async () => {
-  try {
-    const response = await fetch(`${VITE_API_URL}/api/about-us-blogs-section?populate=deep`);
-    if (response.ok) {
-      return (await response.json()) as AboutUsBlogsSectionData;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return aboutUsBlogsSectionDefaultData;
-};
+export const aboutUsBlogsSectionQueryFn = () =>
+  getQueryFn('/api/about-us-blogs-section?populate=deep', aboutUsBlogsSectionDefaultData);
 
 /* aboutUsTeamSectionQueryFn */
 type Member = {
@@ -191,17 +155,8 @@ const aboutUsTeamSectionDefaultData: AboutUsTeamSectionData = {
   members: [],
 };
 
-export const aboutUsTeamSectionQueryFn = async () => {
-  try {
-    const response = await fetch(`${VITE_API_URL}/api/about-us-team-section?populate=deep`);
-    if (response.ok) {
-      return (await response.json()) as AboutUsTeamSectionData;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return aboutUsTeamSectionDefaultData;
-};
+export const aboutUsTeamSectionQueryFn = () =>
+  getQueryFn('/api/about-us-team-section?populate=deep', aboutUsTeamSectionDefaultData);
 
 /* aboutUsValuesSectionQueryFn */
 type Value = {
@@ -221,14 +176,5 @@ const aboutUsValuesSectionDefaultData: AboutUsValuesSectionData = {
   values: [],
 };
 
-export const aboutUsValuesSectionQueryFn = async () => {
-  try {
-    const response = await fetch(`${VITE_API_URL}/api/about-us-values-section?populate=deep`);
-    if (response.ok) {
-      return (await response.json()) as AboutUsValuesSectionData;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  return aboutUsValuesSectionDefaultData;
-};
+export const aboutUsValuesSectionQueryFn = () =>
+  getQueryFn('/api/about-us-values-section?populate=deep', aboutUsValuesSectionDefaultData);
