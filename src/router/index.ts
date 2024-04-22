@@ -128,6 +128,10 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/auth',
+    component: () => import('@/pages/auth/TheAuthentication.vue'),
+  },
+  {
     path: '/:catchAll(.*)',
     redirect: '/not-found',
   },

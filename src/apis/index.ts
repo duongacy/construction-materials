@@ -1,4 +1,4 @@
-import { VITE_API_URL } from '@/consts';
+import { VITE_API_URL, VITE_BASE_TOKEN } from '@/consts';
 
 export interface StrapiFormat {
   id: number;
@@ -42,7 +42,9 @@ export const defaultImage: Image = {
 
 export async function getQueryFn<DataType>(url: string, defaultData: DataType) {
   try {
-    const response = await fetch(`${VITE_API_URL}${url}`);
+    const response = await fetch(`${VITE_API_URL}${url}`, {
+      headers: { Authorization: `Bearer ${VITE_BASE_TOKEN}` },
+    });
     if (response.ok) {
       const partialResult = (await response.json()) as Partial<DataType>;
       const finalResult: DataType = defaultData;
