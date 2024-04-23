@@ -62,22 +62,22 @@
         <div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
           <div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
             <h1 class="text-4xl font-bold tracking-tight text-foreground/90 sm:text-6xl">
-              {{ aboutUsHeroSectionData?.title }}
+              {{ aaaa?.title }}
             </h1>
             <p class="relative mt-6 text-lg leading-8 text-foreground/60 sm:max-w-md lg:max-w-none">
-              {{ aboutUsHeroSectionData?.description }}
+              {{ aaaa?.description }}
             </p>
           </div>
           <div
             class="mt-14 flex justify-end gap-8 overflow-hidden max-w-[360px] sm:max-w-[600px] lg:max-w-none sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0"
           >
             <div
-              v-if="!!aboutUsHeroSectionData?.backgrounds[0]"
+              v-if="!!aaaa?.backgrounds[0]"
               class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
             >
               <div class="relative">
                 <img
-                  :src="VITE_API_URL + aboutUsHeroSectionData?.backgrounds[0].url"
+                  :src="VITE_API_URL + aaaa?.backgrounds[0].url"
                   alt=""
                   class="aspect-[2/3] w-full rounded-xl bg-neutral-900/5 object-cover shadow-lg"
                 />
@@ -87,14 +87,12 @@
               </div>
             </div>
             <div
-              v-if="
-                !!aboutUsHeroSectionData?.backgrounds[1] || !!aboutUsHeroSectionData?.backgrounds[2]
-              "
+              v-if="!!aaaa?.backgrounds[1] || !!aaaa?.backgrounds[2]"
               class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36"
             >
-              <div v-if="!!aboutUsHeroSectionData?.backgrounds[1]" class="relative">
+              <div v-if="!!aaaa?.backgrounds[1]" class="relative">
                 <img
-                  :src="VITE_API_URL + aboutUsHeroSectionData?.backgrounds[1].url"
+                  :src="VITE_API_URL + aaaa?.backgrounds[1].url"
                   alt=""
                   class="aspect-[2/3] w-full rounded-xl bg-neutral-900/5 object-cover shadow-lg"
                 />
@@ -102,9 +100,9 @@
                   class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-neutral-900/10"
                 />
               </div>
-              <div v-if="!!aboutUsHeroSectionData?.backgrounds[2]" class="relative">
+              <div v-if="!!aaaa?.backgrounds[2]" class="relative">
                 <img
-                  :src="VITE_API_URL + aboutUsHeroSectionData?.backgrounds[2].url"
+                  :src="VITE_API_URL + aaaa?.backgrounds[2].url"
                   alt=""
                   class="aspect-[2/3] w-full rounded-xl bg-neutral-900/5 object-cover shadow-lg"
                 />
@@ -114,14 +112,12 @@
               </div>
             </div>
             <div
-              v-if="
-                !!aboutUsHeroSectionData?.backgrounds[3] || !!aboutUsHeroSectionData?.backgrounds[4]
-              "
+              v-if="!!aaaa?.backgrounds[3] || !!aaaa?.backgrounds[4]"
               class="w-44 flex-none space-y-8 pt-32 sm:pt-0"
             >
-              <div v-if="!!aboutUsHeroSectionData?.backgrounds[3]" class="relative">
+              <div v-if="!!aaaa?.backgrounds[3]" class="relative">
                 <img
-                  :src="VITE_API_URL + aboutUsHeroSectionData?.backgrounds[3].url"
+                  :src="VITE_API_URL + aaaa?.backgrounds[3].url"
                   alt=""
                   class="aspect-[2/3] w-full rounded-xl bg-neutral-900/5 object-cover shadow-lg"
                 />
@@ -129,9 +125,9 @@
                   class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-neutral-900/10"
                 />
               </div>
-              <div v-if="!!aboutUsHeroSectionData?.backgrounds[4]" class="relative">
+              <div v-if="!!aaaa?.backgrounds[4]" class="relative">
                 <img
-                  :src="VITE_API_URL + aboutUsHeroSectionData?.backgrounds[4].url"
+                  :src="VITE_API_URL + aaaa?.backgrounds[4].url"
                   alt=""
                   class="aspect-[2/3] w-full rounded-xl bg-neutral-900/5 object-cover shadow-lg"
                 />
@@ -154,5 +150,5 @@ import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
-const aboutUsHeroSectionData = computed(() => aboutUsStore.aboutUsHeroSectionQuery.data);
+const aaaa = computed(() => aboutUsStore.aboutUsHeroSectionQuery.data);
 </script>

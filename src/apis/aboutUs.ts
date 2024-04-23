@@ -1,28 +1,5 @@
 import { defaultImage, getQueryFn, type Image, type StrapiFormat } from '.';
 
-/* aboutUsHeroSectionQueryFn */
-interface AboutUsHeroSectionData extends StrapiFormat {
-  title: string;
-  description: string;
-  backgrounds: Image[];
-}
-
-const aboutUsHeroSectionDefaultData: AboutUsHeroSectionData = {
-  title: '',
-  description: '',
-  backgrounds: [],
-  id: 0,
-  createdAt: '',
-  updatedAt: '',
-  publishedAt: '',
-};
-
-export const aboutUsHeroSectionQueryFn = () =>
-  getQueryFn<AboutUsHeroSectionData>(
-    '/api/about-us-hero-section?populate=deep',
-    aboutUsHeroSectionDefaultData,
-  );
-
 /* aboutUsStatsSectionQueryFn */
 interface Stat {
   value: string;
