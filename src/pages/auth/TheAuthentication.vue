@@ -7,42 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import type { StrapiFormat } from '@/apis';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { watchEffect } from 'vue';
+import { defaultAuthenResponse, type AuthenResponse } from '@/types/api/user';
 import TheRegister from './TheRegister.vue';
 import TheSignin from './TheSignin.vue';
 
-interface User extends StrapiFormat {
-  username: string;
-  email: string;
-  provider: string;
-  confirmed: boolean;
-  blocked: boolean;
-}
-type AuthenInfo = {
-  jwt: string;
-  user: User;
-};
+const authenLocal = useLocalStorage<AuthenResponse>('authenLocal', defaultAuthenResponse());
 
-const defaultAuthenInfo: AuthenInfo = {
-  jwt: '',
-  user: {
-    username: '',
-    email: '',
-    provider: '',
-    confirmed: false,
-    blocked: false,
-    id: 0,
-    createdAt: '',
-    updatedAt: '',
-    publishedAt: '',
-  },
-};
-const authenLocal = useLocalStorage<AuthenInfo>('authenLocal', defaultAuthenInfo);
-watchEffect(() => {
-  console.log(authenLocal.data.value);
-});
 const logout = () => {
   authenLocal.removeData();
 };

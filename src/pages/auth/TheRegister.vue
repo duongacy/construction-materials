@@ -27,46 +27,16 @@
 </template>
 
 <script setup lang="ts">
-import { postMutationFn, type StrapiFormat } from '@/apis';
+import { postMutationFn } from '@/apis';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { defaultAuthenResponse, type AuthenResponse, type RegisterPayload } from '@/types/api/user';
 import { useMutation } from '@tanstack/vue-query';
 
-type RegisterPayload = {
-  username: string;
-  password: string;
-  email: string;
-};
+const authenLocal = useLocalStorage<AuthenResponse>('authenLocal', defaultAuthenResponse());
 
-interface User extends StrapiFormat {
-  username: string;
-  email: string;
-  provider: string;
-  confirmed: boolean;
-  blocked: boolean;
-}
-
-type AuthenInfo = {
-  jwt: string;
-  user: User;
-};
-
-const defaultAuthenInfo: AuthenInfo = {
-  jwt: '',
-  user: {
-    username: '',
-    email: '',
-    provider: '',
-    confirmed: false,
-    blocked: false,
-    id: 0,
-    createdAt: '',
-    updatedAt: '',
-    publishedAt: '',
-  },
-};
-const authenLocal = useLocalStorage<AuthenInfo>('authenLocal', defaultAuthenInfo);
-const loginMutate = useMutation<AuthenInfo, unknown, RegisterPayload, unknown>({
-  mutationFn: (payload) => postMutationFn('/api/auth/local/register', payload, defaultAuthenInfo),
+const registerMutation = useMutation<AuthenResponse, unknown, RegisterPayload, unknown>({
+  mutationFn: (payload) =>
+    postMutationFn('/api/auth/local/register', payload, defaultAuthenResponse()),
   onSuccess(data) {
     authenLocal.setData(data);
   },
@@ -79,6 +49,6 @@ const submitHandler = async (event: Event) => {
     username: formData.get('username') as string,
     password: formData.get('password') as string,
   };
-  loginMutate.mutate(payload);
+  registerMutation.mutate(payload);
 };
 </script>
