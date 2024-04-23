@@ -1,4 +1,5 @@
-import { getQueryFn, type Image, type StrapiFormat } from '@/apis';
+import { getQueryFn } from '@/apis';
+import { defaultStrapiFormat, type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
 
@@ -12,10 +13,7 @@ const aboutUsHeroSectionDefaultData: AboutUsHeroSectionData = {
   title: '',
   description: '',
   backgrounds: [],
-  id: 0,
-  createdAt: '',
-  updatedAt: '',
-  publishedAt: '',
+  ...defaultStrapiFormat(),
 };
 
 export const useAboutUsStore = defineStore('aboutUs', {

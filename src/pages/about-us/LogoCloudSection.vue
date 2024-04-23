@@ -57,9 +57,10 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 
-import { getQueryFn, type Image, type StrapiFormat } from '@/apis';
+import { getQueryFn } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import { cn } from '@/lib/utils';
+import { defaultStrapiFormat, type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
@@ -73,10 +74,7 @@ const aboutUsLogoCloudsSectionDefaultData: AboutUsLogoCloudsSectionData = {
   title: '',
   description: '',
   logos: [],
-  id: 0,
-  createdAt: '',
-  updatedAt: '',
-  publishedAt: '',
+  ...defaultStrapiFormat(),
 };
 
 const aboutUsLogoCloudsSectionQuery = useQuery({

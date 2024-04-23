@@ -61,8 +61,9 @@
 </template>
 
 <script setup lang="ts">
-import { getQueryFn, type StrapiFormat } from '@/apis';
+import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { defaultStrapiFormat, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 
 interface Stat {
@@ -80,10 +81,7 @@ const aboutUsStatsSectionDefaultData: AboutUsStatsSectionData = {
   title: '',
   description: '',
   stats: [],
-  id: 0,
-  createdAt: '',
-  updatedAt: '',
-  publishedAt: '',
+  ...defaultStrapiFormat(),
 };
 
 const aboutUsStatsSectionQuery = useQuery({

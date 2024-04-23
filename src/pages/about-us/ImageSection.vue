@@ -10,27 +10,11 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 
-import { getQueryFn, type Image, type StrapiFormat } from '@/apis';
+import { getQueryFn } from '@/apis';
 import { VITE_API_URL } from '@/consts';
+import { defaultImage, type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 
-const defaultImage: Image = {
-  name: '',
-  formats: undefined,
-  hash: '',
-  ext: '',
-  mime: '',
-  size: 0,
-  url: '',
-  provider: '',
-  provider_metadata: undefined,
-  id: 0,
-  createdAt: '',
-  updatedAt: '',
-  publishedAt: '',
-};
-
-/* aboutUsImageSectionQueryFn */
 interface AboutUsImageSectionData extends StrapiFormat {
   title: string;
   description: string;
@@ -40,7 +24,7 @@ interface AboutUsImageSectionData extends StrapiFormat {
 const aboutUsImageSectionDefaultData: AboutUsImageSectionData = {
   title: '',
   description: '',
-  image: defaultImage,
+  image: defaultImage(),
   id: 0,
   createdAt: '',
   updatedAt: '',

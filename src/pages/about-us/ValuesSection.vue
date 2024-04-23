@@ -20,8 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { getQueryFn, type StrapiFormat } from '@/apis';
+import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import type { StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
