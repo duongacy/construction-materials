@@ -54,14 +54,40 @@
 </template>
 
 <script setup lang="ts">
-import { aboutUsBlogsSectionQueryFn } from '@/apis/aboutUs';
+import { getQueryFn, type StrapiFormat } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
+interface Blog {
+  title: string;
+  description: string;
+  content: string;
+}
+
+interface AboutUsBlogsSectionData extends StrapiFormat {
+  title: string;
+  description: string;
+  blogs: Blog[];
+}
+
+const aboutUsBlogsSectionDefaultData: AboutUsBlogsSectionData = {
+  title: '',
+  description: '',
+  blogs: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
+};
+
 const aboutUsBlogsSectionQuery = useQuery({
   queryKey: ['about-us-blogs-section'],
-  queryFn: aboutUsBlogsSectionQueryFn,
+  queryFn: () =>
+    getQueryFn<AboutUsBlogsSectionData>(
+      '/api/about-us-blogs-section?populate=deep',
+      aboutUsBlogsSectionDefaultData,
+    ),
 });
 
 const aboutUsBlogsSectionData = aboutUsBlogsSectionQuery.data;

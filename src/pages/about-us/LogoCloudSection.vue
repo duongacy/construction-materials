@@ -57,15 +57,35 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 
-import { aboutUsLogoCloudsSectionQueryFn } from '@/apis/aboutUs';
+import { getQueryFn, type Image, type StrapiFormat } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
+interface AboutUsLogoCloudsSectionData extends StrapiFormat {
+  title: string;
+  description: string;
+  logos: Image[];
+}
+
+const aboutUsLogoCloudsSectionDefaultData: AboutUsLogoCloudsSectionData = {
+  title: '',
+  description: '',
+  logos: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
+};
+
 const aboutUsLogoCloudsSectionQuery = useQuery({
   queryKey: ['about-us-logo-clouds-section'],
-  queryFn: aboutUsLogoCloudsSectionQueryFn,
+  queryFn: () =>
+    getQueryFn<AboutUsLogoCloudsSectionData>(
+      '/api/about-us-logo-clouds-section?populate=deep',
+      aboutUsLogoCloudsSectionDefaultData,
+    ),
 });
 
 const aboutUsLogoCloudsSectionData = aboutUsLogoCloudsSectionQuery.data;

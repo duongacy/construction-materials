@@ -61,13 +61,38 @@
 </template>
 
 <script setup lang="ts">
-import { aboutUsStatsSectionQueryFn } from '@/apis/aboutUs';
+import { getQueryFn, type StrapiFormat } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useQuery } from '@tanstack/vue-query';
 
+interface Stat {
+  value: string;
+  title: string;
+  description: string;
+}
+interface AboutUsStatsSectionData extends StrapiFormat {
+  title: string;
+  description: string;
+  stats: Stat[];
+}
+
+const aboutUsStatsSectionDefaultData: AboutUsStatsSectionData = {
+  title: '',
+  description: '',
+  stats: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
+};
+
 const aboutUsStatsSectionQuery = useQuery({
   queryKey: ['about-us-stats-section'],
-  queryFn: aboutUsStatsSectionQueryFn,
+  queryFn: () =>
+    getQueryFn<AboutUsStatsSectionData>(
+      '/api/about-us-stats-section?populate=deep',
+      aboutUsStatsSectionDefaultData,
+    ),
 });
 
 const aboutUsStatsSectionData = aboutUsStatsSectionQuery.data;

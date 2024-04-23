@@ -20,14 +20,39 @@
 </template>
 
 <script setup lang="ts">
-import { aboutUsValuesSectionQueryFn } from '@/apis/aboutUs';
+import { getQueryFn, type StrapiFormat } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
+interface Value {
+  title: string;
+  description: string;
+}
+
+interface AboutUsValuesSectionData extends StrapiFormat {
+  title: string;
+  description: string;
+  values: Value[];
+}
+
+const aboutUsValuesSectionDefaultData: AboutUsValuesSectionData = {
+  title: '',
+  description: '',
+  values: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
+};
+
 const aboutUsValuesSectionQuery = useQuery({
   queryKey: ['about-us-values-section'],
-  queryFn: aboutUsValuesSectionQueryFn,
+  queryFn: () =>
+    getQueryFn<AboutUsValuesSectionData>(
+      '/api/about-us-values-section?populate=deep',
+      aboutUsValuesSectionDefaultData,
+    ),
 });
 
 const aboutUsValuesSectionData = aboutUsValuesSectionQuery.data;

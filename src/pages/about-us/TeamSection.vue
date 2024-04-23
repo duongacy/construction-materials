@@ -28,15 +28,41 @@
 </template>
 
 <script setup lang="ts">
-import { aboutUsTeamSectionQueryFn } from '@/apis/aboutUs';
+import { getQueryFn, type Image, type StrapiFormat } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
+interface Member {
+  name: string;
+  role: string;
+  avatar: Image;
+}
+
+interface AboutUsTeamSectionData extends StrapiFormat {
+  title: string;
+  description: string;
+  members: Member[];
+}
+
+const aboutUsTeamSectionDefaultData: AboutUsTeamSectionData = {
+  title: '',
+  description: '',
+  members: [],
+  id: 0,
+  createdAt: '',
+  updatedAt: '',
+  publishedAt: '',
+};
+
 const aboutUsTeamSectionQuery = useQuery({
   queryKey: ['about-us-team-section'],
-  queryFn: aboutUsTeamSectionQueryFn,
+  queryFn: () =>
+    getQueryFn<AboutUsTeamSectionData>(
+      '/api/about-us-team-section?populate=deep',
+      aboutUsTeamSectionDefaultData,
+    ),
 });
 
 const aboutUsTeamSectionData = aboutUsTeamSectionQuery.data;
