@@ -8,11 +8,11 @@ import TheNavigation from './layouts/navigation/TheNavigation.vue';
 
 const route = useRoute();
 
-const isAuthenTemplate = computed(() => route.name === 'authen');
-const isProfileTemplate = computed(() => route.name === 'profile');
+const isAuthenTemplate = computed(() => route.name === 'auth');
 </script>
 <template>
-  <MainLayout v-if="!isAuthenTemplate">
+  <router-view v-if="isAuthenTemplate"></router-view>
+  <MainLayout v-else>
     <template #header>
       <TheNavigation></TheNavigation>
     </template>
@@ -23,14 +23,14 @@ const isProfileTemplate = computed(() => route.name === 'profile');
         </transition>
       </router-view>
     </template>
-    <template v-if="!isProfileTemplate" #footer>
+    <template #footer>
       <TheFooter></TheFooter>
     </template>
   </MainLayout>
-
   <VueQueryDevtools></VueQueryDevtools>
 </template>
-<style>
+
+<style scoped>
 .route-enter-active,
 .route-leave-active {
   transition: opacity 0.5s ease;
