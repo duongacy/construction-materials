@@ -2,10 +2,10 @@
   <TheContainer class="mt-32 sm:mt-48">
     <div class="mx-auto max-w-2xl lg:mx-0">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-        {{ aboutUsTeamSectionData?.title }}
+        {{ aboutUsTeamSectionData?.data?.title }}
       </h2>
       <p class="mt-6 text-lg leading-8 text-foreground/60">
-        {{ aboutUsTeamSectionData?.description }}
+        {{ aboutUsTeamSectionData?.data?.description }}
       </p>
     </div>
     <ul
@@ -31,7 +31,8 @@
 import { getQueryFn } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { defaultStrapiFormat, type Image, type StrapiFormat } from '@/types/api/common';
+import { type StrapiResponse } from '@/types/api';
+import { type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
@@ -47,22 +48,12 @@ interface AboutUsTeamSectionData extends StrapiFormat {
   members: Member[];
 }
 
-const aboutUsTeamSectionDefaultData: AboutUsTeamSectionData = {
-  title: '',
-  description: '',
-  members: [],
-  ...defaultStrapiFormat(),
-};
-
 const aboutUsTeamSectionQuery = useQuery({
   queryKey: ['about-us-team-section'],
   queryFn: () =>
-    getQueryFn<AboutUsTeamSectionData>(
-      '/api/about-us-team-section?populate=deep',
-      aboutUsTeamSectionDefaultData,
-    ),
+    getQueryFn<StrapiResponse<AboutUsTeamSectionData>>('/api/about-us-team-section?populate=deep'),
 });
 
 const aboutUsTeamSectionData = aboutUsTeamSectionQuery.data;
-const members = computed(() => aboutUsTeamSectionData.value?.members);
+const members = computed(() => aboutUsTeamSectionData.value?.data?.members);
 </script>

@@ -30,7 +30,7 @@
     </div>
     <TheContainer>
       <h2 class="text-center text-lg font-semibold leading-8 text-foreground/90">
-        {{ aboutUsLogoCloudsSectionData?.title }}
+        {{ aboutUsLogoCloudsSectionData?.data?.title }}
       </h2>
       <div
         class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5"
@@ -60,7 +60,8 @@ import TheContainer from '@/layouts/container/TheContainer.vue';
 import { getQueryFn } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import { cn } from '@/lib/utils';
-import { defaultStrapiFormat, type Image, type StrapiFormat } from '@/types/api/common';
+import { type StrapiResponse } from '@/types/api';
+import { type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
@@ -70,22 +71,14 @@ interface AboutUsLogoCloudsSectionData extends StrapiFormat {
   logos: Image[];
 }
 
-const aboutUsLogoCloudsSectionDefaultData: AboutUsLogoCloudsSectionData = {
-  title: '',
-  description: '',
-  logos: [],
-  ...defaultStrapiFormat(),
-};
-
 const aboutUsLogoCloudsSectionQuery = useQuery({
   queryKey: ['about-us-logo-clouds-section'],
   queryFn: () =>
-    getQueryFn<AboutUsLogoCloudsSectionData>(
+    getQueryFn<StrapiResponse<AboutUsLogoCloudsSectionData>>(
       '/api/about-us-logo-clouds-section?populate=deep',
-      aboutUsLogoCloudsSectionDefaultData,
     ),
 });
 
 const aboutUsLogoCloudsSectionData = aboutUsLogoCloudsSectionQuery.data;
-const logos = computed(() => aboutUsLogoCloudsSectionData.value?.logos);
+const logos = computed(() => aboutUsLogoCloudsSectionData.value?.data?.logos);
 </script>

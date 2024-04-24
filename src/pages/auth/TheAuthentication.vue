@@ -7,14 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { defaultAuthenResponse, type AuthenResponse } from '@/types/api/user';
+import { useAuthenStore } from '@/store/useAuthenStore';
 import TheRegister from './TheRegister.vue';
-import TheSignin from './TheSignin.vue';
-
-const authenLocal = useLocalStorage<AuthenResponse>('authenLocal', defaultAuthenResponse());
-
-const logout = () => {
-  authenLocal.removeData();
-};
+import TheSignin from './TheSignIn.vue';
+const { logout } = useAuthenStore();
+// const authenLocal = useLocalStorage<AuthenLocal>('authenLocal', defaultAuthenLocal());
 </script>

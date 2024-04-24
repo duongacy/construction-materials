@@ -2,10 +2,10 @@
   <TheContainer class="mt-32 sm:mt-40">
     <div class="mx-auto max-w-2xl lg:mx-0">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-        {{ aboutUsValuesSectionData?.title }}
+        {{ aboutUsValuesSectionData?.data?.title }}
       </h2>
       <p class="mt-6 text-lg leading-8 text-foreground/60">
-        {{ aboutUsValuesSectionData?.description }}
+        {{ aboutUsValuesSectionData?.data?.description }}
       </p>
     </div>
     <dl
@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { type StrapiResponse } from '@/types/api';
 import type { StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -37,25 +38,14 @@ interface AboutUsValuesSectionData extends StrapiFormat {
   values: Value[];
 }
 
-const aboutUsValuesSectionDefaultData: AboutUsValuesSectionData = {
-  title: '',
-  description: '',
-  values: [],
-  id: 0,
-  createdAt: '',
-  updatedAt: '',
-  publishedAt: '',
-};
-
 const aboutUsValuesSectionQuery = useQuery({
   queryKey: ['about-us-values-section'],
   queryFn: () =>
-    getQueryFn<AboutUsValuesSectionData>(
+    getQueryFn<StrapiResponse<AboutUsValuesSectionData>>(
       '/api/about-us-values-section?populate=deep',
-      aboutUsValuesSectionDefaultData,
     ),
 });
 
 const aboutUsValuesSectionData = aboutUsValuesSectionQuery.data;
-const values = computed(() => aboutUsValuesSectionData.value?.values);
+const values = computed(() => aboutUsValuesSectionData.value?.data?.values);
 </script>

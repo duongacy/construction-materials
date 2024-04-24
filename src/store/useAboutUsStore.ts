@@ -1,4 +1,5 @@
 import { getQueryFn } from '@/apis';
+import { type StrapiResponse } from '@/types/api';
 import { defaultStrapiFormat, type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
@@ -21,9 +22,8 @@ export const useAboutUsStore = defineStore('aboutUs', {
     aboutUsHeroSectionQuery: useQuery({
       queryKey: ['about-us-hero-section'],
       queryFn: () =>
-        getQueryFn<AboutUsHeroSectionData>(
+        getQueryFn<StrapiResponse<AboutUsHeroSectionData>>(
           '/api/about-us-hero-section?populate=deep',
-          aboutUsHeroSectionDefaultData,
         ),
     }),
   }),

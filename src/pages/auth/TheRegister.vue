@@ -27,20 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import { postMutationFn } from '@/apis';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { defaultAuthenResponse, type AuthenResponse, type RegisterPayload } from '@/types/api/user';
-import { useMutation } from '@tanstack/vue-query';
+import { useAuthenStore } from '@/store/useAuthenStore';
+import { type RegisterPayload } from '@/types/api/user';
 
-const authenLocal = useLocalStorage<AuthenResponse>('authenLocal', defaultAuthenResponse());
-
-const registerMutation = useMutation<AuthenResponse, unknown, RegisterPayload, unknown>({
-  mutationFn: (payload) =>
-    postMutationFn('/api/auth/local/register', payload, defaultAuthenResponse()),
-  onSuccess(data) {
-    authenLocal.setData(data);
-  },
-});
+const authenStore = useAuthenStore();
 
 const submitHandler = async (event: Event) => {
   const formData = new FormData(event.target as HTMLFormElement);
@@ -49,6 +39,6 @@ const submitHandler = async (event: Event) => {
     username: formData.get('username') as string,
     password: formData.get('password') as string,
   };
-  registerMutation.mutate(payload);
+  authenStore.registerMutation.mutate(payload);
 };
 </script>

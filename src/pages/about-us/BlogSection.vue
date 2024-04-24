@@ -2,10 +2,10 @@
   <TheContainer class="mt-32 sm:mt-40">
     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-        {{ aboutUsBlogsSectionData?.title }}
+        {{ aboutUsBlogsSectionData?.data?.title }}
       </h2>
       <p class="mt-2 text-lg leading-8 text-foreground/60">
-        {{ aboutUsBlogsSectionData?.description }}
+        {{ aboutUsBlogsSectionData?.data?.description }}
       </p>
     </div>
     <div
@@ -56,6 +56,7 @@
 <script setup lang="ts">
 import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import type { StrapiResponse } from '@/types/api';
 import type { StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -72,27 +73,16 @@ interface AboutUsBlogsSectionData extends StrapiFormat {
   blogs: Blog[];
 }
 
-const aboutUsBlogsSectionDefaultData: AboutUsBlogsSectionData = {
-  title: '',
-  description: '',
-  blogs: [],
-  id: 0,
-  createdAt: '',
-  updatedAt: '',
-  publishedAt: '',
-};
-
 const aboutUsBlogsSectionQuery = useQuery({
   queryKey: ['about-us-blogs-section'],
   queryFn: () =>
-    getQueryFn<AboutUsBlogsSectionData>(
+    getQueryFn<StrapiResponse<AboutUsBlogsSectionData>>(
       '/api/about-us-blogs-section?populate=deep',
-      aboutUsBlogsSectionDefaultData,
     ),
 });
 
 const aboutUsBlogsSectionData = aboutUsBlogsSectionQuery.data;
-const blogPosts = computed(() => aboutUsBlogsSectionData.value?.blogs);
+const blogPosts = computed(() => aboutUsBlogsSectionData.value?.data?.blogs);
 
 // const store = useAboutUsStore();
 // const blogPosts = [

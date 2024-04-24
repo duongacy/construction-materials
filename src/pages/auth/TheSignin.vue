@@ -24,19 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import { postMutationFn } from '@/apis';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { defaultAuthenResponse, type AuthenResponse, type SignInPayload } from '@/types/api/user';
-import { useMutation } from '@tanstack/vue-query';
+import { useAuthenStore } from '@/store/useAuthenStore';
+import { type SignInPayload } from '@/types/api/user';
 
-const authenLocal = useLocalStorage<AuthenResponse>('authenLocal', defaultAuthenResponse());
-
-const signInMutation = useMutation<AuthenResponse, unknown, SignInPayload, unknown>({
-  mutationFn: (payload) => postMutationFn('/api/auth/local', payload, defaultAuthenResponse()),
-  onSuccess(data) {
-    authenLocal.setData(data);
-  },
-});
+const authenStore = useAuthenStore();
 
 const submitHandler = async (event: Event) => {
   const formData = new FormData(event.target as HTMLFormElement);
@@ -44,6 +35,6 @@ const submitHandler = async (event: Event) => {
     identifier: formData.get('identifier') as string,
     password: formData.get('password') as string,
   };
-  signInMutation.mutate(payload);
+  authenStore.signInMutation.mutate(payload);
 };
 </script>

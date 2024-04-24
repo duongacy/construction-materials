@@ -26,6 +26,9 @@ export const useLocalStorage = <T>(name: LocalStorageName, defaultValue: T) => {
   });
 
   const setData = (value: T) => {
+    if (value === undefined || value === null) {
+      value = defaultValue;
+    }
     localStorage.setItem(name, JSON.stringify(value));
     window.dispatchEvent(new Event('storage'));
   };
