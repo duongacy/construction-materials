@@ -2,7 +2,7 @@
   <div>
     <TheSignin />
     <TheRegister />
-    <button @click="logout">Logout</button>
+    <button @click="signOut">Logout</button>
   </div>
 </template>
 
@@ -10,6 +10,5 @@
 import { useAuthenStore } from '@/store/useAuthenStore';
 import TheRegister from './TheRegister.vue';
 import TheSignin from './TheSignIn.vue';
-const { logout } = useAuthenStore();
-// const authenLocal = useLocalStorage<AuthenLocal>('authenLocal', defaultAuthenLocal());
+const { signOut } = useAuthenStore();
 </script>

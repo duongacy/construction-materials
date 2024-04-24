@@ -1,5 +1,5 @@
 import { postMutationFn } from '@/apis';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { getRoute } from '@/router';
 import type { StrapiResponse } from '@/types/api';
 import {
   defaultAuthenLocal,
@@ -8,12 +8,17 @@ import {
   type UserAuthen,
 } from '@/types/api/user';
 import { useMutation } from '@tanstack/vue-query';
+import { useLocalStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
+import { useRoute, useRouter } from 'vue-router';
 
 export const useAuthenStore = defineStore('authen', {
   state: () => {
-    const authenLocal = useLocalStorage<UserAuthen>('authenLocal', defaultAuthenLocal());
+    const authenLocal = useLocalStorage('authenLocal', defaultAuthenLocal());
+    const route = useRoute();
+    const router = useRouter();
     return {
+      authenLocal,
       signInMutation: useMutation<
         StrapiResponse<UserAuthen> | null,
         unknown,
@@ -24,7 +29,8 @@ export const useAuthenStore = defineStore('authen', {
         mutationFn: (payload) => postMutationFn('/api/auth/local', payload),
         onSuccess(response) {
           if (response?.data) {
-            authenLocal.setData(response.data);
+            authenLocal.value = response.data;
+            router.replace(route.redirectedFrom || getRoute('home').path);
           }
         },
       }),
@@ -39,18 +45,23 @@ export const useAuthenStore = defineStore('authen', {
         mutationFn: (payload) => postMutationFn('/api/auth/local/register', payload),
         onSuccess(response) {
           if (response?.data) {
-            authenLocal.setData(response.data);
+            authenLocal.value = response.data;
           }
         },
       }),
 
-      authenLocal,
+      signOut: () => {
+        authenLocal.value = defaultAuthenLocal();
+        if (route.meta?.requireAuth) {
+          router.push(getRoute('auth').path);
+        }
+      },
     };
   },
-  actions: {
-    logout: () => {
-      const authenLocal = useLocalStorage<UserAuthen>('authenLocal', defaultAuthenLocal());
-      authenLocal.removeData();
+  actions: {},
+  getters: {
+    isAuthenticated(state) {
+      return !!state.authenLocal.jwt;
     },
   },
 });

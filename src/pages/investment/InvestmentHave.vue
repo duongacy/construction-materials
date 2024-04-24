@@ -34,7 +34,6 @@
 
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { useCounterStore } from '@/store/useCounterStore';
 const features = [
   { name: 'Origin', description: 'Designed by Good Goods, Inc.' },
   {
@@ -52,6 +51,4 @@ const features = [
     description: 'Made from natural materials. Grain and color vary with each item.',
   },
 ];
-
-const counterStore = useCounterStore();
 </script>

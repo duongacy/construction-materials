@@ -2,41 +2,14 @@
 import { MainLayout } from '@/layouts';
 import TheFooter from '@/layouts/TheFooter.vue';
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
-import { computed, onBeforeUnmount, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import TheNavigation from './layouts/navigation/TheNavigation.vue';
 
-const router = useRouter();
 const route = useRoute();
 
 const isAuthenTemplate = computed(() => route.name === 'authen');
 const isProfileTemplate = computed(() => route.name === 'profile');
-
-const authenSuccessEventHandler = () => {
-  if (route.redirectedFrom) {
-    router.replace(route.redirectedFrom);
-  } else {
-    router.replace('/coaches');
-  }
-};
-
-const removeAuthenSuccessEventHandler = () => {
-  if (route.meta.requireAuth) {
-    router.replace('/coaches');
-  }
-};
-
-onMounted(() => {
-  // store.dispatch('PROFILE/getProfile');
-  // store.dispatch('AUTHEN/autoSignin');
-  // window.addEventListener('authenSuccess', authenSuccessEventHandler);
-  // window.addEventListener('removeAuthenSuccess', removeAuthenSuccessEventHandler);
-});
-
-onBeforeUnmount(() => {
-  // window.removeEventListener('authenSuccess', authenSuccessEventHandler);
-  // window.removeEventListener('removeAuthenSuccess', removeAuthenSuccessEventHandler);
-});
 </script>
 <template>
   <MainLayout v-if="!isAuthenTemplate">

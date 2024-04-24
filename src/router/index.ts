@@ -1,6 +1,7 @@
 import { VITE_BASE_URL } from '@/consts';
+import { useAuthenStore } from '@/store/useAuthenStore';
 import { ChartPieIcon } from '@heroicons/vue/24/outline';
-import type { Component } from 'vue';
+import { type Component } from 'vue';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
 export const routes: RouteRecordRaw[] = [
@@ -67,6 +68,7 @@ export const routes: RouteRecordRaw[] = [
       title: 'Tài chính',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       icon: ChartPieIcon,
+      requireAuth: true,
     },
   },
   {
@@ -77,6 +79,7 @@ export const routes: RouteRecordRaw[] = [
       title: 'Pháp lý',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       icon: ChartPieIcon,
+      requireAuth: true,
     },
   },
   {
@@ -87,6 +90,7 @@ export const routes: RouteRecordRaw[] = [
       title: 'Mar-tech',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       icon: ChartPieIcon,
+      requireAuth: true,
     },
   },
   {
@@ -97,6 +101,7 @@ export const routes: RouteRecordRaw[] = [
       title: 'Tải tài liệu',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       icon: ChartPieIcon,
+      requireAuth: true,
     },
   },
   {
@@ -107,6 +112,7 @@ export const routes: RouteRecordRaw[] = [
       title: 'Casestudy',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       icon: ChartPieIcon,
+      requireAuth: true,
     },
   },
   {
@@ -129,7 +135,11 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: '/auth',
+    name: 'auth',
     component: () => import('@/pages/auth/TheAuthentication.vue'),
+    meta: {
+      requireUnauth: true,
+    },
   },
   {
     path: '/:catchAll(.*)',
@@ -158,7 +168,8 @@ export const getRoute = (
     | 'learningDownload'
     | 'learningCasestudy'
     | 'contact'
-    | 'notFound',
+    | 'notFound'
+    | 'auth',
 ) => {
   const rs = routes.find((item) => item.name === name);
   return {
@@ -184,6 +195,19 @@ export const aboutRoute = getRoute('aboutUs');
 const router = createRouter({
   history: createWebHistory(VITE_BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const authenStore = useAuthenStore();
+  if (to.meta.requireAuth && !authenStore.isAuthenticated) {
+    // vào trang cần authen nhưng chưa authen
+    next('/auth');
+  } else if (to.meta.requireUnauth && authenStore.isAuthenticated) {
+    // đã login nhưng vẫn còn ở trang login
+    next(from || '/');
+  } else {
+    next();
+  }
 });
 
 export default router;

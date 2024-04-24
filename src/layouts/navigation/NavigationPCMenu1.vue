@@ -10,9 +10,17 @@
     <PCMenuDropdown title="Investment" :items="investmentRoutes" />
     <PCMenuDropdown title="Learning" :items="learningRoutes" />
   </div>
-  <div class="flex lg:flex-1 lg:justify-end">
+  <div class="flex lg:flex-1 lg:justify-end gap-2">
     <button class="text-sm font-semibold leading-6 text-foreground/90" @click="toggleDarkMode">
       {{ isDark ? 'Light' : 'Dark' }}
+    </button>
+    <RouterLink v-if="!store.isAuthenticated" to="/auth">Sign In</RouterLink>
+    <button
+      v-else
+      class="text-sm font-semibold leading-6 text-foreground/90"
+      @click="store.signOut"
+    >
+      Sign Out
     </button>
   </div>
 </template>
@@ -21,6 +29,8 @@
 import { useTheme } from '@/hooks/useTheme';
 import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@/router';
 
+import { useAuthenStore } from '@/store/useAuthenStore';
 import PCMenuDropdown from './PCMenuDropdown.vue';
 const [isDark, toggleDarkMode] = useTheme();
+const store = useAuthenStore();
 </script>
