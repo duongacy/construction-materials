@@ -63,7 +63,6 @@
 <script setup lang="ts">
 import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { type StrapiResponse } from '@/types/api';
 import { type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 
@@ -80,10 +79,7 @@ interface AboutUsStatsSectionData extends StrapiFormat {
 
 const aboutUsStatsSectionQuery = useQuery({
   queryKey: ['about-us-stats-section'],
-  queryFn: () =>
-    getQueryFn<StrapiResponse<AboutUsStatsSectionData>>(
-      '/api/about-us-stats-section?populate=deep',
-    ),
+  queryFn: () => getQueryFn<AboutUsStatsSectionData>('/api/about-us-stats-section?populate=deep'),
 });
 
 const aboutUsStatsSectionData = aboutUsStatsSectionQuery.data;

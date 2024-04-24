@@ -31,7 +31,6 @@
 import { getQueryFn } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { type StrapiResponse } from '@/types/api';
 import { type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -50,8 +49,7 @@ interface AboutUsTeamSectionData extends StrapiFormat {
 
 const aboutUsTeamSectionQuery = useQuery({
   queryKey: ['about-us-team-section'],
-  queryFn: () =>
-    getQueryFn<StrapiResponse<AboutUsTeamSectionData>>('/api/about-us-team-section?populate=deep'),
+  queryFn: () => getQueryFn<AboutUsTeamSectionData>('/api/about-us-team-section?populate=deep'),
 });
 
 const aboutUsTeamSectionData = aboutUsTeamSectionQuery.data;

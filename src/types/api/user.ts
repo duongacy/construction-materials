@@ -1,4 +1,3 @@
-import type { StrapiResponse } from '.';
 import { type StrapiFormat } from './common';
 
 export type User = {
@@ -20,14 +19,11 @@ export type SignInPayload = {
   password: string;
 };
 
-export type AuthenResponse = StrapiResponse<{
+export type UserAuthen = {
   jwt: string;
   user: User & StrapiFormat;
-}>;
-export const defaultAuthenResponse = (): AuthenResponse => ({});
-
-export type AuthenLocal = AuthenResponse['data'];
-export const defaultAuthenLocal = (): AuthenLocal => ({
+};
+export const defaultAuthenLocal = (): UserAuthen => ({
   jwt: '',
   user: {
     username: '',

@@ -22,7 +22,6 @@
 <script setup lang="ts">
 import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { type StrapiResponse } from '@/types/api';
 import type { StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -40,10 +39,7 @@ interface AboutUsValuesSectionData extends StrapiFormat {
 
 const aboutUsValuesSectionQuery = useQuery({
   queryKey: ['about-us-values-section'],
-  queryFn: () =>
-    getQueryFn<StrapiResponse<AboutUsValuesSectionData>>(
-      '/api/about-us-values-section?populate=deep',
-    ),
+  queryFn: () => getQueryFn<AboutUsValuesSectionData>('/api/about-us-values-section?populate=deep'),
 });
 
 const aboutUsValuesSectionData = aboutUsValuesSectionQuery.data;
