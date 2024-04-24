@@ -5,10 +5,11 @@ import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import TheNavigation from './layouts/navigation/TheNavigation.vue';
+import { getRoute } from './router';
 
 const route = useRoute();
 
-const isAuthenTemplate = computed(() => route.name === 'auth');
+const isAuthenTemplate = computed(() => route.name === getRoute('auth').name);
 </script>
 <template>
   <router-view v-if="isAuthenTemplate"></router-view>

@@ -152,6 +152,7 @@ export type RouterLinkItem = {
   title: string;
   description: string;
   icon: Component;
+  name: string;
 };
 
 export const getRoute = (
@@ -177,6 +178,7 @@ export const getRoute = (
     title: rs?.meta?.title || '',
     description: rs?.meta?.description || '',
     icon: rs?.meta?.icon || null,
+    name: rs?.name || '',
   } as RouterLinkItem;
 };
 
