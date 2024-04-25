@@ -1,40 +1,52 @@
 <template>
-  <div>
-    <div>
-      <h1>Login</h1>
-      <form @submit.prevent="submitHandler">
-        <div>
-          <label
-            >Username:
-
-            <input type="text" name="identifier" class="border" value="ylvn1" />
-          </label>
-        </div>
-        <div>
-          <label
-            >Password:
-
-            <input type="password" name="password" class="border" value="1@Qwertyuiop" />
-          </label>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
+  <form class="grid gap-4" @submit.prevent="onSubmit">
+    <BaseInput v-model:value="identifier" placeholder="Username" :error="errors.identifier" />
+    <BaseInput
+      v-model:value="password"
+      placeholder="Password"
+      :error="errors.password"
+      type="password"
+    />
+    <BaseButton class="w-full mt-2" type="submit">Login</BaseButton>
+  </form>
 </template>
 
 <script setup lang="ts">
+import { BaseButton } from '@/components/ui/button';
+import { BaseInput } from '@/components/ui/input';
 import { useAuthenStore } from '@/store/useAuthenStore';
-import { type SignInPayload } from '@/types/api/user';
+import { toTypedSchema } from '@vee-validate/zod';
+import { useForm, type InvalidSubmissionHandler, type SubmissionHandler } from 'vee-validate';
+import * as z from 'zod';
 
-const authenStore = useAuthenStore();
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const PASSWORD_REGEX = /^.{6,}$/;
 
-const submitHandler = async (event: Event) => {
-  const formData = new FormData(event.target as HTMLFormElement);
-  const payload: SignInPayload = {
-    identifier: formData.get('identifier') as string,
-    password: formData.get('password') as string,
+const SignInSchema = z.object({
+  identifier: z.string().refine((value) => value.length >= 4, 'Your identifier is invalid'),
+  password: z.string().refine((value) => PASSWORD_REGEX.test(value), 'Your password is invalid'),
+});
+
+type SignInType = z.infer<typeof SignInSchema>;
+
+const { errors, handleSubmit, defineField } = useForm<SignInType>({
+  initialValues: { identifier: 'ylvn1', password: '1@Qwertyuiop' },
+  validationSchema: toTypedSchema(SignInSchema),
+});
+
+const [identifier] = defineField('identifier');
+const [password] = defineField('password');
+
+const signInHandler: SubmissionHandler<SignInType> = async (data) => {
+  const payload = {
+    identifier: identifier.value,
+    password: password.value,
   };
   authenStore.signInMutation.mutate(payload);
 };
+const signInErrorHandler: InvalidSubmissionHandler<SignInType> = (e) => {
+  console.error('Error:', e);
+};
+const onSubmit = handleSubmit(signInHandler, signInErrorHandler);
+const authenStore = useAuthenStore();
 </script>

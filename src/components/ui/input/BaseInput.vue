@@ -5,7 +5,6 @@ import { useAttrs, type Component } from 'vue';
 const attrs = useAttrs();
 defineOptions({ inheritAttrs: false });
 defineProps<{
-  // size?: Size;
   isError?: boolean;
   error?: string;
   hideError?: boolean;
@@ -68,6 +67,7 @@ const modelValue = defineModel<string>('value');
       <input
         v-model="modelValue"
         type="text"
+        v-bind="$attrs"
         :disabled="disabled"
         :class="
           cn(

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <h1>Register</h1>
     <form @submit.prevent="submitHandler">
       <div>
@@ -23,10 +23,18 @@
       </div>
       <button type="submit">Submit</button>
     </form>
-  </div>
+  </div> -->
+  <form class="grid gap-4">
+    <BaseInput placeholder="Username" />
+    <BaseInput placeholder="Email" />
+    <BaseInput placeholder="Password" type="password" />
+    <BaseButton class="w-full mt-2">Register</BaseButton>
+  </form>
 </template>
 
 <script setup lang="ts">
+import { BaseButton } from '@/components/ui/button';
+import { BaseInput } from '@/components/ui/input';
 import { useAuthenStore } from '@/store/useAuthenStore';
 import { type RegisterPayload } from '@/types/api/user';
 
