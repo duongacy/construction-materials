@@ -1,5 +1,5 @@
 <template>
-  <TheContainer class="pt-20 text-neutral-800">
+  <TheContainer class="pt-20 bg-background">
     <p class="text-heading3 font-bold">Forms</p>
     <div class="mt-12 grid gap-4">
       <InputDemo />

@@ -11,6 +11,18 @@ export const routes: RouteRecordRaw[] = [
     redirect: '/about-us',
   },
   {
+    path: '/design-pattern/forms',
+    component: () => import('@/pages/design-pattern/forms/TheForms.vue'),
+  },
+  {
+    path: '/design-pattern/content',
+    component: () => import('@/pages/design-pattern/content/TheContent.vue'),
+  },
+  {
+    path: '/design-pattern/components',
+    component: () => import('@/pages/design-pattern/components/TheComponents.vue'),
+  },
+  {
     path: '/about-us',
     name: 'aboutUs',
     component: () => import('@/pages/about-us/AboutUs.vue'),
