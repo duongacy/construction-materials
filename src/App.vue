@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Toaster from '@/components/ui/toast/Toaster.vue';
 import { MainLayout } from '@/layouts';
 import TheFooter from '@/layouts/TheFooter.vue';
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
@@ -28,6 +29,7 @@ const isAuthenTemplate = computed(() => route.name === getRoute('auth').name);
       <TheFooter></TheFooter>
     </template>
   </MainLayout>
+  <Toaster />
   <VueQueryDevtools></VueQueryDevtools>
 </template>
 

@@ -72,8 +72,7 @@ interface AboutUsLogoCloudsSectionData extends StrapiFormat {
 
 const aboutUsLogoCloudsSectionQuery = useQuery({
   queryKey: ['about-us-logo-clouds-section'],
-  queryFn: () =>
-    getQueryFn<AboutUsLogoCloudsSectionData>('/api/about-us-logo-clouds-section?populate=deep'),
+  queryFn: () => getQueryFn<AboutUsLogoCloudsSectionData>('/api/about-us-logo-clouds-section'),
 });
 
 const aboutUsLogoCloudsSectionData = aboutUsLogoCloudsSectionQuery.data;

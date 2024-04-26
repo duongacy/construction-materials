@@ -23,7 +23,7 @@ interface AboutUsImageSectionData extends StrapiFormat {
 
 const aboutUsImageSectionQuery = useQuery({
   queryKey: ['about-us-image-section'],
-  queryFn: () => getQueryFn<AboutUsImageSectionData>('/api/about-us-image-section?populate=deep'),
+  queryFn: () => getQueryFn<AboutUsImageSectionData>('/api/about-us-image-section'),
 });
 
 const aboutUsImageSectionData = aboutUsImageSectionQuery.data;

@@ -74,7 +74,7 @@ interface AboutUsBlogsSectionData extends StrapiFormat {
 
 const aboutUsBlogsSectionQuery = useQuery({
   queryKey: ['about-us-blogs-section'],
-  queryFn: () => getQueryFn<AboutUsBlogsSectionData>('/api/about-us-blogs-section?populate=deep'),
+  queryFn: () => getQueryFn<AboutUsBlogsSectionData>('/api/about-us-blogs-section'),
 });
 
 const aboutUsBlogsSectionData = aboutUsBlogsSectionQuery.data;

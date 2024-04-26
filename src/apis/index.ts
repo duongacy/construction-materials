@@ -1,9 +1,18 @@
 import { VITE_API_URL, VITE_BASE_TOKEN } from '@/consts';
 import type { StrapiResponse } from '@/types/api';
 
-export async function getQueryFn<T>(url: string) {
+type GetQueryURL =
+  | '/api/about-us-blogs-section'
+  | '/api/about-us-image-section'
+  | '/api/about-us-logo-clouds-section'
+  | '/api/about-us-stats-section'
+  | '/api/about-us-team-section'
+  | '/api/about-us-values-section';
+
+export const getQueryFn = async <T>(url: GetQueryURL, populate = true) => {
+  const populateString = populate ? '?populate=deep' : '';
   try {
-    const response = await fetch(`${VITE_API_URL}${url}`, {
+    const response = await fetch(`${VITE_API_URL}${url}${populateString}`, {
       headers: { Authorization: `Bearer ${VITE_BASE_TOKEN}` },
     });
     return (await response.json()) as StrapiResponse<T>;
@@ -11,9 +20,13 @@ export async function getQueryFn<T>(url: string) {
     console.error(error);
     return null;
   }
-}
+};
 
-export async function postMutationFn<PayloadType, T>(url: string, payload: PayloadType) {
+type PostMutationURL = '/api/auth/local' | '/api/auth/local/register';
+export const postMutationFn = async <PayloadType, T>(
+  url: PostMutationURL,
+  payload: PayloadType,
+) => {
   try {
     const response = await fetch(`${VITE_API_URL}${url}`, {
       headers: { 'Content-Type': 'application/json' },
@@ -25,4 +38,4 @@ export async function postMutationFn<PayloadType, T>(url: string, payload: Paylo
     console.error(error);
     return null;
   }
-}
+};

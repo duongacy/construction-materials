@@ -49,7 +49,7 @@ interface AboutUsTeamSectionData extends StrapiFormat {
 
 const aboutUsTeamSectionQuery = useQuery({
   queryKey: ['about-us-team-section'],
-  queryFn: () => getQueryFn<AboutUsTeamSectionData>('/api/about-us-team-section?populate=deep'),
+  queryFn: () => getQueryFn<AboutUsTeamSectionData>('/api/about-us-team-section'),
 });
 
 const aboutUsTeamSectionData = aboutUsTeamSectionQuery.data;

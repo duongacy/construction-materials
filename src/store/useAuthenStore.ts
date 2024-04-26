@@ -1,4 +1,6 @@
 import { postMutationFn } from '@/apis';
+import { useToast } from '@/components/ui/toast';
+import { useLocalStorageMOD } from '@/hooks/useLocalStorageMOD';
 import { getRoute } from '@/router';
 import type { StrapiResponse } from '@/types/api';
 import {
@@ -8,15 +10,15 @@ import {
   type UserAuthen,
 } from '@/types/api/user';
 import { useMutation } from '@tanstack/vue-query';
-import { useLocalStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import { useRoute, useRouter } from 'vue-router';
 
 export const useAuthenStore = defineStore('authen', {
   state: () => {
-    const authenLocal = useLocalStorage('authenLocal', defaultAuthenLocal());
+    const authenLocal = useLocalStorageMOD('authenLocal', defaultAuthenLocal());
     const route = useRoute();
     const router = useRouter();
+    const { toast } = useToast();
     return {
       authenLocal,
       signInMutation: useMutation<
@@ -30,7 +32,24 @@ export const useAuthenStore = defineStore('authen', {
         onSuccess(response) {
           if (response?.data) {
             authenLocal.value = response.data;
-            router.replace(route.redirectedFrom || getRoute('home').path);
+
+            toast({
+              title: 'Success',
+              description: 'Login success',
+              duration: 2000,
+            });
+
+            const timeoutId = setTimeout(() => {
+              router.replace(route.redirectedFrom || getRoute('home').path);
+              clearTimeout(timeoutId);
+            }, 2000);
+          } else if (response?.error) {
+            toast({
+              title: 'Error',
+              description: response.error?.message || 'Something went wrong!',
+              variant: 'destructive',
+              duration: 5000,
+            });
           }
         },
       }),
@@ -46,6 +65,24 @@ export const useAuthenStore = defineStore('authen', {
         onSuccess(response) {
           if (response?.data) {
             authenLocal.value = response.data;
+
+            toast({
+              title: 'Success',
+              description: 'Register success',
+              duration: 2000,
+            });
+
+            const timeoutId = setTimeout(() => {
+              router.replace(route.redirectedFrom || getRoute('home').path);
+              clearTimeout(timeoutId);
+            }, 2000);
+          } else if (response?.error) {
+            toast({
+              title: 'Error',
+              description: response.error?.message || 'Something went wrong!',
+              variant: 'destructive',
+              duration: 5000,
+            });
           }
         },
       }),

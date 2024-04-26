@@ -6,7 +6,7 @@ const BREAKPOINTS = {
   xl: 1280,
   '2xl': 1536,
 };
-export function useBreakpoints() {
+export const useBreakpoints = () => {
   const breakPoint = ref<'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined>();
   const getSizeHandler = (e?: Event) => {
     const win = (e?.currentTarget || window) as Window;
@@ -45,4 +45,4 @@ export function useBreakpoints() {
     window.removeEventListener('resize', getSizeHandler);
   });
   return breakPoint;
-}
+};

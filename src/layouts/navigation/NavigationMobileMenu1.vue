@@ -3,7 +3,7 @@
     <button
       type="button"
       class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground/70"
-      @click="toggleMobileMenuOpen"
+      @click="toggleMobileMenuOpen(!mobileMenuOpen)"
     >
       <span class="sr-only">Open main menu</span>
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
@@ -25,7 +25,7 @@
           <button
             type="button"
             class="-m-2.5 rounded-md p-2.5 text-foreground/70"
-            @click="toggleMobileMenuOpen"
+            @click="toggleMobileMenuOpen(!mobileMenuOpen)"
           >
             <span class="sr-only">Close menu</span>
             <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -36,7 +36,7 @@
             <RouterLink
               :to="aboutRoute.path"
               class="-mx-3 block [&.router-link-active]:bg-muted/80 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-foreground/90 hover:bg-muted/60"
-              @click="toggleMobileMenuOpen"
+              @click="toggleMobileMenuOpen(!mobileMenuOpen)"
               >{{ aboutRoute.title }}
             </RouterLink>
           </div>
@@ -45,17 +45,17 @@
               <MobileMenuDropdown
                 :items="promotionRoutes"
                 title="Promotion"
-                @change-link="toggleMobileMenuOpen"
+                @change-link="toggleMobileMenuOpen(!mobileMenuOpen)"
               />
               <MobileMenuDropdown
                 :items="investmentRoutes"
                 title="Investment"
-                @change-link="toggleMobileMenuOpen"
+                @change-link="toggleMobileMenuOpen(!mobileMenuOpen)"
               />
               <MobileMenuDropdown
                 :items="learningRoutes"
                 title="Learning"
-                @change-link="toggleMobileMenuOpen"
+                @change-link="toggleMobileMenuOpen(!mobileMenuOpen)"
               />
               <div class="py-6">
                 <button
@@ -74,17 +74,13 @@
 </template>
 
 <script setup>
-import { useTheme } from '@/hooks/useTheme';
-import { useToggle } from '@/hooks/useToggle';
+import { useDarkMode } from '@/hooks/useDarkMode';
 import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@/router';
 import { Dialog, DialogPanel } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { useToggle } from '@vueuse/core';
 import MobileMenuDropdown from './MobileMenuDropdown.vue';
 
 const [mobileMenuOpen, toggleMobileMenuOpen] = useToggle(false);
-
-const [isDark, toggleDarkMode] = useTheme();
-// watch(isDark, () => {
-//   mobileMenuOpen.value = false;
-// });
+const [isDark, toggleDarkMode] = useDarkMode();
 </script>

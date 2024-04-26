@@ -1,34 +1,14 @@
 <template>
-  <!-- <div>
-    <h1>Register</h1>
-    <form @submit.prevent="submitHandler">
-      <div>
-        <label
-          >Email:
-          <input type="text" name="email" class="border" value="duongy500@gmail.com" />
-        </label>
-      </div>
-      <div>
-        <label
-          >Username:
-          <input type="text" name="username" class="border" value="ylvn1" />
-        </label>
-      </div>
-      <div>
-        <label
-          >Password:
-
-          <input type="password" name="password" class="border" value="1@Qwertyuiop" />
-        </label>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  </div> -->
-  <form class="grid gap-4">
-    <BaseInput placeholder="Username" />
-    <BaseInput placeholder="Email" />
-    <BaseInput placeholder="Password" type="password" />
-    <BaseButton class="w-full mt-2">Register</BaseButton>
+  <form class="grid gap-4" @submit.prevent="onSubmit">
+    <BaseInput v-model:value="username" :error="errors.username" placeholder="Username" />
+    <BaseInput v-model:value="email" :error="errors.email" placeholder="Email" />
+    <BaseInput
+      v-model:value="password"
+      :error="errors.password"
+      placeholder="Password"
+      type="password"
+    />
+    <BaseButton class="w-full mt-2" type="submit">Register</BaseButton>
   </form>
 </template>
 
@@ -36,17 +16,42 @@
 import { BaseButton } from '@/components/ui/button';
 import { BaseInput } from '@/components/ui/input';
 import { useAuthenStore } from '@/store/useAuthenStore';
-import { type RegisterPayload } from '@/types/api/user';
+import { toTypedSchema } from '@vee-validate/zod';
+import { useForm, type InvalidSubmissionHandler, type SubmissionHandler } from 'vee-validate';
+import * as z from 'zod';
 
-const authenStore = useAuthenStore();
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const PASSWORD_REGEX = /^.{6,}$/;
 
-const submitHandler = async (event: Event) => {
-  const formData = new FormData(event.target as HTMLFormElement);
-  const payload: RegisterPayload = {
-    email: formData.get('email') as string,
-    username: formData.get('username') as string,
-    password: formData.get('password') as string,
+const SignInSchema = z.object({
+  username: z.string().refine((value) => value.length >= 4, 'Your username is invalid'),
+  email: z.string().refine((value) => EMAIL_REGEX.test(value), 'Your email is invalid'),
+  password: z.string().refine((value) => PASSWORD_REGEX.test(value), 'Your password is invalid'),
+});
+
+type RegisterType = z.infer<typeof SignInSchema>;
+
+const { errors, handleSubmit, defineField } = useForm<RegisterType>({
+  initialValues: { username: 'ylvn1', email: 'duongy96@gmail.com', password: '1@Qwertyuiop' },
+  validationSchema: toTypedSchema(SignInSchema),
+});
+
+const [username] = defineField('username');
+const [email] = defineField('email');
+const [password] = defineField('password');
+
+const signInHandler: SubmissionHandler<RegisterType> = async (data) => {
+  const payload = {
+    username: username.value,
+    email: email.value,
+    password: password.value,
   };
   authenStore.registerMutation.mutate(payload);
 };
+const signInErrorHandler: InvalidSubmissionHandler<RegisterType> = (e) => {
+  console.error('Error:', e);
+};
+const onSubmit = handleSubmit(signInHandler, signInErrorHandler);
+
+const authenStore = useAuthenStore();
 </script>
