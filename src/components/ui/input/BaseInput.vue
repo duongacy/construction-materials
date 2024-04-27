@@ -12,7 +12,6 @@ defineProps<{
   value?: string;
   label?: string;
   class?: string;
-  disabled?: boolean;
 }>();
 
 defineEmits<{
@@ -23,11 +22,14 @@ const modelValue = defineModel<string>('value');
 </script>
 
 <template>
-  <label :class="cn('px-[1px] flex flex-col', $props.class)">
-    <p v-if="!!label" :class="cn('text-caption font-medium w-fit', { 'opacity-50': disabled })">
+  <label :class="cn('px-[1px] flex mx-1 flex-col', $props.class)">
+    <p
+      v-if="!!label"
+      :class="cn('text-caption font-medium w-fit', { 'opacity-50': $attrs.disabled })"
+    >
       {{ label }}
     </p>
-    <div class="relative w-full">
+    <div class="relative flex flex-col bg-background">
       <div class="absolute w-4 h-4 left-3 top-1/2 -translate-y-1/2">
         <component :is="startIcon" class="size-4 text-muted-foreground" />
       </div>
@@ -39,11 +41,12 @@ const modelValue = defineModel<string>('value');
         v-model="modelValue"
         :class="
           cn(
-            'flex h-9 my-[1px] w-full border border-input disabled:cursor-not-allowed disabled:opacity-50 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-ring',
+            'flex h-9 my-[1px] border border-input ring-offset-background bg-background disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground',
             {
               'pl-8': !!startIcon,
               'pr-8': !!endIcon,
-              'border-destructive/70 focus-visible:border-destructive': !!error,
+              'focus:ring-2 focus:ring-destructive/70 focus:ring-offset-2 border-destructive/70':
+                !!error,
             },
           )
         "
