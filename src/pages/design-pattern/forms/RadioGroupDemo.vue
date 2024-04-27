@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { BaseLabel } from '@/components/ui/label';
 import { RadioGroup } from '@/components/ui/radio-group';
 import type { RadioOption } from '@/components/ui/radio-group/RadioGroup.vue';
 import ExampleSectionTemplate from '@/pages/design-pattern/ExampleSectionTemplate.vue';
@@ -26,27 +25,22 @@ const value = ref('compact');
 <template>
   <ExampleSectionTemplate name="Radio Group">
     <div class="flex gap-4">
-      <div class="grid min-w-[350px] gap-2">
-        <BaseLabel>Select type</BaseLabel>
-        <RadioGroup
-          v-model:model-value="value"
-          default-value="comfortable"
-          :options="options"
-          class="mx-1 flex gap-3"
-        >
-        </RadioGroup>
-      </div>
-      <div class="grid min-w-[350px] gap-2">
-        <BaseLabel disabled>Select type(Disabled all)</BaseLabel>
-        <RadioGroup
-          v-model:model-value="value"
-          disabled
-          default-value="comfortable"
-          :options="options"
-          class="mx-1 flex gap-3"
-        >
-        </RadioGroup>
-      </div>
+      <RadioGroup
+        v-model:model-value="value"
+        default-value="comfortable"
+        :options="options"
+        label="Select type"
+        class="mx-1 flex gap-3 min-w-[350px]"
+      >
+      </RadioGroup>
+      <RadioGroup
+        v-model:model-value="value"
+        disabled
+        default-value="comfortable"
+        :options="options"
+        label="Disabled"
+        class="mx-1 flex gap-3 min-w-[350px]"
+      />
     </div>
   </ExampleSectionTemplate>
 </template>

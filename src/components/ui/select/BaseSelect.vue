@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import type { SelectRootEmits, SelectRootProps } from 'radix-vue';
 import { SelectRoot, useForwardPropsEmits } from 'radix-vue';
 import { computed } from 'vue';
-import { SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '.';
+import { SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '.';
 
 export type SelectOption = {
   value: string;
@@ -30,14 +30,33 @@ const forwarded = useForwardPropsEmits(delegateProps, emits);
 </script>
 
 <template>
-  <div :class="cn('', props.class)">
+  <label
+    :class="
+      cn(
+        {
+          'cursor-not-allowed': disabled,
+        },
+        props.class,
+      )
+    "
+  >
+    <p
+      v-if="!!label"
+      :class="
+        cn('font-medium text-caption', {
+          ' opacity-50': disabled,
+        })
+      "
+    >
+      {{ label }}
+    </p>
     <SelectRoot v-bind="forwarded">
       <SelectTrigger :id="id">
         <SelectValue :placeholder="placeholder" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel v-if="!!label">{{ label }}</SelectLabel>
+          <!-- <SelectLabel v-if="!!label">{{ label }}</SelectLabel> -->
           <SelectItem
             v-for="option in options"
             :key="'select-option' + option.value"
@@ -49,5 +68,5 @@ const forwarded = useForwardPropsEmits(delegateProps, emits);
         </SelectGroup>
       </SelectContent>
     </SelectRoot>
-  </div>
+  </label>
 </template>

@@ -16,6 +16,7 @@ const props = defineProps<
     class?: string;
     options: RadioOption[];
     disabled?: boolean;
+    label?: string;
   }
 >();
 const emits = defineEmits<RadioGroupRootEmits>();
@@ -28,18 +29,23 @@ const forwarded = useForwardPropsEmits(delegateProps, emits);
 </script>
 
 <template>
-  <RadioGroupRoot :class="cn('grid gap-2', props.class)" v-bind="forwarded">
-    <BaseLabel
-      v-for="option in options"
-      :key="option.value"
-      :class="
-        cn('flex items-center gap-1', {
-          'cursor-not-allowed opacity-60': option.disabled || disabled,
-        })
-      "
-    >
-      <RadioGroupItem :value="option.value" :disabled="option.disabled || disabled" />
-      <span>{{ option.label }}</span>
-    </BaseLabel>
-  </RadioGroupRoot>
+  <div class="grid gap-1">
+    <label v-if="!!label" :class="cn({ 'opacity-50 cursor-not-allowed': disabled })">{{
+      label
+    }}</label>
+    <RadioGroupRoot :class="cn('grid gap-2', props.class)" v-bind="forwarded">
+      <BaseLabel
+        v-for="option in options"
+        :key="option.value"
+        :class="
+          cn('flex items-center gap-1', {
+            'cursor-not-allowed opacity-60': option.disabled || disabled,
+          })
+        "
+      >
+        <RadioGroupItem :value="option.value" :disabled="option.disabled || disabled" />
+        <span>{{ option.label }}</span>
+      </BaseLabel>
+    </RadioGroupRoot>
+  </div>
 </template>
