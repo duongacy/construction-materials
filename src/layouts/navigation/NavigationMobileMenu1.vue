@@ -74,7 +74,6 @@
 </template>
 
 <script setup>
-import { useDarkMode } from '@/hooks/useDarkMode';
 import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@/router';
 import { Dialog, DialogPanel } from '@headlessui/vue';
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
@@ -82,5 +81,4 @@ import { useToggle } from '@vueuse/core';
 import MobileMenuDropdown from './MobileMenuDropdown.vue';
 
 const [mobileMenuOpen, toggleMobileMenuOpen] = useToggle(false);
-const [isDark, toggleDarkMode] = useDarkMode();
 </script>

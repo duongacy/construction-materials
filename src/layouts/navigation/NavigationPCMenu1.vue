@@ -33,7 +33,7 @@
           <RouterLink v-if="!store.isAuthenticated" to="/auth">Login </RouterLink>
           <button v-else @click="store.signOut">Logout</button>
           <div class="border-t border-border my-2"></div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 flex-wrap items-end">
             <button
               class="bg-accent/80 text-accent-foreground/60 hover:bg-accent hover:text-accent-foreground rounded-md p-2"
               @click="toggleDarkMode"
@@ -41,9 +41,18 @@
               <SunMoonIcon v-if="isDark" />
               <MoonIcon v-else />
             </button>
-            <button @click="setTheme('BLUE')">Blue</button>
-            <button @click="setTheme('DEFAULT')">Default</button>
-            <button @click="setTheme('ORANGE')">Orange</button>
+            <button
+              v-for="color in listColor"
+              :key="color"
+              :class="
+                cn(' px-2 h-10', {
+                  'bg-foreground/20': color === scheme,
+                })
+              "
+              @click="setScheme(color)"
+            >
+              {{ color }}
+            </button>
           </div>
         </div>
       </PopoverContent>
@@ -52,16 +61,17 @@
 </template>
 
 <script setup lang="ts">
-import { useDarkMode } from '@/hooks/useDarkMode';
+import SCHEMES from '@/constants/schemes';
 import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@/router';
 
 import { BaseAvatar } from '@/components/ui/avatar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useTheme } from '@/hooks/useTheme';
+import { cn } from '@/lib/utils';
 import { useAuthenStore } from '@/store/useAuthenStore';
 import { MoonIcon, SunMoonIcon } from 'lucide-vue-next';
 import PCMenuDropdown from './PCMenuDropdown.vue';
-const [isDark, toggleDarkMode] = useDarkMode();
 const store = useAuthenStore();
-const { setTheme } = useTheme();
+const { scheme, setScheme, isDark, toggleDarkMode } = useTheme();
+const listColor = Object.keys(SCHEMES) as (keyof typeof SCHEMES)[];
 </script>

@@ -1,6 +1,6 @@
 import { useLocalStorage, type UseStorageOptions } from '@vueuse/core';
 
-type LocalStorageKey = 'dark' | 'authenLocal';
+type LocalStorageKey = 'dark' | 'scheme' | 'authenLocal';
 export const useLocalStorageMOD = <T>(
   key: LocalStorageKey,
   initialValue: T,
