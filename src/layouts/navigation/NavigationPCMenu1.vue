@@ -33,13 +33,18 @@
           <RouterLink v-if="!store.isAuthenticated" to="/auth">Login </RouterLink>
           <button v-else @click="store.signOut">Logout</button>
           <div class="border-t border-border my-2"></div>
-          <button
-            class="bg-accent/80 text-accent-foreground/60 hover:bg-accent hover:text-accent-foreground rounded-md p-2"
-            @click="toggleDarkMode"
-          >
-            <SunMoonIcon v-if="isDark" />
-            <MoonIcon v-else />
-          </button>
+          <div class="flex gap-2">
+            <button
+              class="bg-accent/80 text-accent-foreground/60 hover:bg-accent hover:text-accent-foreground rounded-md p-2"
+              @click="toggleDarkMode"
+            >
+              <SunMoonIcon v-if="isDark" />
+              <MoonIcon v-else />
+            </button>
+            <button @click="setTheme('BLUE')">Blue</button>
+            <button @click="setTheme('DEFAULT')">Default</button>
+            <button @click="setTheme('ORANGE')">Orange</button>
+          </div>
         </div>
       </PopoverContent>
     </Popover>
@@ -52,9 +57,11 @@ import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@
 
 import { BaseAvatar } from '@/components/ui/avatar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useTheme } from '@/hooks/useTheme';
 import { useAuthenStore } from '@/store/useAuthenStore';
 import { MoonIcon, SunMoonIcon } from 'lucide-vue-next';
 import PCMenuDropdown from './PCMenuDropdown.vue';
 const [isDark, toggleDarkMode] = useDarkMode();
 const store = useAuthenStore();
+const { setTheme } = useTheme();
 </script>

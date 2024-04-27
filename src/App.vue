@@ -3,14 +3,18 @@ import Toaster from '@/components/ui/toast/Toaster.vue';
 import { MainLayout } from '@/layouts';
 import TheFooter from '@/layouts/TheFooter.vue';
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useTheme } from './hooks/useTheme';
 import TheNavigation from './layouts/navigation/TheNavigation.vue';
 import { getRoute } from './router';
 
 const route = useRoute();
 
 const isAuthenTemplate = computed(() => route.name === getRoute('auth').name);
+
+const { setTheme } = useTheme();
+onMounted(() => setTheme('DEFAULT'));
 </script>
 <template>
   <router-view v-if="isAuthenTemplate"></router-view>

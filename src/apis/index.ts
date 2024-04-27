@@ -7,7 +7,8 @@ type GetQueryURL =
   | '/api/about-us-logo-clouds-section'
   | '/api/about-us-stats-section'
   | '/api/about-us-team-section'
-  | '/api/about-us-values-section';
+  | '/api/about-us-values-section'
+  | '/api/about-us-hero-section';
 
 export const getQueryFn = async <T>(url: GetQueryURL, populate = true) => {
   const populateString = populate ? '?populate=deep' : '';
