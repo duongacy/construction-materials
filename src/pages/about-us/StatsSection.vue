@@ -61,10 +61,11 @@
 </template>
 
 <script setup lang="ts">
-import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { axiosInstanceGet } from '@/lib/utils/axios';
 import { type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
+import { watchEffect } from 'vue';
 
 interface Stat {
   value: string;
@@ -79,7 +80,11 @@ interface AboutUsStatsSectionData extends StrapiFormat {
 
 const aboutUsStatsSectionQuery = useQuery({
   queryKey: ['about-us-stats-section'],
-  queryFn: () => getQueryFn<AboutUsStatsSectionData>('/api/about-us-stats-section'),
+  queryFn: () => axiosInstanceGet<AboutUsStatsSectionData>('/api/about-us-stats-section'),
+});
+
+watchEffect(() => {
+  console.log('aboutUsStatsSectionQuery', aboutUsStatsSectionQuery.data.value);
 });
 
 const aboutUsStatsSectionData = aboutUsStatsSectionQuery.data;

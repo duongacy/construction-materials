@@ -1,4 +1,4 @@
-import { getQueryFn } from '@/apis';
+import { axiosInstanceGet } from '@/lib/utils/axios';
 import { type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
@@ -13,7 +13,7 @@ export const useAboutUsStore = defineStore('aboutUs', {
   state: () => ({
     aboutUsHeroSectionQuery: useQuery({
       queryKey: ['about-us-hero-section'],
-      queryFn: () => getQueryFn<AboutUsHeroSectionData>('/api/about-us-hero-section'),
+      queryFn: () => axiosInstanceGet<AboutUsHeroSectionData>('/api/about-us-hero-section'),
     }),
   }),
   actions: {},

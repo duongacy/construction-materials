@@ -5,10 +5,12 @@ import TheFooter from '@/layouts/TheFooter.vue';
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useTheme } from './hooks/useTheme';
 import TheNavigation from './layouts/navigation/TheNavigation.vue';
 import { getRoute } from './router';
 
 const route = useRoute();
+useTheme();
 const isAuthenTemplate = computed(() => route.name === getRoute('auth').name);
 </script>
 <template>

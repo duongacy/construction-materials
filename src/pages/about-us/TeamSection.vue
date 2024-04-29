@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { getQueryFn } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { axiosInstanceGet } from '@/lib/utils/axios';
 import { type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -49,7 +49,7 @@ interface AboutUsTeamSectionData extends StrapiFormat {
 
 const aboutUsTeamSectionQuery = useQuery({
   queryKey: ['about-us-team-section'],
-  queryFn: () => getQueryFn<AboutUsTeamSectionData>('/api/about-us-team-section'),
+  queryFn: () => axiosInstanceGet<AboutUsTeamSectionData>('/api/about-us-team-section'),
 });
 
 const aboutUsTeamSectionData = aboutUsTeamSectionQuery.data;

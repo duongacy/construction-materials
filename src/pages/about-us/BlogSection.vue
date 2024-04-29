@@ -54,8 +54,8 @@
 </template>
 
 <script setup lang="ts">
-import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { axiosInstanceGet } from '@/lib/utils/axios';
 import type { StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -74,7 +74,7 @@ interface AboutUsBlogsSectionData extends StrapiFormat {
 
 const aboutUsBlogsSectionQuery = useQuery({
   queryKey: ['about-us-blogs-section'],
-  queryFn: () => getQueryFn<AboutUsBlogsSectionData>('/api/about-us-blogs-section'),
+  queryFn: () => axiosInstanceGet<AboutUsBlogsSectionData>('/api/about-us-blogs-section'),
 });
 
 const aboutUsBlogsSectionData = aboutUsBlogsSectionQuery.data;

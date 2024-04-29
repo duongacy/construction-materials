@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { getQueryFn } from '@/apis';
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { axiosInstanceGet } from '@/lib/utils/axios';
 import type { StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -36,12 +36,10 @@ interface AboutUsValuesSectionData extends StrapiFormat {
   description: string;
   values: Value[];
 }
-
 const aboutUsValuesSectionQuery = useQuery({
   queryKey: ['about-us-values-section'],
-  queryFn: () => getQueryFn<AboutUsValuesSectionData>('/api/about-us-values-section'),
+  queryFn: () => axiosInstanceGet<AboutUsValuesSectionData>('/api/about-us-values-section'),
 });
-
 const aboutUsValuesSectionData = aboutUsValuesSectionQuery.data;
-const values = computed(() => aboutUsValuesSectionData.value?.data?.values);
+const values = computed(() => aboutUsValuesSectionData.value?.data.values);
 </script>

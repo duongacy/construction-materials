@@ -19,6 +19,7 @@ const props = defineProps<
     options: CheckboxOption[];
     modelValue: string[];
     id?: string;
+    label?: string;
   }
 >();
 

@@ -1,5 +1,5 @@
 import { VITE_API_URL, VITE_BASE_TOKEN } from '@/consts';
-import type { StrapiResponse } from '@/types/api';
+import type { AxiosResponse } from 'axios';
 
 type GetQueryURL =
   | '/api/about-us-blogs-section'
@@ -16,7 +16,7 @@ export const getQueryFn = async <T>(url: GetQueryURL, populate = true) => {
     const response = await fetch(`${VITE_API_URL}${url}${populateString}`, {
       headers: { Authorization: `Bearer ${VITE_BASE_TOKEN}` },
     });
-    return (await response.json()) as StrapiResponse<T>;
+    return (await response.json()) as AxiosResponse<T>;
   } catch (error) {
     console.error(error);
     return null;

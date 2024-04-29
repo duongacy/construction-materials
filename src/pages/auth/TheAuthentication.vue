@@ -25,25 +25,25 @@ const separateText = computed(() =>
 const switchButtonText = computed(() => (isLogin.value ? 'Register' : 'Login'));
 </script>
 <template>
-  <div class="h-screen bg-black flex justify-end">
-    <div
-      class="h-full w-full lg:max-w-[600px] bg-white min-w-[400px] flex-[0_0_auto] flex items-center"
+  <div class="h-screen grid place-content-center">
+    <BaseCard
+      :title="authenTitle"
+      class="flex-grow m-8 min-w-[400px]"
+      :description="authenDescription"
     >
-      <BaseCard :title="authenTitle" class="flex-grow m-8" :description="authenDescription">
-        <TheSignIn v-if="isLogin" />
-        <TheRegister v-else />
-        <div class="relative">
-          <div class="absolute inset-0 flex items-center">
-            <span class="w-full border-t"></span>
-          </div>
-          <div class="relative flex justify-center text-xs uppercase">
-            <span class="bg-background px-2 text-muted-foreground">{{ separateText }} </span>
-          </div>
+      <TheSignIn v-if="isLogin" />
+      <TheRegister v-else />
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <span class="w-full border-t"></span>
         </div>
-        <BaseButton class="w-full" variant="outline" @click="toggle(!isLogin)">{{
-          switchButtonText
-        }}</BaseButton>
-      </BaseCard>
-    </div>
+        <div class="relative flex justify-center text-xs uppercase">
+          <span class="bg-background px-2 text-muted-foreground">{{ separateText }} </span>
+        </div>
+      </div>
+      <BaseButton class="w-full" variant="outline" @click="toggle(!isLogin)">{{
+        switchButtonText
+      }}</BaseButton>
+    </BaseCard>
   </div>
 </template>

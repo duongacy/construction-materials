@@ -23,6 +23,7 @@ export type UserAuthen = {
   jwt: string;
   user: User & StrapiFormat;
 };
+
 export const defaultAuthenLocal = (): UserAuthen => ({
   jwt: '',
   user: {

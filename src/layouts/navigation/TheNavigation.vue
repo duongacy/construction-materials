@@ -24,9 +24,4 @@ import NavigationMobileMenu1 from './NavigationMobileMenu1.vue';
 import NavigationPCMenu1 from './NavigationPCMenu1.vue';
 
 const breakPoints = useBreakpoints();
-
-// const { setScheme } = useTheme();
-// onMounted(() => {
-//   setScheme('BLUE');
-// });
 </script>

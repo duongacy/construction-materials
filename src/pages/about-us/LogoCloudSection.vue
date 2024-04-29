@@ -57,9 +57,9 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 
-import { getQueryFn } from '@/apis';
 import { VITE_API_URL } from '@/consts';
 import { cn } from '@/lib/utils';
+import { axiosInstanceGet } from '@/lib/utils/axios';
 import { type Image, type StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
@@ -72,7 +72,8 @@ interface AboutUsLogoCloudsSectionData extends StrapiFormat {
 
 const aboutUsLogoCloudsSectionQuery = useQuery({
   queryKey: ['about-us-logo-clouds-section'],
-  queryFn: () => getQueryFn<AboutUsLogoCloudsSectionData>('/api/about-us-logo-clouds-section'),
+  queryFn: () =>
+    axiosInstanceGet<AboutUsLogoCloudsSectionData>('/api/about-us-logo-clouds-section'),
 });
 
 const aboutUsLogoCloudsSectionData = aboutUsLogoCloudsSectionQuery.data;

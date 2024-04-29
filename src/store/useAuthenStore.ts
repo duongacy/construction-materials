@@ -1,8 +1,7 @@
-import { postMutationFn } from '@/apis';
 import { useToast } from '@/components/ui/toast';
 import { useLocalStorageMOD } from '@/hooks/useLocalStorageMOD';
+import { axiosInstancePost } from '@/lib/utils/axios';
 import { getRoute } from '@/router';
-import type { StrapiResponse } from '@/types/api';
 import {
   defaultAuthenLocal,
   type RegisterPayload,
@@ -10,6 +9,7 @@ import {
   type UserAuthen,
 } from '@/types/api/user';
 import { useMutation } from '@tanstack/vue-query';
+import type { AxiosError, AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -21,14 +21,9 @@ export const useAuthenStore = defineStore('authen', {
     const { toast } = useToast();
     return {
       authenLocal,
-      signInMutation: useMutation<
-        StrapiResponse<UserAuthen> | null,
-        unknown,
-        SignInPayload,
-        unknown
-      >({
+      signInMutation: useMutation<AxiosResponse<UserAuthen>, AxiosError, SignInPayload, unknown>({
         mutationKey: ['signin'],
-        mutationFn: (payload) => postMutationFn('/api/auth/local', payload),
+        mutationFn: (payload) => axiosInstancePost('/api/auth/local', payload),
         onSuccess(response) {
           if (response?.data) {
             authenLocal.value = response.data;
@@ -43,25 +38,26 @@ export const useAuthenStore = defineStore('authen', {
               router.replace(route.redirectedFrom || getRoute('home').path);
               clearTimeout(timeoutId);
             }, 2000);
-          } else if (response?.error) {
-            toast({
-              title: 'Error',
-              description: response.error?.message || 'Something went wrong!',
-              variant: 'destructive',
-              duration: 5000,
-            });
           }
+        },
+        onError(error) {
+          toast({
+            title: 'Error',
+            description: error.message || 'Something went wrong!',
+            variant: 'destructive',
+            duration: 5000,
+          });
         },
       }),
 
       registerMutation: useMutation<
-        StrapiResponse<UserAuthen> | null,
-        unknown,
+        AxiosResponse<UserAuthen> | null,
+        AxiosError,
         RegisterPayload,
         unknown
       >({
         mutationKey: ['register'],
-        mutationFn: (payload) => postMutationFn('/api/auth/local/register', payload),
+        mutationFn: (payload) => axiosInstancePost('/api/auth/local/register', payload),
         onSuccess(response) {
           if (response?.data) {
             authenLocal.value = response.data;
@@ -76,14 +72,15 @@ export const useAuthenStore = defineStore('authen', {
               router.replace(route.redirectedFrom || getRoute('home').path);
               clearTimeout(timeoutId);
             }, 2000);
-          } else if (response?.error) {
-            toast({
-              title: 'Error',
-              description: response.error?.message || 'Something went wrong!',
-              variant: 'destructive',
-              duration: 5000,
-            });
           }
+        },
+        onError(error) {
+          toast({
+            title: 'Error',
+            description: error.message || 'Something went wrong!',
+            variant: 'destructive',
+            duration: 5000,
+          });
         },
       }),
 
