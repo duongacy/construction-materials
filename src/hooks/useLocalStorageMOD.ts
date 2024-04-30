@@ -1,4 +1,4 @@
-import type { LocalStorageKey } from '@/lib/utils/localStorageMOD';
+import type { LocalStorageKey } from '@/lib/utils/LocalStorage';
 import { useLocalStorage, type UseStorageOptions } from '@vueuse/core';
 
 export const useLocalStorageMOD = <T>(

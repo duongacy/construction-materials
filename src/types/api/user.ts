@@ -6,6 +6,11 @@ export type User = {
   provider: string;
   confirmed: boolean;
   blocked: boolean;
+  role?: {
+    description: string;
+    name: string;
+    type: string;
+  } & StrapiFormat;
 };
 
 export type RegisterPayload = {

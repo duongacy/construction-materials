@@ -1,11 +1,13 @@
 import { useToast } from '@/components/ui/toast';
 import { useLocalStorageMOD } from '@/hooks/useLocalStorageMOD';
-import { axiosInstancePost } from '@/lib/utils/axios';
+import { axiosInstanceGet, axiosInstancePost } from '@/lib/utils/axios';
 import { getRoute } from '@/router';
+import type { StrapiFormat } from '@/types/api/common';
 import {
   defaultAuthenLocal,
   type RegisterPayload,
   type SignInPayload,
+  type User,
   type UserAuthen,
 } from '@/types/api/user';
 import { useMutation } from '@tanstack/vue-query';
@@ -15,18 +17,25 @@ import { useRoute, useRouter } from 'vue-router';
 
 export const useAuthenStore = defineStore('authen', {
   state: () => {
-    const authenLocal = useLocalStorageMOD('authenLocal', defaultAuthenLocal());
+    const authenLocal = useLocalStorageMOD('userAuthen', defaultAuthenLocal());
     const route = useRoute();
     const router = useRouter();
     const { toast } = useToast();
     return {
       authenLocal,
-      signInMutation: useMutation<AxiosResponse<UserAuthen>, AxiosError, SignInPayload, unknown>({
+      signInMutation: useMutation<AxiosResponse<UserAuthen>, Error, SignInPayload>({
         mutationKey: ['signin'],
         mutationFn: (payload) => axiosInstancePost('/api/auth/local', payload),
-        onSuccess(response) {
+        async onSuccess(response) {
           if (response?.data) {
             authenLocal.value = response.data;
+            //Workaround to get user role
+            axiosInstanceGet<unknown, AxiosResponse<User & StrapiFormat>>(
+              '/api/users/me?populate=*',
+              { withCredentials: true },
+            ).then((rs) => {
+              authenLocal.value.user = rs.data;
+            });
 
             toast({
               title: 'Success',

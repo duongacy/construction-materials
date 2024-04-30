@@ -1,5 +1,6 @@
 import { VITE_API_URL } from '@/consts';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import { LocalStorage } from './LocalStorage';
 
 type GetQueryURL =
   | '/api/about-us-blogs-section'
@@ -8,7 +9,8 @@ type GetQueryURL =
   | '/api/about-us-stats-section'
   | '/api/about-us-team-section'
   | '/api/about-us-values-section'
-  | '/api/about-us-hero-section';
+  | '/api/about-us-hero-section'
+  | '/api/users/me?populate=*';
 
 type PostMutationURL = '/api/auth/local' | '/api/auth/local/register';
 
@@ -31,13 +33,13 @@ axiosInstance.interceptors.request.use(async (req) => {
   //   });
 
   // localStorage.setItem('authTokens', JSON.stringify(response.data))
-  // req.headers.Authorization = `Bearer ${response.data.access}`
+  if (req.withCredentials) {
+    req.headers.Authorization = `Bearer ${LocalStorage.userAuthen.jwt}`;
+  }
   return req;
 });
 axiosInstance.interceptors.response.use(
   (res) => {
-    console.log({ res });
-
     return res;
   },
   (err) => {
@@ -49,7 +51,9 @@ export const axiosInstanceGet = <T = any, R = AxiosResponse<T>, D = any>(
   url: GetQueryURL,
   config?: AxiosRequestConfig<D>,
 ): Promise<R> => {
-  url = url + '?populate=deep';
+  if (!url.includes('populate=')) {
+    url = url + '?populate=deep';
+  }
   return axiosInstance.get(url, config);
 };
 
@@ -58,5 +62,5 @@ export const axiosInstancePost = <T = any, R = AxiosResponse<T>, D = any>(
   data?: D,
   config?: AxiosRequestConfig<D>,
 ): Promise<R> => {
-  return axiosInstance.post(url, data, config);
+  return axiosInstance.post(url + '?populate=deep', data, config);
 };
