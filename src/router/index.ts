@@ -97,7 +97,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/learning/mar-tech',
     name: 'learningMarTech',
-    component: () => () => import('@/pages/learning-center/MarTech.vue'),
+    component: () => import('@/pages/learning-center/MarTech.vue'),
     meta: {
       title: 'Mar-tech',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',

@@ -10,6 +10,7 @@ type GetQueryURL =
   | '/api/about-us-team-section'
   | '/api/about-us-values-section'
   | '/api/about-us-hero-section'
+  | '/api/about-us-page'
   | '/api/users/me?populate=*';
 
 type PostMutationURL = '/api/auth/local' | '/api/auth/local/register';
