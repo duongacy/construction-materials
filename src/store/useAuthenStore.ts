@@ -1,15 +1,15 @@
-import { useToast } from '@/components/ui/toast';
-import { useLocalStorageMOD } from '@/hooks/useLocalStorageMOD';
-import { axiosInstanceGet, axiosInstancePost } from '@/lib/utils/axios';
-import { getRoute } from '@/router';
-import type { StrapiFormat } from '@/types/api/common';
 import {
   defaultAuthenLocal,
   type RegisterPayload,
   type SignInPayload,
   type User,
   type UserAuthen,
-} from '@/types/api/user';
+} from '@/api/types/collection/User';
+import type { StrapiFormat } from '@/api/types/common';
+import { useToast } from '@/components/ui/toast';
+import { useLocalStorageMOD } from '@/hooks/useLocalStorageMOD';
+import { axiosInstanceGet, axiosInstancePost } from '@/lib/utils/axios';
+import { getRoute } from '@/router';
 import { useMutation } from '@tanstack/vue-query';
 import type { AxiosError, AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';

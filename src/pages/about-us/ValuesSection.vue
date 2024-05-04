@@ -43,3 +43,4 @@ const aboutUsValuesSectionQuery = useQuery({
 const aboutUsValuesSectionData = aboutUsValuesSectionQuery.data;
 const values = computed(() => aboutUsValuesSectionData.value?.data.values);
 </script>
+@/types/api/types/common

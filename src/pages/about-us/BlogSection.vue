@@ -101,3 +101,4 @@ const blogPosts = computed(() => aboutUsBlogsSectionData.value?.data?.blogs);
 //   // More posts...
 // ];
 </script>
+@/types/api/types/common

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="relative isolate -z-10">
     <svg
       class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-neutral-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
@@ -157,4 +157,24 @@ import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
 const aboutUsHeroSectionData = computed(() => aboutUsStore.aboutUsHeroSectionQuery.data);
+</script> -->
+
+<template>
+  <div>
+
+  </div>
+</template>
+
+<script>
+export default {
+  setup () {
+    
+
+    return {}
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+
+</style>

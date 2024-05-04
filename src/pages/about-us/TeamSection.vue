@@ -55,3 +55,4 @@ const aboutUsTeamSectionQuery = useQuery({
 const aboutUsTeamSectionData = aboutUsTeamSectionQuery.data;
 const members = computed(() => aboutUsTeamSectionData.value?.data?.members);
 </script>
+@/types/api/types/common

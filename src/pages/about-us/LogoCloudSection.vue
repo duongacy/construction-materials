@@ -79,3 +79,4 @@ const aboutUsLogoCloudsSectionQuery = useQuery({
 const aboutUsLogoCloudsSectionData = aboutUsLogoCloudsSectionQuery.data;
 const logos = computed(() => aboutUsLogoCloudsSectionData.value?.data?.logos);
 </script>
+@/types/api/types/common

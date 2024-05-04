@@ -84,3 +84,4 @@ const aboutUsStatsSectionQuery = useQuery({
 
 const aboutUsStatsSectionData = aboutUsStatsSectionQuery.data;
 </script>
+@/types/api/types/common

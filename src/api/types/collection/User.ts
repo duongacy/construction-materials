@@ -1,16 +1,17 @@
-import { type StrapiFormat } from './common';
-
 export type User = {
   username: string;
   email: string;
   provider: string;
+  password?: string;
+  resetPasswordToken?: string;
+  confirmationToken?: string;
   confirmed: boolean;
   blocked: boolean;
   role?: {
     description: string;
     name: string;
     type: string;
-  } & StrapiFormat;
+  };
 };
 
 export type RegisterPayload = {
@@ -26,7 +27,7 @@ export type SignInPayload = {
 
 export type UserAuthen = {
   jwt: string;
-  user: User & StrapiFormat;
+  user: User;
 };
 
 export const defaultAuthenLocal = (): UserAuthen => ({
@@ -37,9 +38,5 @@ export const defaultAuthenLocal = (): UserAuthen => ({
     provider: '',
     confirmed: false,
     blocked: false,
-    id: 0,
-    createdAt: '',
-    updatedAt: '',
-    publishedAt: '',
   },
 });

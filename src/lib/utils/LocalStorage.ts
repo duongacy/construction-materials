@@ -1,4 +1,4 @@
-import { defaultAuthenLocal, type UserAuthen } from '@/types/api/user';
+import { defaultAuthenLocal, type UserAuthen } from '@/api/types/collection/User';
 
 export type LocalStorageKey = 'dark' | 'scheme' | 'userAuthen';
 

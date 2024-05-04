@@ -28,3 +28,4 @@ const aboutUsImageSectionQuery = useQuery({
 
 const aboutUsImageSectionData = aboutUsImageSectionQuery.data;
 </script>
+@/types/api/types/common
