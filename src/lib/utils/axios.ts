@@ -1,6 +1,6 @@
 import { VITE_API_URL } from '@/consts';
+import { LocalStorage } from '@/hooks/useLocalStorageMOD';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
-import { LocalStorage } from './LocalStorage';
 
 type GetQueryURL = '/api/about-us-page' | '/api/users/me?populate=*';
 
