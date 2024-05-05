@@ -1,1 +1,1 @@
-export type LogosCloudSection = {};
+export type LogosCloudSection = { title: string; description: string };

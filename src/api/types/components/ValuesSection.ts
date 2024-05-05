@@ -1,1 +1,1 @@
-export type ValuesSection = {};
+export type ValuesSection = { title: string; description: string };

@@ -1,1 +1,1 @@
-export type Value = {};
+export type Value = { title: string; description: string };
