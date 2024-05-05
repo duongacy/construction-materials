@@ -30,7 +30,7 @@
     </div>
     <TheContainer>
       <h2 class="text-center text-lg font-semibold leading-8 text-foreground/90">
-        {{ aboutUsLogoCloudsSectionData?.data?.title }}
+        {{ logosCloudData?.title }}
       </h2>
       <div
         class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5"
@@ -59,24 +59,10 @@ import TheContainer from '@/layouts/container/TheContainer.vue';
 
 import { VITE_API_URL } from '@/consts';
 import { cn } from '@/lib/utils';
-import { axiosInstanceGet } from '@/lib/utils/axios';
-import { type Image, type StrapiFormat } from '@/types/api/common';
-import { useQuery } from '@tanstack/vue-query';
+import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
-interface AboutUsLogoCloudsSectionData extends StrapiFormat {
-  title: string;
-  description: string;
-  logos: Image[];
-}
-
-const aboutUsLogoCloudsSectionQuery = useQuery({
-  queryKey: ['about-us-logo-clouds-section'],
-  queryFn: () =>
-    axiosInstanceGet<AboutUsLogoCloudsSectionData>('/api/about-us-logo-clouds-section'),
-});
-
-const aboutUsLogoCloudsSectionData = aboutUsLogoCloudsSectionQuery.data;
-const logos = computed(() => aboutUsLogoCloudsSectionData.value?.data?.logos);
+const aboutUsStore = useAboutUsStore();
+const logosCloudData = computed(() => aboutUsStore.aboutUsPageData?.logosCloudSection);
+const logos = computed(() => logosCloudData.value?.logos);
 </script>
-@/types/api/types/common

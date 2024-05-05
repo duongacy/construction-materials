@@ -11,7 +11,7 @@ export type AboutUsPage = {
   blogsSection: BlogsSection;
   imageSection: ImageSection;
   logosCloudSection: LogosCloudSection;
-  statsCloudSection: StatsSection;
-  teamCloudSection: TeamSection;
-  valuesCloudSection: ValuesSection;
+  statsSection: StatsSection;
+  teamSection: TeamSection;
+  valuesSection: ValuesSection;
 };

@@ -2,10 +2,10 @@
   <TheContainer class="mt-32 sm:mt-40">
     <div class="mx-auto max-w-2xl lg:mx-0">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-        {{ aboutUsValuesSectionData?.data?.title }}
+        {{ valuesData?.title }}
       </h2>
       <p class="mt-6 text-lg leading-8 text-foreground/60">
-        {{ aboutUsValuesSectionData?.data?.description }}
+        {{ valuesData?.description }}
       </p>
     </div>
     <dl
@@ -21,26 +21,10 @@
 
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { axiosInstanceGet } from '@/lib/utils/axios';
-import type { StrapiFormat } from '@/types/api/common';
-import { useQuery } from '@tanstack/vue-query';
+import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
-interface Value {
-  title: string;
-  description: string;
-}
-
-interface AboutUsValuesSectionData extends StrapiFormat {
-  title: string;
-  description: string;
-  values: Value[];
-}
-const aboutUsValuesSectionQuery = useQuery({
-  queryKey: ['about-us-values-section'],
-  queryFn: () => axiosInstanceGet<AboutUsValuesSectionData>('/api/about-us-values-section'),
-});
-const aboutUsValuesSectionData = aboutUsValuesSectionQuery.data;
-const values = computed(() => aboutUsValuesSectionData.value?.data.values);
+const aboutUsStore = useAboutUsStore();
+const valuesData = computed(() => aboutUsStore.aboutUsPageData?.valuesSection);
+const values = computed(() => valuesData.value?.values || []);
 </script>
-@/types/api/types/common

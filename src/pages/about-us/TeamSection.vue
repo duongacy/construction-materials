@@ -2,10 +2,10 @@
   <TheContainer class="mt-32 sm:mt-48">
     <div class="mx-auto max-w-2xl lg:mx-0">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-        {{ aboutUsTeamSectionData?.data?.title }}
+        {{ teamData?.title }}
       </h2>
       <p class="mt-6 text-lg leading-8 text-foreground/60">
-        {{ aboutUsTeamSectionData?.data?.description }}
+        {{ teamData?.description }}
       </p>
     </div>
     <ul
@@ -30,29 +30,10 @@
 <script setup lang="ts">
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { axiosInstanceGet } from '@/lib/utils/axios';
-import { type Image, type StrapiFormat } from '@/types/api/common';
-import { useQuery } from '@tanstack/vue-query';
+import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
-interface Member {
-  name: string;
-  role: string;
-  avatar: Image;
-}
-
-interface AboutUsTeamSectionData extends StrapiFormat {
-  title: string;
-  description: string;
-  members: Member[];
-}
-
-const aboutUsTeamSectionQuery = useQuery({
-  queryKey: ['about-us-team-section'],
-  queryFn: () => axiosInstanceGet<AboutUsTeamSectionData>('/api/about-us-team-section'),
-});
-
-const aboutUsTeamSectionData = aboutUsTeamSectionQuery.data;
-const members = computed(() => aboutUsTeamSectionData.value?.data?.members);
+const aboutUsStore = useAboutUsStore();
+const teamData = computed(() => aboutUsStore.aboutUsPageData?.teamSection);
+const members = computed(() => teamData.value?.members);
 </script>
-@/types/api/types/common

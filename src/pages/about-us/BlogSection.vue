@@ -54,9 +54,9 @@
 </template>
 
 <script setup lang="ts">
+import type { StrapiFormat } from '@/api/types/common';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { axiosInstanceGet } from '@/lib/utils/axios';
-import type { StrapiFormat } from '@/types/api/common';
 import { useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
 
