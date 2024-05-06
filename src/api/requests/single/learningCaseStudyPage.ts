@@ -2,4 +2,6 @@ import type { LearningCaseStudyPage } from '@/api/types/single/LearningCaseStudy
 import { axiosInstanceGet } from '@/lib/utils/axios';
 
 export const learningCaseStudyPageQueryFn = () =>
-  axiosInstanceGet<LearningCaseStudyPage>('/api/learning-case-study-page');
+  axiosInstanceGet<LearningCaseStudyPage>('/api/learning-case-study-page', {
+    withCredentials: true,
+  });

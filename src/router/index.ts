@@ -108,7 +108,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/learning/download',
     name: 'learningDownload',
-    component: () => import('@/pages/learning-center/DocumentDownload.vue'),
+    component: () => import('@/pages/learning-center/Download.vue'),
     meta: {
       title: 'Tải tài liệu',
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -125,15 +125,6 @@ export const routes: RouteRecordRaw[] = [
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       icon: ChartPieIcon,
       requireAuth: true,
-    },
-  },
-  {
-    path: '/contact',
-    name: 'contact',
-    component: () => import('@/pages/contact/Contact.vue'),
-    meta: {
-      title: 'Liên hệ',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     },
   },
   {
@@ -180,7 +171,6 @@ export const getRoute = (
     | 'learningMarTech'
     | 'learningDownload'
     | 'learningCasestudy'
-    | 'contact'
     | 'notFound'
     | 'auth',
 ) => {
@@ -203,7 +193,6 @@ export const learningRoutes = [
   getRoute('learningCasestudy'),
   getRoute('learningDownload'),
 ];
-export const contactRoute = getRoute('contact');
 export const aboutRoute = getRoute('aboutUs');
 
 const router = createRouter({

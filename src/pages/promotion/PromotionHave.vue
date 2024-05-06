@@ -6,11 +6,10 @@
           id="details-heading"
           class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl"
         >
-          Sản phẩm/ Dịch vụ chúng tôi có
+          {{ promotionHaveData.title }}
         </h2>
         <p class="mt-3 max-w-3xl text-lg text-foreground/60">
-          Our patented padded snack sleeve construction protects your favorite treats from getting
-          smooshed during all-day adventures, long shifts at work, and tough travel schedules.
+          {{ promotionHaveData.description }}
         </p>
       </div>
 
@@ -60,6 +59,9 @@
 </template>
 
 <script setup>
+import { usePromotionHaveStore } from '@/store/usePromotionHave';
+import { computed } from 'vue';
+
 const products = [
   {
     id: 1,
@@ -99,4 +101,6 @@ const policies = [
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg',
   },
 ];
+const promotionHave = usePromotionHaveStore();
+const promotionHaveData = computed(() => promotionHave.promotionHavePageData);
 </script>

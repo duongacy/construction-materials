@@ -7,11 +7,10 @@
             id="features-heading"
             class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl"
           >
-            Cơ hội đầu tư chúng tôi cần
+            {{ investmentNeedData?.title }}
           </h2>
           <p class="mt-4 text-foreground/50">
-            The Organize modular system offers endless options for arranging your favorite and most
-            used items. Keep everything at reach and in its place, while dressing up your workspace.
+            {{ investmentNeedData?.description }}
           </p>
         </div>
 
@@ -68,7 +67,9 @@
 
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { useInvestmentNeedStore } from '@/store/useInvestmentNeed';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue';
+import { computed } from 'vue';
 
 const tabs = [
   {
@@ -123,4 +124,7 @@ const tabs = [
     ],
   },
 ];
+
+const investmentNeed = useInvestmentNeedStore();
+const investmentNeedData = computed(() => investmentNeed.investmentNeedPageData);
 </script>

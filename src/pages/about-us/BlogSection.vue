@@ -2,10 +2,10 @@
   <TheContainer class="mt-32 sm:mt-40">
     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
       <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-        {{ aboutUsBlogsSectionData?.data?.title }}
+        {{ blogsData?.title }}
       </h2>
       <p class="mt-2 text-lg leading-8 text-foreground/60">
-        {{ aboutUsBlogsSectionData?.data?.description }}
+        {{ blogsData?.description }}
       </p>
     </div>
     <div
@@ -54,31 +54,29 @@
 </template>
 
 <script setup lang="ts">
-import type { StrapiFormat } from '@/api/types/common';
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { axiosInstanceGet } from '@/lib/utils/axios';
-import { useQuery } from '@tanstack/vue-query';
+import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
-interface Blog {
-  title: string;
-  description: string;
-  content: string;
-}
+// interface Blog {
+//   title: string;
+//   description: string;
+//   content: string;
+// }
 
-interface AboutUsBlogsSectionData extends StrapiFormat {
-  title: string;
-  description: string;
-  blogs: Blog[];
-}
+// interface AboutUsBlogsSectionData extends StrapiFormat {
+//   title: string;
+//   description: string;
+//   blogs: Blog[];
+// }
 
-const aboutUsBlogsSectionQuery = useQuery({
-  queryKey: ['about-us-blogs-section'],
-  queryFn: () => axiosInstanceGet<AboutUsBlogsSectionData>('/api/about-us-blogs-section'),
-});
+// const aboutUsBlogsSectionQuery = useQuery({
+//   queryKey: ['about-us-blogs-section'],
+//   queryFn: () => axiosInstanceGet<AboutUsBlogsSectionData>('/api/about-us-blogs-section'),
+// });
 
-const aboutUsBlogsSectionData = aboutUsBlogsSectionQuery.data;
-const blogPosts = computed(() => aboutUsBlogsSectionData.value?.data?.blogs);
+// const aboutUsBlogsSectionData = aboutUsBlogsSectionQuery.data;
+// const blogPosts = computed(() => aboutUsBlogsSectionData.value?.data?.blogs);
 
 // const store = useAboutUsStore();
 // const blogPosts = [
@@ -100,5 +98,6 @@ const blogPosts = computed(() => aboutUsBlogsSectionData.value?.data?.blogs);
 //   },
 //   // More posts...
 // ];
+const aboutUsStore = useAboutUsStore();
+const blogsData = computed(() => aboutUsStore.aboutUsPageData?.blogsSection);
 </script>
-@/types/api/types/common

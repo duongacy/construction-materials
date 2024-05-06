@@ -12,11 +12,10 @@
     <TheContainer class="relative -mt-12 pb-16 sm:pb-24">
       <div class="mx-auto max-w-2xl text-center lg:max-w-4xl">
         <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-          Cơ hội đầu tư chúng tôi có
+          {{ investmentHaveData?.title }}
         </h2>
         <p class="mt-4 text-foreground/50">
-          Organize is a system to keep your desk tidy and photo-worthy all day long. Procrastinate
-          your work while you meticulously arrange items into dedicated trays.
+          {{ investmentHaveData?.description }}
         </p>
       </div>
 
@@ -34,6 +33,8 @@
 
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
+import { useInvestmentHaveStore } from '@/store/useInvestmentHave';
+import { computed } from 'vue';
 const features = [
   { name: 'Origin', description: 'Designed by Good Goods, Inc.' },
   {
@@ -51,4 +52,7 @@ const features = [
     description: 'Made from natural materials. Grain and color vary with each item.',
   },
 ];
+
+const investmentHave = useInvestmentHaveStore();
+const investmentHaveData = computed(() => investmentHave.investmentHavePageData);
 </script>
