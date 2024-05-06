@@ -2,7 +2,18 @@ import { VITE_API_URL } from '@/consts';
 import { LocalStorage } from '@/hooks/useLocalStorageMOD';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 
-type GetQueryURL = '/api/about-us-page' | '/api/users/me?populate=*';
+type GetQueryURL =
+  | '/api/about-us-page'
+  | '/api/investment-have-page'
+  | '/api/investment-need-page'
+  | '/api/learning-case-study-page'
+  | '/api/learning-download-page'
+  | '/api/learning-finance-page'
+  | '/api/learning-legal-page'
+  | '/api/learning-mar-tech-page'
+  | '/api/promotion-have-page'
+  | '/api/promotion-need-page'
+  | '/api/users/me?populate=*';
 
 type PostMutationURL = '/api/auth/local' | '/api/auth/local/register';
 

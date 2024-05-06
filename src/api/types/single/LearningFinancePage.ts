@@ -1,1 +1,1 @@
-export type LearningFinancePage = {};
+export type LearningFinancePage = { title: string; description: string };

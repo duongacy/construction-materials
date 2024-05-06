@@ -1,1 +1,1 @@
-export type LearningLegalPage = {};
+export type LearningLegalPage = { title: string; description: string };

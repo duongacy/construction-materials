@@ -1,18 +1,19 @@
+import { promotionNeedPageQueryFn } from '@/api/requests/single/promotionNeedPage';
+import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
 
-type PromotionNeedStore = {};
-
 export const usePromotionNeedStore = defineStore('promotionNeed', {
-  state: () => {
-    return {
-      promotionNeedStore: null as PromotionNeedStore | null,
-    };
-  },
-  actions: {
-    async fetchData() {
-      const originData = await fetch('http://localhost:1337/api/promotion-need');
-      const jsonData = (await originData.json()) as PromotionNeedStore;
-      this.promotionNeedStore = jsonData;
+  state: () => ({
+    promotionNeedPageQuery: useQuery({
+      queryKey: ['promotion-need-page'],
+      queryFn: promotionNeedPageQueryFn,
+    }),
+  }),
+  getters: {
+    promotionNeedPageData: (state) => {
+      // can filter data here
+      return state.promotionNeedPageQuery.data?.data;
     },
   },
+  actions: {},
 });

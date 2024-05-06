@@ -1,1 +1,1 @@
-export type InvestmentNeedPage = {};
+export type InvestmentNeedPage = { title: string; description: string };

@@ -1,1 +1,1 @@
-export type PromotionNeedPage = {};
+export type PromotionNeedPage = { title: string; description: string };
