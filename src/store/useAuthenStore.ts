@@ -7,6 +7,7 @@ import {
 } from '@/api/types/collection/User';
 import type { StrapiFormat } from '@/api/types/common';
 import { useToast } from '@/components/ui/toast';
+import { VITE_TOKEN_TIMEOUT } from '@/consts';
 import { useLocalStorageMOD } from '@/hooks/useLocalStorageMOD';
 import { axiosInstanceGet, axiosInstancePost } from '@/lib/utils/axios';
 import { getRoute } from '@/router';
@@ -25,14 +26,17 @@ export const useAuthenStore = defineStore('authen', {
       authenLocal,
       signInMutation: useMutation<AxiosResponse<UserAuthen>, Error, SignInPayload>({
         mutationKey: ['signin'],
-        mutationFn: (payload) => axiosInstancePost('/api/auth/local', payload),
+        mutationFn: (payload) =>
+          axiosInstancePost('/api/auth/local', payload, { preventPopulateDeep: true }),
         async onSuccess(response) {
           if (response?.data) {
+            const now = new Date();
+            response.data.expiresIn = now.getTime() + VITE_TOKEN_TIMEOUT;
             authenLocal.value = response.data;
             //Workaround to get user role
             axiosInstanceGet<unknown, AxiosResponse<User & StrapiFormat>>(
               '/api/users/me?populate=*',
-              { withCredentials: true },
+              { withCredentials: true, preventPopulateDeep: true },
             ).then((rs) => {
               authenLocal.value.user = rs.data;
             });
@@ -43,10 +47,7 @@ export const useAuthenStore = defineStore('authen', {
               duration: 2000,
             });
 
-            const timeoutId = setTimeout(() => {
-              router.replace(route.redirectedFrom || getRoute('home').path);
-              clearTimeout(timeoutId);
-            }, 2000);
+            router.replace(route.redirectedFrom || getRoute('home').path);
           }
         },
         onError(error) {
@@ -66,7 +67,8 @@ export const useAuthenStore = defineStore('authen', {
         unknown
       >({
         mutationKey: ['register'],
-        mutationFn: (payload) => axiosInstancePost('/api/auth/local/register', payload),
+        mutationFn: (payload) =>
+          axiosInstancePost('/api/auth/local/register', payload, { preventPopulateDeep: true }),
         onSuccess(response) {
           if (response?.data) {
             authenLocal.value = response.data;
@@ -77,10 +79,7 @@ export const useAuthenStore = defineStore('authen', {
               duration: 2000,
             });
 
-            const timeoutId = setTimeout(() => {
-              router.replace(route.redirectedFrom || getRoute('home').path);
-              clearTimeout(timeoutId);
-            }, 2000);
+            router.replace(route.redirectedFrom || getRoute('home').path);
           }
         },
         onError(error) {

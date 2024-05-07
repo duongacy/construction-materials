@@ -1,4 +1,4 @@
-import { VITE_API_URL } from '@/consts';
+import { LOGOUT_EVENT_NAME, VITE_API_URL, VITE_REFRESH_TOKEN_OFFSET } from '@/consts';
 import { LocalStorage } from '@/hooks/useLocalStorageMOD';
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 
@@ -15,27 +15,43 @@ type GetQueryURL =
   | '/api/promotion-need-page'
   | '/api/users/me?populate=*';
 
-type PostMutationURL = '/api/auth/local' | '/api/auth/local/register';
+type PostMutationURL = '/api/auth/local' | '/api/auth/local/register' | '/api/token/refresh';
 
 export const axiosInstance = axios.create({
   baseURL: VITE_API_URL,
 });
+
 axiosInstance.interceptors.request.use(async (req) => {
-  // if(!authTokens){
-  //     authTokens = localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null
-  //     req.headers.Authorization = `Bearer ${authTokens?.access}`
-  // }
+  const now = new Date();
+  if (
+    LocalStorage.userAuthen.expiresIn !== 0 &&
+    LocalStorage.userAuthen.expiresIn - now.getTime() < VITE_REFRESH_TOKEN_OFFSET &&
+    !req.url?.includes('/api/token/refresh') &&
+    !req.url?.includes('/api/auth/local') &&
+    !req.url?.includes('/api/auth/local/register')
+  ) {
+    try {
+      const data = await axiosInstancePost<
+        unknown,
+        AxiosResponse<{ jwt: string; refreshToken: string }>
+      >(
+        '/api/token/refresh',
+        {
+          refreshToken: LocalStorage.userAuthen.refreshToken,
+        },
+        { preventPopulateDeep: true },
+      );
+      const userAuthen = {
+        ...LocalStorage.userAuthen,
+        jwt: data.data.jwt,
+        refreshToken: data.data.refreshToken,
+      };
+      LocalStorage.userAuthen = userAuthen;
+    } catch (error) {
+      window.dispatchEvent(new Event(LOGOUT_EVENT_NAME));
+    }
+  }
 
-  // const user = jwt_decode(authTokens.access)
-  // const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
-
-  // if(!isExpired) return req
-
-  // const response = await axios.post(`${baseURL}/api/token/refresh/`, {
-  //     refresh: authTokens.refresh
-  //   });
-
-  // localStorage.setItem('authTokens', JSON.stringify(response.data))
   if (req.withCredentials) {
     req.headers.Authorization = `Bearer ${LocalStorage.userAuthen.jwt}`;
   }
@@ -52,9 +68,9 @@ axiosInstance.interceptors.response.use(
 
 export const axiosInstanceGet = <T = any, R = AxiosResponse<T>, D = any>(
   url: GetQueryURL,
-  config?: AxiosRequestConfig<D>,
+  config?: AxiosRequestConfig<D> & { preventPopulateDeep?: boolean },
 ): Promise<R> => {
-  if (!url.includes('populate=')) {
+  if (!config?.preventPopulateDeep) {
     url = url + '?populate=deep';
   }
   return axiosInstance.get(url, config);
@@ -63,7 +79,10 @@ export const axiosInstanceGet = <T = any, R = AxiosResponse<T>, D = any>(
 export const axiosInstancePost = <T = any, R = AxiosResponse<T>, D = any>(
   url: PostMutationURL,
   data?: D,
-  config?: AxiosRequestConfig<D>,
+  config?: AxiosRequestConfig<D> & { preventPopulateDeep?: boolean },
 ): Promise<R> => {
-  return axiosInstance.post(url + '?populate=deep', data, config);
+  if (!config?.preventPopulateDeep) {
+    url = url + '?populate=deep';
+  }
+  return axiosInstance.post(url, data, config);
 };

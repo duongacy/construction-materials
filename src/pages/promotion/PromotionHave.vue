@@ -6,10 +6,10 @@
           id="details-heading"
           class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl"
         >
-          {{ promotionHaveData.title }}
+          {{ promotionHaveData?.title }}
         </h2>
         <p class="mt-3 max-w-3xl text-lg text-foreground/60">
-          {{ promotionHaveData.description }}
+          {{ promotionHaveData?.description }}
         </p>
       </div>
 
@@ -45,7 +45,7 @@
     </section>
 
     <!-- Policies section -->
-    <section aria-labelledby="policy-heading" class="mt-16 lg:mt-24">
+    <!-- <section aria-labelledby="policy-heading" class="mt-16 lg:mt-24">
       <h2 id="policy-heading" class="sr-only">Our policies</h2>
       <div class="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
         <div v-for="policy in policies" :key="policy.name">
@@ -54,7 +54,7 @@
           <p class="mt-3 text-base text-foreground/50">{{ policy.description }}</p>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 

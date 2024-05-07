@@ -3,15 +3,26 @@ import Toaster from '@/components/ui/toast/Toaster.vue';
 import { MainLayout } from '@/layouts';
 import TheFooter from '@/layouts/TheFooter.vue';
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { LOGOUT_EVENT_NAME } from './consts';
 import { useTheme } from './hooks/useTheme';
 import TheNavigation from './layouts/navigation/TheNavigation.vue';
 import { getRoute } from './router';
+import { useAuthenStore } from './store/useAuthenStore';
 
 const route = useRoute();
 useTheme();
 const isAuthenTemplate = computed(() => route.name === getRoute('auth').name);
+const authenStore = useAuthenStore();
+
+onMounted(() => {
+  window.addEventListener(LOGOUT_EVENT_NAME, authenStore.signOut);
+});
+
+onUnmounted(() => {
+  window.removeEventListener(LOGOUT_EVENT_NAME, authenStore.signOut);
+});
 </script>
 <template>
   <router-view v-if="isAuthenTemplate"></router-view>
@@ -20,11 +31,7 @@ const isAuthenTemplate = computed(() => route.name === getRoute('auth').name);
       <TheNavigation></TheNavigation>
     </template>
     <template #content>
-      <router-view v-slot="slotProps">
-        <transition name="route" mode="out-in">
-          <component :is="slotProps.Component"></component>
-        </transition>
-      </router-view>
+      <router-view> </router-view>
     </template>
     <template #footer>
       <TheFooter></TheFooter>
@@ -33,15 +40,3 @@ const isAuthenTemplate = computed(() => route.name === getRoute('auth').name);
   <Toaster />
   <VueQueryDevtools></VueQueryDevtools>
 </template>
-
-<style scoped>
-.route-enter-active,
-.route-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.route-enter-from,
-.route-leave-to {
-  opacity: 0;
-}
-</style>

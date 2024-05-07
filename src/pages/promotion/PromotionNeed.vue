@@ -3,10 +3,10 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-2xl lg:mx-0">
         <h2 class="text-3xl font-bold tracking-tight text-foreground/90 sm:text-4xl">
-          {{ promotionNeedData.title }}
+          {{ promotionNeedData?.title }}
         </h2>
         <p class="mt-6 text-lg leading-8 text-foreground/60">
-          {{ promotionNeedData.description }}
+          {{ promotionNeedData?.description }}
         </p>
       </div>
       <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">

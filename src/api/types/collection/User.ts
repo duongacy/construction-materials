@@ -27,11 +27,15 @@ export type SignInPayload = {
 
 export type UserAuthen = {
   jwt: string;
+  expiresIn: number;
+  refreshToken: string;
   user: User;
 };
 
 export const defaultAuthenLocal = (): UserAuthen => ({
   jwt: '',
+  expiresIn: 0,
+  refreshToken: '',
   user: {
     username: '',
     email: '',
