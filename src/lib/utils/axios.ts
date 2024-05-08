@@ -13,7 +13,14 @@ type GetQueryURL =
   | '/api/learning-mar-tech-page'
   | '/api/promotion-have-page'
   | '/api/promotion-need-page'
-  | '/api/users/me?populate=*';
+  | '/api/users/me?populate=*'
+  | '/api/blogs'
+  | '/api/categories'
+  | '/api/investment-haves'
+  | '/api/investment-needs'
+  | '/api/members'
+  | '/api/promotion-haves'
+  | '/api/promotion-needs';
 
 type PostMutationURL = '/api/auth/local' | '/api/auth/local/register' | '/api/token/refresh';
 

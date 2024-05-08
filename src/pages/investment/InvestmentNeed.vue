@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { useInvestmentNeedStore } from '@/store/useInvestmentNeed';
+import { useInvestmentNeedStore } from '@/store/useInvestmentNeedStore';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue';
 import { computed } from 'vue';
 

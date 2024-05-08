@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
-import { useInvestmentHaveStore } from '@/store/useInvestmentHave';
+import { useInvestmentHaveStore } from '@/store/useInvestmentHaveStore';
 import { computed } from 'vue';
 const features = [
   { name: 'Origin', description: 'Designed by Good Goods, Inc.' },

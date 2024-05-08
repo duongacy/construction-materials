@@ -21,9 +21,8 @@
             <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-foreground/60">
               <p class="flex-auto">{{ feature.description }}</p>
               <p class="mt-6">
-                <a :href="feature.href" class="text-sm font-semibold leading-6 text-primary/60"
-                  >Learn more <span aria-hidden="true">→</span></a
-                >
+                <a :href="feature.href" class="text-sm font-semibold leading-6 text-primary/60">Learn more <span
+                    aria-hidden="true">→</span></a>
               </p>
             </dd>
           </div>
@@ -34,7 +33,7 @@
 </template>
 
 <script setup>
-import { usePromotionNeedStore } from '@/store/usePromotionNeed';
+import { usePromotionNeedStore } from '@/store/usePromotionNeedStore';
 import { InboxIcon, TrashIcon, UsersIcon } from '@heroicons/vue/24/outline';
 import { computed } from 'vue';
 
@@ -65,3 +64,4 @@ const features = [
 const promotionNeed = usePromotionNeedStore();
 const promotionNeedData = computed(() => promotionNeed.promotionNeedPageData);
 </script>
+@/store/usePromotionNeedStore
