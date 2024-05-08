@@ -22,9 +22,13 @@
       <dl
         class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:max-w-none lg:grid-cols-3 lg:gap-x-8"
       >
-        <div v-for="feature in features" :key="feature.name" class="border-t border-border pt-4">
-          <dt class="font-medium text-foreground/90">{{ feature.name }}</dt>
-          <dd class="mt-2 text-sm text-foreground/50">{{ feature.description }}</dd>
+        <div
+          v-for="investment in investmentHaves"
+          :key="investment.title"
+          class="border-t border-border pt-4"
+        >
+          <dt class="font-medium text-foreground/90">{{ investment.title }}</dt>
+          <dd class="mt-2 text-sm text-foreground/50">{{ investment.description }}</dd>
         </div>
       </dl>
     </TheContainer>
@@ -35,24 +39,9 @@
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useInvestmentHaveStore } from '@/store/useInvestmentHaveStore';
 import { computed } from 'vue';
-const features = [
-  { name: 'Origin', description: 'Designed by Good Goods, Inc.' },
-  {
-    name: 'Material',
-    description: 'Solid walnut base with rare earth magnets and polycarbonate add-ons.',
-  },
-  { name: 'Dimensions', description: '15" x 3.75" x .75"' },
-  { name: 'Finish', description: 'Hand sanded and finished with natural oil' },
-  {
-    name: 'Includes',
-    description: 'Pen Tray, Phone Tray, Small Tray, Large Tray, Sticky Note Holder',
-  },
-  {
-    name: 'Considerations',
-    description: 'Made from natural materials. Grain and color vary with each item.',
-  },
-];
 
 const investmentHave = useInvestmentHaveStore();
 const investmentHaveData = computed(() => investmentHave.investmentHavePageData);
+
+const investmentHaves = computed(() => investmentHave.allInvestmentHaves);
 </script>

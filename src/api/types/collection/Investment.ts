@@ -8,7 +8,7 @@ export type InvestmentHave = {
 
 export type InvestmentNeed = {
   title: string;
-  subTitle: string;
+  subtitle: string;
   description: string;
   icon: Image;
 };
