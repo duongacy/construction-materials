@@ -68,4 +68,3 @@ const promotionHaveData = computed(() => promotionHave.promotionHavePageData);
 
 const promotionHaves = computed(() => promotionHave.allPromotionHaves || []);
 </script>
-@/store/usePromotionHaveStore

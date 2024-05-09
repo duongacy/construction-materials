@@ -28,6 +28,31 @@ export const axiosInstance = axios.create({
   baseURL: VITE_API_URL,
 });
 
+const refreshTokenHandler = () => {
+  return new Promise((resolve, reject) => {
+    axiosInstancePost<unknown, AxiosResponse<{ jwt: string; refreshToken: string }>>(
+      '/api/token/refresh',
+      {
+        refreshToken: LocalStorage.userAuthen.refreshToken,
+      },
+      { preventPopulateDeep: true },
+    )
+      .then((rs) => {
+        const userAuthen = {
+          ...LocalStorage.userAuthen,
+          jwt: rs.data.jwt,
+          refreshToken: rs.data.refreshToken,
+        };
+        LocalStorage.userAuthen = userAuthen;
+        resolve(true);
+      })
+      .catch(() => {
+        window.dispatchEvent(new Event(LOGOUT_EVENT_NAME));
+        reject();
+      });
+  });
+};
+
 axiosInstance.interceptors.request.use(async (req) => {
   const now = new Date();
   if (
@@ -37,26 +62,7 @@ axiosInstance.interceptors.request.use(async (req) => {
     !req.url?.includes('/api/auth/local') &&
     !req.url?.includes('/api/auth/local/register')
   ) {
-    try {
-      const data = await axiosInstancePost<
-        unknown,
-        AxiosResponse<{ jwt: string; refreshToken: string }>
-      >(
-        '/api/token/refresh',
-        {
-          refreshToken: LocalStorage.userAuthen.refreshToken,
-        },
-        { preventPopulateDeep: true },
-      );
-      const userAuthen = {
-        ...LocalStorage.userAuthen,
-        jwt: data.data.jwt,
-        refreshToken: data.data.refreshToken,
-      };
-      LocalStorage.userAuthen = userAuthen;
-    } catch (error) {
-      window.dispatchEvent(new Event(LOGOUT_EVENT_NAME));
-    }
+    await refreshTokenHandler();
   }
 
   if (req.withCredentials) {
@@ -64,8 +70,18 @@ axiosInstance.interceptors.request.use(async (req) => {
   }
   return req;
 });
+
 axiosInstance.interceptors.response.use(
   (res) => {
+    if (res.status === 401) {
+      refreshTokenHandler()
+        .then(() => {
+          axiosInstance.request(res.request);
+        })
+        .catch(() => {
+          return res;
+        });
+    }
     return res;
   },
   (err) => {
