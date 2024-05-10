@@ -72,19 +72,13 @@ axiosInstance.interceptors.request.use(async (req) => {
 });
 
 axiosInstance.interceptors.response.use(
-  (res) => {
-    if (res.status === 401) {
-      refreshTokenHandler()
-        .then(() => {
-          axiosInstance.request(res.request);
-        })
-        .catch(() => {
-          return res;
-        });
-    }
-    return res;
-  },
+  (res) => res,
   (err) => {
+    if (err.response.status === 401) {
+      refreshTokenHandler().then(() => {
+        axiosInstance.request(err.request);
+      });
+    }
     return Promise.reject(err.response.data.error);
   },
 );
