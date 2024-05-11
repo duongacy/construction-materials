@@ -1,4 +1,4 @@
-import type { Image } from '../common';
+import type { Image, StrapiFormat } from '../common';
 import type { Category } from './Category';
 
 export type Blog = {
@@ -7,4 +7,4 @@ export type Blog = {
   thumb: Image;
   categories: Category[];
   content: string;
-};
+} & StrapiFormat;

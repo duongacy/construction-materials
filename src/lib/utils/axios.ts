@@ -15,6 +15,7 @@ type GetQueryURL =
   | '/api/promotion-need-page'
   | '/api/users/me?populate=*'
   | '/api/blogs'
+  | `/api/blogs/${string}`
   | '/api/categories'
   | '/api/investment-haves'
   | '/api/investment-needs'

@@ -128,6 +128,30 @@ export const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/blogs',
+    name: 'blogs',
+    props: true,
+    component: () => import('@/pages/blogs/Blogs.vue'),
+    meta: {
+      title: 'Blogs',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/blogs/:blogId',
+    name: 'blogDetails',
+    props: true,
+    component: () => import('@/pages/blogs/BlogDetails.vue'),
+    meta: {
+      title: 'Blog Detail',
+      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      icon: ChartPieIcon,
+      requireAuth: true,
+    },
+  },
+  {
     path: '/not-found',
     name: 'notFound',
     component: () => import('@/pages/NotFound.vue'),
@@ -172,7 +196,9 @@ export const getRoute = (
     | 'learningDownload'
     | 'learningCasestudy'
     | 'notFound'
-    | 'auth',
+    | 'auth'
+    | 'blogDetails'
+    | 'blogs',
 ) => {
   const rs = routes.find((item) => item.name === name);
   return {
@@ -194,6 +220,8 @@ export const learningRoutes = [
   getRoute('learningDownload'),
 ];
 export const aboutRoute = getRoute('aboutUs');
+export const blogsRoute = getRoute('blogs');
+export const blogDetailsRoute = getRoute('blogDetails');
 
 const router = createRouter({
   history: createWebHistory(VITE_BASE_URL),

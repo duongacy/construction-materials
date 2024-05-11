@@ -9,6 +9,12 @@
     <PCMenuDropdown title="Promotion" :items="promotionRoutes" />
     <PCMenuDropdown title="Investment" :items="investmentRoutes" />
     <PCMenuDropdown title="Learning" :items="learningRoutes" />
+    <RouterLink
+      :to="blogsRoute.path"
+      class="[&.router-link-active]:bg-muted/80 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-foreground/90 hover:bg-muted/60"
+    >
+      {{ blogsRoute.title }}
+    </RouterLink>
   </div>
 
   <div class="flex lg:flex-1 lg:justify-end gap-2">
@@ -62,7 +68,13 @@
 
 <script setup lang="ts">
 import SCHEMES from '@/constants/schemes';
-import { aboutRoute, investmentRoutes, learningRoutes, promotionRoutes } from '@/router';
+import {
+  aboutRoute,
+  blogsRoute,
+  investmentRoutes,
+  learningRoutes,
+  promotionRoutes,
+} from '@/router';
 
 import { BaseAvatar } from '@/components/ui/avatar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
