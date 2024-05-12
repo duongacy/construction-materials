@@ -6,11 +6,8 @@ import { paginationToSearchParams } from '.';
 
 export const getAllBlogsQueryFn = () => axiosInstanceGet<AxiosResponse<Blog[]>>(`/api/blogs`);
 
-export const getBlogsByCategoryName = (
-  categoryName: string,
-  paginationRequest: PaginationRequest,
-) => {
-  const urlSearchParams = new URLSearchParams(paginationToSearchParams(paginationRequest));
+export const getBlogsQueryFn = (categoryName: string, pagination: PaginationRequest) => {
+  const urlSearchParams = new URLSearchParams(paginationToSearchParams(pagination));
 
   if (categoryName !== '') {
     urlSearchParams.append('filters[category][name][$eq]', categoryName);

@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { getBlogsByCategoryName } from '@/api/requests/collection/blog';
+import { getBlogsQueryFn } from '@/api/requests/collection/blog';
 import type { PaginationRequest } from '@/api/types/common';
 import { BaseInput } from '@/components/ui/input';
 import { BasePagination2 } from '@/components/ui/pagination';
@@ -34,15 +34,13 @@ const paginationRequest = ref<PaginationRequest>({
 });
 
 const blogByCategoryQuery = useQuery({
-  queryKey: ['blogs-by-category-name', categoryName, paginationRequest],
-  queryFn: () => getBlogsByCategoryName(categoryName.value, paginationRequest.value),
+  queryKey: ['blogs', categoryName, paginationRequest],
+  queryFn: () => getBlogsQueryFn(categoryName.value, paginationRequest.value),
 });
 const blogs = computed(() => blogByCategoryQuery.data.value?.data.data);
 const paginationResponse = computed(() => blogByCategoryQuery.data.value?.data.meta?.pagination);
 
 const updatePaginationHandler = (request: PaginationRequest) => {
-  console.log(request);
-
   paginationRequest.value = request;
 };
 </script>
