@@ -38,10 +38,9 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useInvestmentHaveStore } from '@/store/useInvestmentHaveStore';
-import { computed } from 'vue';
 
 const investmentHave = useInvestmentHaveStore();
-const investmentHaveData = computed(() => investmentHave.investmentHavePageData);
+const investmentHaveData = investmentHave.investmentHavePageData;
 
-const investmentHaves = computed(() => investmentHave.allInvestmentHaves);
+const investmentHaves = investmentHave.allInvestmentHaves;
 </script>

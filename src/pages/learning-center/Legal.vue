@@ -7,7 +7,6 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useLearningLegalStore } from '@/store/useLearningLegalStore';
-import { computed } from 'vue';
 const learningLegal = useLearningLegalStore();
-const learningLegalData = computed(() => learningLegal.learningLegalPageData);
+const learningLegalData = learningLegal.learningLegalPageData;
 </script>

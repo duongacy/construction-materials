@@ -2,6 +2,7 @@ import { getAllPromotionHavesQueryFn } from '@/api/requests/collection/promotion
 import { promotionHavePageQueryFn } from '@/api/requests/single/promotionHavePage';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
+import { computed } from 'vue';
 
 export const usePromotionHaveStore = defineStore('promotionHave', {
   state: () => ({
@@ -15,14 +16,9 @@ export const usePromotionHaveStore = defineStore('promotionHave', {
     }),
   }),
   getters: {
-    promotionHavePageData: (state) => {
-      // can filter data here
-      return state.promotionHavePageQuery.data?.data;
-    },
-    allPromotionHaves: (state) => {
-      // can filter data here
-      return state.allPromotionHavesQuery.data?.data;
-    },
+    promotionHavePageData: (state) => computed(() => state.promotionHavePageQuery.data?.data.data),
+    allPromotionHaves: (state) =>
+      computed(() => state.allPromotionHavesQuery.data?.data.data || []),
   },
   actions: {},
 });

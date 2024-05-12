@@ -1,6 +1,7 @@
 import { learningLegalPageQueryFn } from '@/api/requests/single/learningLegalPage';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
+import { computed } from 'vue';
 
 export const useLearningLegalStore = defineStore('learningLegal', {
   state: () => ({
@@ -10,10 +11,7 @@ export const useLearningLegalStore = defineStore('learningLegal', {
     }),
   }),
   getters: {
-    learningLegalPageData: (state) => {
-      // can filter data here
-      return state.learningLegalPageQuery.data?.data;
-    },
+    learningLegalPageData: (state) => computed(() => state.learningLegalPageQuery.data?.data.data),
   },
   actions: {},
 });

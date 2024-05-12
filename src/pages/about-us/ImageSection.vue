@@ -12,7 +12,6 @@ import TheContainer from '@/layouts/container/TheContainer.vue';
 
 import { VITE_API_URL } from '@/consts';
 import { useAboutUsStore } from '@/store/useAboutUsStore';
-import { computed } from 'vue';
 const aboutUsStore = useAboutUsStore();
-const imageData = computed(() => aboutUsStore.aboutUsPageData?.imageSection);
+const imageData = aboutUsStore.imageSectionData;
 </script>

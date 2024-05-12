@@ -1,6 +1,7 @@
 import { learningMarTechPageQueryFn } from '@/api/requests/single/learningMarTechPage';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
+import { computed } from 'vue';
 
 export const useLearningMarTechStore = defineStore('learningMarTech', {
   state: () => ({
@@ -10,10 +11,8 @@ export const useLearningMarTechStore = defineStore('learningMarTech', {
     }),
   }),
   getters: {
-    learningMarTechPageData: (state) => {
-      // can filter data here
-      return state.learningMarTechPageQuery.data?.data;
-    },
+    learningMarTechPageData: (state) =>
+      computed(() => state.learningMarTechPageQuery.data?.data.data),
   },
   actions: {},
 });

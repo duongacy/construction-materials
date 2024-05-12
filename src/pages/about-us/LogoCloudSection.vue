@@ -63,6 +63,6 @@ import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
-const logosCloudData = computed(() => aboutUsStore.aboutUsPageData?.logosCloudSection);
-const logos = computed(() => logosCloudData.value?.logos);
+const logosCloudData = aboutUsStore.logosCloudSectionData;
+const logos = computed(() => logosCloudData?.value?.logos || []);
 </script>

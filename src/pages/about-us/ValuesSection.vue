@@ -25,6 +25,6 @@ import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
-const valuesData = computed(() => aboutUsStore.aboutUsPageData?.valuesSection);
-const values = computed(() => valuesData.value?.values || []);
+const valuesData = aboutUsStore.valuesSectionData;
+const values = computed(() => valuesData?.value?.values || []);
 </script>

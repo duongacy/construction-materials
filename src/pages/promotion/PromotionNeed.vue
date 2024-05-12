@@ -37,10 +37,8 @@
 <script setup>
 import { VITE_API_URL } from '@/consts';
 import { usePromotionNeedStore } from '@/store/usePromotionNeedStore';
-import { computed } from 'vue';
 
 const promotionNeed = usePromotionNeedStore();
-const promotionNeedData = computed(() => promotionNeed.promotionNeedPageData);
-
-const promotionNeeds = computed(() => promotionNeed.allPromotionNeeds || []);
+const promotionNeedData = promotionNeed.promotionNeedPageData;
+const promotionNeeds = promotionNeed.allPromotionNeeds;
 </script>

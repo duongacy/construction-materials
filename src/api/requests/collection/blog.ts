@@ -5,6 +5,7 @@ import type { AxiosResponse } from 'axios';
 import { paginationToSearchParams } from '.';
 
 export const getAllBlogsQueryFn = () => axiosInstanceGet<AxiosResponse<Blog[]>>(`/api/blogs`);
+
 export const getBlogsByCategoryName = (
   categoryName: string,
   paginationRequest: PaginationRequest,
@@ -16,4 +17,5 @@ export const getBlogsByCategoryName = (
   }
   return axiosInstanceGet<StrapiAxiosResponse<Blog[]>>(`/api/blogs?${urlSearchParams.toString()}`);
 };
+
 export const getBlogByIdQueryFn = (id: string) => axiosInstanceGet<Blog>(`/api/blogs/${id}`);

@@ -73,18 +73,20 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue';
 import { computed } from 'vue';
 
 const investmentNeed = useInvestmentNeedStore();
-const investmentNeedData = computed(() => investmentNeed.investmentNeedPageData);
+const investmentNeedData = investmentNeed.investmentNeedPageData;
+const investmentNeeds = investmentNeed.allInvestmentNeeds;
 
-const investmentNeeds = computed(() => investmentNeed.allInvestmentNeeds || []);
-const tabs = investmentNeeds.value.map((investment) => ({
-  name: investment.title,
-  features: [
-    {
-      name: investment.subtitle,
-      description: investment.description,
-      imageSrc: VITE_API_URL + investment.icon.url,
-      imageAlt: investment.icon.alternativeText,
-    },
-  ],
-}));
+const tabs = computed(() =>
+  investmentNeeds.value.map((investment) => ({
+    name: investment.title,
+    features: [
+      {
+        name: investment.subtitle,
+        description: investment.description,
+        imageSrc: VITE_API_URL + investment.icon.url,
+        imageAlt: investment.icon.alternativeText,
+      },
+    ],
+  })),
+);
 </script>

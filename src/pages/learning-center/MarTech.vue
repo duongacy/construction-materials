@@ -7,7 +7,6 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useLearningMarTechStore } from '@/store/useLearningMarTechStore';
-import { computed } from 'vue';
 const learningMarTech = useLearningMarTechStore();
-const learningMarTechData = computed(() => learningMarTech.learningMarTechPageData);
+const learningMarTechData = learningMarTech.learningMarTechPageData;
 </script>

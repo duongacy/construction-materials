@@ -7,8 +7,7 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useLearningDownloadStore } from '@/store/useLearningDownloadStore';
-import { computed } from 'vue';
 
 const learningDownload = useLearningDownloadStore();
-const learningDownloadData = computed(() => learningDownload.learningDownloadPageData);
+const learningDownloadData = learningDownload.learningDownloadPageData;
 </script>

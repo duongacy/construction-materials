@@ -1,6 +1,7 @@
 import { getAllBlogsQueryFn } from '@/api/requests/collection/blog';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
+import { computed } from 'vue';
 
 export const useBlogStore = defineStore('learningFinance', {
   state: () => ({
@@ -10,9 +11,7 @@ export const useBlogStore = defineStore('learningFinance', {
     }),
   }),
   getters: {
-    blogs: (state) => {
-      return state.allBlogsPageQuery.data?.data;
-    },
+    blogs: (state) => computed(() => state.allBlogsPageQuery.data?.data.data),
   },
   actions: {},
 });

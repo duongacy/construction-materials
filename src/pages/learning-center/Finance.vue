@@ -19,10 +19,9 @@
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useLearningFinanceStore } from '@/store/useLearningFinanceStore';
-import { computed } from 'vue';
 
 const learningFinance = useLearningFinanceStore();
-const learningFinanceData = computed(() => learningFinance.learningFinancePageData);
+const learningFinanceData = learningFinance.learningFinancePageData;
 
-const blogs = computed(() => learningFinance.blogs?.data || []);
+const blogs = learningFinance.blogs;
 </script>

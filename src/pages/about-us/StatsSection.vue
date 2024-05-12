@@ -66,6 +66,6 @@ import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
-const statsData = computed(() => aboutUsStore.aboutUsPageData?.statsSection);
-const stats = computed(() => statsData.value?.stats || []);
+const statsData = aboutUsStore.statsSectionData;
+const stats = computed(() => statsData?.value?.stats || []);
 </script>

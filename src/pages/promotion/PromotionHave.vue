@@ -61,10 +61,8 @@
 <script setup>
 import { VITE_API_URL } from '@/consts';
 import { usePromotionHaveStore } from '@/store/usePromotionHaveStore';
-import { computed } from 'vue';
 
 const promotionHave = usePromotionHaveStore();
-const promotionHaveData = computed(() => promotionHave.promotionHavePageData);
-
-const promotionHaves = computed(() => promotionHave.allPromotionHaves || []);
+const promotionHaveData = promotionHave.promotionHavePageData;
+const promotionHaves = promotionHave.allPromotionHaves;
 </script>

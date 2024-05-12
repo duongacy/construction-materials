@@ -2,6 +2,7 @@ import { getAllInvestmentNeedsQueryFn } from '@/api/requests/collection/investme
 import { investmentNeedPageQueryFn } from '@/api/requests/single/investmentNeedPage';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
+import { computed } from 'vue';
 
 export const useInvestmentNeedStore = defineStore('investmentNeed', {
   state: () => ({
@@ -15,14 +16,10 @@ export const useInvestmentNeedStore = defineStore('investmentNeed', {
     }),
   }),
   getters: {
-    investmentNeedPageData: (state) => {
-      // can filter data here
-      return state.investmentNeedPageQuery.data?.data;
-    },
-    allInvestmentNeeds: (state) => {
-      // can filter data here
-      return state.allInvestmentNeedsQuery.data?.data;
-    },
+    investmentNeedPageData: (state) =>
+      computed(() => state.investmentNeedPageQuery.data?.data.data),
+    allInvestmentNeeds: (state) =>
+      computed(() => state.allInvestmentNeedsQuery.data?.data.data || []),
   },
   actions: {},
 });

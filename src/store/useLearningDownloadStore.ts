@@ -1,6 +1,7 @@
 import { learningDownloadPageQueryFn } from '@/api/requests/single/learningDownloadPage';
 import { useQuery } from '@tanstack/vue-query';
 import { defineStore } from 'pinia';
+import { computed } from 'vue';
 
 export const useLearningDownloadStore = defineStore('learningDownload', {
   state: () => ({
@@ -10,10 +11,8 @@ export const useLearningDownloadStore = defineStore('learningDownload', {
     }),
   }),
   getters: {
-    learningDownloadPageData: (state) => {
-      // can filter data here
-      return state.learningDownloadPageQuery.data?.data;
-    },
+    learningDownloadPageData: (state) =>
+      computed(() => state.learningDownloadPageQuery.data?.data.data),
   },
   actions: {},
 });

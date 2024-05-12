@@ -34,6 +34,6 @@ import { useAboutUsStore } from '@/store/useAboutUsStore';
 import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
-const teamData = computed(() => aboutUsStore.aboutUsPageData?.teamSection);
-const members = computed(() => teamData.value?.members);
+const teamData = aboutUsStore.teamSectionData;
+const members = computed(() => teamData?.value?.members || []);
 </script>

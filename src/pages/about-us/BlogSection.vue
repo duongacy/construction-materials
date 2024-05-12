@@ -56,7 +56,6 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useAboutUsStore } from '@/store/useAboutUsStore';
-import { computed } from 'vue';
 
 // interface Blog {
 //   title: string;
@@ -99,5 +98,6 @@ import { computed } from 'vue';
 //   // More posts...
 // ];
 const aboutUsStore = useAboutUsStore();
-const blogsData = computed(() => aboutUsStore.aboutUsPageData?.blogsSection);
+const blogsData = aboutUsStore.blogsSectionData;
+console.log('blogsData', blogsData.value?.title);
 </script>

@@ -7,8 +7,7 @@
 <script setup lang="ts">
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useLearningCaseStudyStore } from '@/store/useLearningCaseStudyStore';
-import { computed } from 'vue';
 
 const learningCaseStudy = useLearningCaseStudyStore();
-const learningCaseStudyData = computed(() => learningCaseStudy.learningCaseStudyPageData);
+const learningCaseStudyData = learningCaseStudy.learningCaseStudyPageData;
 </script>

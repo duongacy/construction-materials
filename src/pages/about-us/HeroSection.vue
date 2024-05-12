@@ -147,8 +147,7 @@
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useAboutUsStore } from '@/store/useAboutUsStore';
-import { computed } from 'vue';
 
 const aboutUsStore = useAboutUsStore();
-const heroSectionData = computed(() => aboutUsStore.aboutUsPageData?.heroSection);
+const heroSectionData = aboutUsStore.heroSectionData;
 </script>
