@@ -1,6 +1,6 @@
 <template>
   <div class="bg-background">
-    <TheContainer aria-labelledby="features-heading" class="py-32">
+    <TheContainer class="py-32">
       <div class="mx-auto max-w-2xl px-4 lg:max-w-none lg:px-0">
         <div class="max-w-3xl">
           <h2

@@ -24,5 +24,5 @@ import { computed } from 'vue';
 const learningFinance = useLearningFinanceStore();
 const learningFinanceData = computed(() => learningFinance.learningFinancePageData);
 
-const blogs = computed(() => learningFinance.blogs || []);
+const blogs = computed(() => learningFinance.blogs?.data || []);
 </script>

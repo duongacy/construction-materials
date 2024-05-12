@@ -1,3 +1,5 @@
+import type { AxiosResponse } from 'axios';
+
 export type StrapiFormat = {
   id: number;
   createdAt: string;
@@ -21,3 +23,22 @@ export type Image = {
   provider: string;
   provider_metadata: any;
 } & StrapiFormat;
+
+export type PaginationRequest = {
+  page?: number;
+  pageSize?: number;
+  withCount?: boolean;
+};
+
+export type PaginationResponse = {
+  page?: number; // current page
+  pageCount?: number; // how many page
+  pageSize?: number; // items each page
+  total?: number; // total of result
+};
+
+export type StrapiAxiosResponse<T> = AxiosResponse<T> & {
+  meta?: {
+    pagination?: PaginationResponse;
+  };
+};

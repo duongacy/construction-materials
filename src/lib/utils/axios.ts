@@ -14,7 +14,7 @@ type GetQueryURL =
   | '/api/promotion-have-page'
   | '/api/promotion-need-page'
   | '/api/users/me?populate=*'
-  | '/api/blogs'
+  | `/api/blogs${string}`
   | `/api/blogs/${string}`
   | '/api/categories'
   | '/api/investment-haves'
@@ -88,10 +88,11 @@ export const axiosInstanceGet = <T = any, R = AxiosResponse<T>, D = any>(
   url: GetQueryURL,
   config?: AxiosRequestConfig<D> & { preventPopulateDeep?: boolean },
 ): Promise<R> => {
-  if (!config?.preventPopulateDeep) {
-    url = url + '?populate=deep';
+  const newUrl = new URL(VITE_API_URL + url);
+  if (!config?.preventPopulateDeep && !newUrl.searchParams.has('populate')) {
+    newUrl.searchParams.append('populate', 'deep');
   }
-  return axiosInstance.get(url, config);
+  return axiosInstance.get(newUrl.href, config);
 };
 
 export const axiosInstancePost = <T = any, R = AxiosResponse<T>, D = any>(
@@ -99,8 +100,9 @@ export const axiosInstancePost = <T = any, R = AxiosResponse<T>, D = any>(
   data?: D,
   config?: AxiosRequestConfig<D> & { preventPopulateDeep?: boolean },
 ): Promise<R> => {
-  if (!config?.preventPopulateDeep) {
-    url = url + '?populate=deep';
+  const newUrl = new URL(VITE_API_URL + url);
+  if (!config?.preventPopulateDeep && !newUrl.searchParams.has('populate')) {
+    newUrl.searchParams.append('populate', 'deep');
   }
-  return axiosInstance.post(url, data, config);
+  return axiosInstance.post(newUrl.href, data, config);
 };
