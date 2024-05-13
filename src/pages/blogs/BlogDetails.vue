@@ -33,5 +33,5 @@ const blogDetailQuery = useQuery({
   queryFn: () => getBlogByIdQueryFn(props.blogId),
 });
 
-const blogDetailData = computed(() => blogDetailQuery.data.value?.data);
+const blogDetailData = computed(() => blogDetailQuery.data.value?.data.data);
 </script>

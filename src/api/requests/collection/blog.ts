@@ -15,4 +15,5 @@ export const getBlogsQueryFn = (categoryName: string, pagination: PaginationRequ
   return axiosInstanceGet<StrapiAxiosResponse<Blog[]>>(`/api/blogs?${urlSearchParams.toString()}`);
 };
 
-export const getBlogByIdQueryFn = (id: string) => axiosInstanceGet<Blog>(`/api/blogs/${id}`);
+export const getBlogByIdQueryFn = (id: string) =>
+  axiosInstanceGet<StrapiAxiosResponse<Blog>>(`/api/blogs/${id}`);

@@ -1,42 +1,33 @@
 <template>
-  <div class="gap-1 flex justify-between">
-    <div>
-      <button v-if="props.value.page !== 1" @click="changePageHandler(0)">Start</button>
-      <button
+  <div class="gap-2 flex">
+    <div class="flex items-start">
+      <PaginationFirst v-if="props.value.page !== 1" @click="changePageHandler(0)" />
+      <PaginationPrev
         v-if="(props.value.page || 0) > 2"
         @click="changePageHandler((props.value.page || 0) - 1)"
-      >
-        Prev
-      </button>
-
-      <button
+      />
+      <PageItem
         v-for="page in listPage"
         :key="page"
         :class="cn('border px-2 py-1', { 'text-red-600': page === props.value?.page })"
         @click="changePageHandler(page)"
+        >{{ page }}</PageItem
       >
-        {{ page }}
-      </button>
-      <button
+      <PaginationNext
         v-if="(props.value.page || 0) < (props.value.pageCount || 0) - 1"
         @click="changePageHandler((props.value.page || 1) + 1)"
-      >
-        Next
-      </button>
-      <button
+      ></PaginationNext>
+
+      <PaginationLast
         v-if="props.value.page !== props.value.pageCount"
         @click="changePageHandler(props.value?.pageCount || 1)"
-      >
-        End
-      </button>
+      ></PaginationLast>
     </div>
 
     <BaseSelect
       v-model:model-value="value2"
       :options="options"
       placeholder="Select items per page"
-      class="w-[350px]"
-      label="Items per page"
       @change="
         (e: any) => {
           console.log(e);
@@ -51,20 +42,25 @@ import type { PaginationRequest, PaginationResponse } from '@/api/types/common';
 import { cn } from '@/lib/utils';
 import { computed, ref, watch } from 'vue';
 import BaseSelect, { type SelectOption } from '../select/BaseSelect.vue';
+import PageItem from './PageItem.vue';
+import PaginationFirst from './PaginationFirst.vue';
+import PaginationLast from './PaginationLast.vue';
+import PaginationNext from './PaginationNext.vue';
+import PaginationPrev from './PaginationPrev.vue';
 
 const value2 = ref('1');
 const options: SelectOption[] = [
   {
     value: '1',
-    label: '1',
+    label: '1 item per page',
   },
   {
     value: '2',
-    label: '2',
+    label: '2 items per page',
   },
   {
     value: '3',
-    label: '3',
+    label: '3 items per page',
   },
 ];
 
