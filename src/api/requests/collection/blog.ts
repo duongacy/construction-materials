@@ -6,11 +6,11 @@ import { paginationToSearchParams } from '.';
 
 export const getAllBlogsQueryFn = () => axiosInstanceGet<AxiosResponse<Blog[]>>(`/api/blogs`);
 
-export const getBlogsQueryFn = (categoryName: string, pagination: PaginationRequest) => {
+export const getBlogsQueryFn = (categoryName: string[], pagination: PaginationRequest) => {
   const urlSearchParams = new URLSearchParams(paginationToSearchParams(pagination));
 
-  if (categoryName !== '') {
-    urlSearchParams.append('filters[category][name][$eq]', categoryName);
+  if (categoryName.length) {
+    urlSearchParams.append('filters[category][name][$in]', `${[categoryName]}`);
   }
   return axiosInstanceGet<StrapiAxiosResponse<Blog[]>>(`/api/blogs?${urlSearchParams.toString()}`);
 };

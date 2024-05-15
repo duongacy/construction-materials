@@ -5,6 +5,6 @@ export type Blog = {
   title: string;
   description: string;
   thumb: Image;
-  categories: Category[];
+  category: Category;
   content: string;
 } & StrapiFormat;

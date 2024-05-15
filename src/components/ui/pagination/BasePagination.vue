@@ -28,11 +28,6 @@
       v-model:model-value="value2"
       :options="options"
       placeholder="Select items per page"
-      @change="
-        (e: any) => {
-          console.log(e);
-        }
-      "
     />
   </div>
 </template>
@@ -52,15 +47,15 @@ const value2 = ref('1');
 const options: SelectOption[] = [
   {
     value: '1',
-    label: '1 item per page',
+    label: '1 items/ page',
   },
   {
     value: '2',
-    label: '2 items per page',
+    label: '2 items/ page',
   },
   {
     value: '3',
-    label: '3 items per page',
+    label: '3 items/ page',
   },
 ];
 

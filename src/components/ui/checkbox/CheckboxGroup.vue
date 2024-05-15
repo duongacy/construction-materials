@@ -3,14 +3,8 @@ import { cn } from '@/lib/utils';
 import { Check } from 'lucide-vue-next';
 import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
 import { CheckboxIndicator, CheckboxRoot } from 'radix-vue';
+import type { CheckboxOption } from '.';
 import { BaseLabel } from '../label';
-
-export type CheckboxOption = {
-  label: string;
-  description?: string;
-  value: string;
-  disabled?: boolean;
-};
 
 defineOptions({ inheritAttrs: false });
 const props = defineProps<

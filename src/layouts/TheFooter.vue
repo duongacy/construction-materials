@@ -1,9 +1,9 @@
 <template>
-  <footer class="mt-32 sm:mt-40" aria-labelledby="footer-heading">
+  <footer aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <TheContainer class="pb-8">
       <div
-        class="mt-16 border-t border-border/90 pt-8 sm:mt-20 md:flex md:items-center md:justify-between lg:mt-24"
+        class="border-t border-border/90 pt-8 md:flex md:items-center md:justify-between"
       >
         <div class="flex space-x-6 md:order-2">
           <a
