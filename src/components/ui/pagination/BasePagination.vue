@@ -33,8 +33,8 @@
 <script setup lang="ts">
 import type { PaginationRequest, PaginationResponse } from '@/api/types/common';
 import { cn } from '@/lib/utils';
-import { watch } from 'fs';
-import { computed, reactive, watchEffect } from 'vue';
+import { computed, reactive, watch, watchEffect } from 'vue';
+import { PAGINATION_REQUEST_DEFAULT } from '.';
 import BaseSelect, { type SelectOption } from '../select/BaseSelect.vue';
 import PageItem from './PageItem.vue';
 import PaginationFirst from './PaginationFirst.vue';
@@ -75,23 +75,13 @@ const listPage = computed(() =>
 );
 
 //paginationRequest
-const paginationRequest = reactive<PaginationRequest>({
-  page: 1,
-  pageSize: '1',
-  withCount: true,
-});
+const paginationRequest = reactive<PaginationRequest>(PAGINATION_REQUEST_DEFAULT);
 
 watchEffect(() => {
   emits('request', paginationRequest);
 });
 
-// const pageSize = computed(() => {
-//   return paginationRequest.pageSize;
-// });
-
-// watch(pageSize, (value) => {
-//   paginationRequest.page = 1;
-// });
+const pageSize = computed(() => paginationRequest.pageSize);
 
 const goFirst = () => {
   paginationRequest.page = 1;
@@ -112,6 +102,10 @@ const goLast = () => {
 const goTo = (page: number) => {
   paginationRequest.page = page;
 };
+
+watch(pageSize, () => {
+  goFirst();
+});
 
 defineExpose({ paginationRequest });
 </script>

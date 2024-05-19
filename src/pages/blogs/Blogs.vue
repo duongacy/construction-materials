@@ -1,21 +1,4 @@
 <template>
-  <!-- <div>
-    <BaseInput v-model:value="categoryName"></BaseInput>
-    <div class="flex gap-3">
-      <RouterLink v-for="blog in blogs" :key="blog.title" :to="'/blogs/' + blog.id">
-        <div class="border">
-          <img :src="VITE_API_URL + blog.thumb?.url" alt="" />
-          <div class="p-3">
-            <p class="font-bold">{{ blog.title }}</p>
-            <p>{{ blog.description }}</p>
-          </div>
-          {{ blog.category.name }}
-        </div>
-      </RouterLink>
-    </div>
-    <CheckboxGroup v-model:model-value="categoriesValue" :options="checkboxOptions" />
-    <BasePagination :value="paginationResponse" @update-pagin="updatePaginationHandler" />
-  </div> -->
   <div class="bg-background h-full">
     <TheContainer class="pt-24 sm:pt-32 h-full flex flex-col gap-8">
       <div class="flex-grow">
@@ -103,7 +86,7 @@ import { getAllCategorysQueryFn } from '@/api/requests/collection/category';
 import type { PaginationRequest } from '@/api/types/common';
 import { CheckboxGroup, type CheckboxOption } from '@/components/ui/checkbox';
 import { BaseLabel } from '@/components/ui/label';
-import { BasePagination } from '@/components/ui/pagination';
+import { BasePagination, PAGINATION_REQUEST_DEFAULT } from '@/components/ui/pagination';
 import { VITE_API_URL } from '@/consts';
 import TheContainer from '@/layouts/container/TheContainer.vue';
 import { useQuery } from '@tanstack/vue-query';
@@ -123,12 +106,13 @@ const checkboxOptions = computed(() => {
   })) as CheckboxOption[];
 });
 
-const paginationRequest = ref<PaginationRequest>({ page: 1, pageSize: '1', withCount: true });
+const paginationRequest = ref<PaginationRequest>(PAGINATION_REQUEST_DEFAULT);
 
 const blogByCategoryQuery = useQuery({
   queryKey: ['blogs', categoriesValue, paginationRequest],
   queryFn: () => getBlogsQueryFn(categoriesValue.value, paginationRequest.value),
 });
+
 const blogs = computed(() => blogByCategoryQuery.data.value?.data.data);
 const paginationResponse = computed(() => blogByCategoryQuery.data.value?.data.meta?.pagination);
 

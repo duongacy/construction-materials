@@ -2,9 +2,7 @@
   <footer aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <TheContainer class="pb-8">
-      <div
-        class="border-t border-border/90 pt-8 md:flex md:items-center md:justify-between"
-      >
+      <div class="border-t border-border/90 pt-8 md:flex md:items-center md:justify-between">
         <div class="flex space-x-6 md:order-2">
           <a
             v-for="item in footerNavigation.social"
