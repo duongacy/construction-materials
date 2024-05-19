@@ -1,31 +1,29 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <div class="gap-2 flex">
     <div class="flex items-start">
-      <PaginationFirst v-if="props.value.page !== 1" @click="changePageHandler(0)" />
-      <PaginationPrev
-        v-if="(props.value.page || 0) > 2"
-        @click="changePageHandler((props.value.page || 0) - 1)"
-      />
+      <PaginationFirst v-if="props.paginationResponse.page !== 1" @click="goFirst" />
+      <PaginationPrev v-if="(props.paginationResponse.page || 0) > 2" @click="goPrevious" />
       <PageItem
         v-for="page in listPage"
         :key="page"
-        :class="cn('border px-2 py-1', { 'text-red-600': page === props.value?.page })"
-        @click="changePageHandler(page)"
+        :class="cn('border px-2 py-1', { 'text-red-600': page === props.paginationResponse?.page })"
+        @click="goTo(page)"
         >{{ page }}</PageItem
       >
       <PaginationNext
-        v-if="(props.value.page || 0) < (props.value.pageCount || 0) - 1"
-        @click="changePageHandler((props.value.page || 1) + 1)"
+        v-if="(props.paginationResponse.page || 0) < (props.paginationResponse.pageCount || 0) - 1"
+        @click="goNext"
       ></PaginationNext>
 
       <PaginationLast
-        v-if="props.value.page !== props.value.pageCount"
-        @click="changePageHandler(props.value?.pageCount || 1)"
+        v-if="props.paginationResponse.page !== props.paginationResponse.pageCount"
+        @click="goLast"
       ></PaginationLast>
     </div>
 
     <BaseSelect
-      v-model:model-value="value2"
+      v-model:model-value="paginationRequest.pageSize"
       :options="options"
       placeholder="Select items per page"
     />
@@ -35,7 +33,8 @@
 <script setup lang="ts">
 import type { PaginationRequest, PaginationResponse } from '@/api/types/common';
 import { cn } from '@/lib/utils';
-import { computed, ref, watch } from 'vue';
+import { watch } from 'fs';
+import { computed, reactive, watchEffect } from 'vue';
 import BaseSelect, { type SelectOption } from '../select/BaseSelect.vue';
 import PageItem from './PageItem.vue';
 import PaginationFirst from './PaginationFirst.vue';
@@ -43,7 +42,6 @@ import PaginationLast from './PaginationLast.vue';
 import PaginationNext from './PaginationNext.vue';
 import PaginationPrev from './PaginationPrev.vue';
 
-const value2 = ref('1');
 const options: SelectOption[] = [
   {
     value: '1',
@@ -61,31 +59,59 @@ const options: SelectOption[] = [
 
 const props = withDefaults(
   defineProps<{
-    value?: PaginationResponse;
+    paginationResponse?: PaginationResponse;
   }>(),
   {
-    value: () => ({ page: 0, pageCount: 0, pageSize: 0, total: 0 }),
+    paginationResponse: () => ({ page: 0, pageCount: 0, pageSize: 0, total: 0 }),
   },
 );
 
 const emits = defineEmits<{
-  updatePagin: [value: PaginationRequest];
+  request: [value: PaginationRequest];
 }>();
 
-const paginationRequest = computed<PaginationRequest>(() => ({
-  page: props.value?.page,
-  pageSize: props.value?.pageSize,
-}));
+const listPage = computed(() =>
+  Array.from({ length: props?.paginationResponse?.pageCount || 0 }, (_, key) => key + 1),
+);
 
-watch(value2, (newValue) => {
-  emits('updatePagin', { ...paginationRequest.value, pageSize: Number(newValue), page: 0 });
+//paginationRequest
+const paginationRequest = reactive<PaginationRequest>({
+  page: 1,
+  pageSize: '1',
+  withCount: true,
 });
 
-const changePageHandler = (page: number) => {
-  emits('updatePagin', { ...paginationRequest.value, page });
+watchEffect(() => {
+  emits('request', paginationRequest);
+});
+
+// const pageSize = computed(() => {
+//   return paginationRequest.pageSize;
+// });
+
+// watch(pageSize, (value) => {
+//   paginationRequest.page = 1;
+// });
+
+const goFirst = () => {
+  paginationRequest.page = 1;
 };
 
-const listPage = computed(() =>
-  Array.from({ length: props?.value?.pageCount || 0 }, (_, key) => key + 1),
-);
+const goPrevious = () => {
+  paginationRequest.page! -= 1;
+};
+
+const goNext = () => {
+  paginationRequest.page! += 1;
+};
+
+const goLast = () => {
+  paginationRequest.page! += 1;
+};
+
+const goTo = (page: number) => {
+  paginationRequest.page = page;
+};
+
+defineExpose({ paginationRequest });
 </script>

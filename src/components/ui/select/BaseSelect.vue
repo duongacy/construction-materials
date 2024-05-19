@@ -21,7 +21,6 @@ const props = defineProps<
   }
 >();
 const emits = defineEmits<SelectRootEmits>();
-
 const delegateProps = computed(() => {
   const { options, placeholder, class: _, ...delegate } = props;
   return delegate;
@@ -56,7 +55,6 @@ const forwarded = useForwardPropsEmits(delegateProps, emits);
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <!-- <SelectLabel v-if="!!label">{{ label }}</SelectLabel> -->
           <SelectItem
             v-for="option in options"
             :key="'select-option' + option.value"

@@ -17,7 +17,7 @@
     <BasePagination :value="paginationResponse" @update-pagin="updatePaginationHandler" />
   </div> -->
   <div class="bg-background h-full">
-    <TheContainer class="bg-white pt-24 sm:pt-32 h-full flex flex-col gap-8">
+    <TheContainer class="pt-24 sm:pt-32 h-full flex flex-col gap-8">
       <div class="flex-grow">
         <div class="mx-auto max-w-2xl text-center">
           <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
@@ -88,7 +88,10 @@
           <BaseLabel>Category</BaseLabel>
           <CheckboxGroup v-model:model-value="categoriesValue" :options="checkboxOptions" />
         </div>
-        <BasePagination :value="paginationResponse" @update-pagin="updatePaginationHandler" />
+        <BasePagination
+          :pagination-response="paginationResponse"
+          @request="updatePaginationHandler"
+        />
       </div>
     </TheContainer>
   </div>
@@ -120,12 +123,7 @@ const checkboxOptions = computed(() => {
   })) as CheckboxOption[];
 });
 
-// blogs
-const paginationRequest = ref<PaginationRequest>({
-  page: 1,
-  pageSize: 1,
-  withCount: true,
-});
+const paginationRequest = ref<PaginationRequest>({ page: 1, pageSize: '1', withCount: true });
 
 const blogByCategoryQuery = useQuery({
   queryKey: ['blogs', categoriesValue, paginationRequest],

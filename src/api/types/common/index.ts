@@ -26,7 +26,7 @@ export type Image = {
 
 export type PaginationRequest = {
   page?: number;
-  pageSize?: number;
+  pageSize?: string;
   withCount?: boolean;
 };
 
